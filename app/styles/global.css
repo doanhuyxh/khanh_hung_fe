@@ -17,6 +17,7 @@
   --sz-hd-top: 4.4rem;
   --sz-hd-bot: 6.8rem;
   --sz-hd-menu: 4.8rem;
+  --h-page: 950;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -36,5 +37,11 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  width: 100vw
 
+}
+
+.main{
+  padding-top: 20px;
+  min-height: 68vh;
 }

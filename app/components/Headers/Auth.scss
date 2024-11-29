@@ -9,6 +9,10 @@
 .btn_login {
     @extend .btn_header;
 
+    span{
+        color: #000;
+    }
+
     &:hover {
         border: 1px dashed var(--primary-color);
         padding: 7px 17px;

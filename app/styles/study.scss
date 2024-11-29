@@ -1,0 +1,22 @@
+
+
+.study_container{
+    margin: 0 auto;
+    max-width: calc(1694 / var(--h-page)* 100vh);
+    padding: 0 calc(15 / var(--h-page)* 100vh);
+    width: 100%;
+}
+
+.video_list {
+    min-height: 64px;
+    overflow-y: auto;
+  }
+  
+ 
+  @media (min-width: 1200px) {
+    .video_list {
+      height: calc(100vh - 16rem); 
+      overflow-y: auto;
+    }
+  }
+  
