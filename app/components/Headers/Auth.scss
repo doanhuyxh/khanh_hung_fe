@@ -1,0 +1,52 @@
+.btn_header {
+    padding: 8px 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box !important;
+}
+
+.btn_login {
+    @extend .btn_header;
+
+    &:hover {
+        border: 1px dashed var(--primary-color);
+        padding: 7px 17px;
+
+        span {
+            color: var(--primary-color);
+        }
+    }
+}
+
+.btn_register {
+    @extend .btn_header;
+    background-color: var(--primary-color);
+    z-index: 3;
+    position: relative;
+
+    &:hover {
+        background-color: var(--primary-color);
+    }
+
+    span {
+        color: #fff;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: var(--active-color);
+        z-index: -1;
+        transition: width 0.5s ease;
+    }
+
+    &:hover::after {
+        width: 100%;
+    }
+
+}
