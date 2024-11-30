@@ -7,6 +7,8 @@
   --foreground: #171717;
   --primary-color:#f41e92;
   --active-color: #7c0fd1;
+  --hover-color-primary:#7c0fd1;
+  --text-color-primary:#7c0fd1;
   --w-logo: 17.3rem;
   --size-hd-top: 4.4rem;
   --size-hd-bot: 6.8rem;
@@ -34,8 +36,7 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
   width: 100vw
 
@@ -44,4 +45,5 @@ body {
 .main{
   padding-top: 20px;
   min-height: 68vh;
+
 }

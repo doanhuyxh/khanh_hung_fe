@@ -27,7 +27,7 @@ export default function CollapseCourse({
     <div className="w-full rounded-md shadow-md">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 text-left bg-blue-500 text-white font-semibold rounded-t-md hover:bg-blue-600 flex justify-between items-center"
+        className="w-full px-4 py-3 text-left text-white font-semibold rounded-t-md hover:bg-hover_primary flex justify-between items-center"
       >
         <div>
           <h2 className="text-lg">{title}</h2>

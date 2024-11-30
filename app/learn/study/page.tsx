@@ -30,7 +30,9 @@ export default function StudyPage() {
     <div className="study_container flex flex-col lg:flex-row lg:gap-4 lg:px-10 px-4 py-8">
       <div className="video_section flex-1 bg-gray-900  rounded-md shadow-md">
         <div className="h-full w-full flex items-center justify-center text-white">
-          <p>Video Player</p>
+            <video src="/public/assets/">
+
+            </video>
         </div>
         <div>
           <p className="text-xxl">
@@ -46,7 +48,7 @@ export default function StudyPage() {
             <h2 className="text-lg font-semibold mb-4 text-black">
               Trải nghiệm toàn bộ 202 videos- Hơn 35 giờ
             </h2>
-            <div className="space-y-4">
+            <div className="">
               {data.map((item: any, index: number) => {
                 return (
                   <CollapseCourse
