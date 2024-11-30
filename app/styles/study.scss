@@ -5,7 +5,18 @@
   width: 100%;
 }
 
+.video_section{
+  height: 60vh;
+  
+}
+
 .title_course {
+  font-size: var(--f-sz);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.lesson_name{
   font-size: var(--f-sz);
   font-weight: 600;
   text-transform: uppercase;
@@ -22,6 +33,15 @@
   border: 1px solid #e0e0e0;
 }
 
+.border_top_nav_course{
+  border-top: 3px solid var(--color-primary);
+}
+
+.line{
+  width: 2px;
+  height: 100%;
+  background-color: gray;
+}
 
 @media (min-width: 1200px) {
   .video_list {

@@ -13,6 +13,7 @@ export default {
         foreground: "var(--foreground)",
         "hover-primary":"var(--hover-color-primary)",
         "color-primary": "var(--color-primary)",
+        "color-secondary": "var(--primary-color)",
       },
       screens: {
         lg: '1200px',
