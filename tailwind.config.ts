@@ -11,11 +11,13 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        hover_primary:"var(--hover-color-primary)"
+        "hover-primary":"var(--hover-color-primary)",
+        "color-primary": "var(--color-primary)",
       },
       screens: {
         lg: '1200px',
       },
+      
     },
   },
   plugins: [

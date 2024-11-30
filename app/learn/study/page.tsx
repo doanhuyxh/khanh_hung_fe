@@ -18,7 +18,7 @@ export default function StudyPage() {
         type: "quan_trong",
         isFree: true,
         timeDuration: "10:35",
-        name: "Cơ hội thật sự của chuyên gia trong thời đại sáo rỗng!",
+        name: "Giáo trình khóa học free - Viết trang home, upgrade"
       };
 
       temp_arr.push(temp);
@@ -30,9 +30,7 @@ export default function StudyPage() {
     <div className="study_container flex flex-col lg:flex-row lg:gap-4 lg:px-10 px-4 py-8">
       <div className="video_section flex-1 bg-gray-900  rounded-md shadow-md">
         <div className="h-full w-full flex items-center justify-center text-white">
-            <video src="/public/assets/">
-
-            </video>
+          <video src="/assets/video/video_demo.mp4" />
         </div>
         <div>
           <p className="text-xxl">
@@ -43,28 +41,26 @@ export default function StudyPage() {
       </div>
 
       <div className="video_list lg:w-1/3 w-full bg-gray-100 rounded-md shadow-md mt-4 lg:mt-0 flex flex-col">
-        {activeTab == "course" && (
-          <div className="p-4 flex-1 overflow-y-auto">
-            <h2 className="text-lg font-semibold mb-4 text-black">
-              Trải nghiệm toàn bộ 202 videos- Hơn 35 giờ
-            </h2>
-            <div className="">
-              {data.map((item: any, index: number) => {
-                return (
-                  <CollapseCourse
-                  key={index}
-                    title={title}
-                    data={data}
-                    numberVideo={9}
-                    timeDuration="01:51:09"
-                  />
-                );
-              })}
-            </div>
-          </div>
-        )}
+        <h2 className="text-lg font-semibold mb-4 text-black">
+          Trải nghiệm toàn bộ 202 videos- Hơn 35 giờ
+        </h2>
 
-        {activeTab == "description" && (
+        {activeTab == "course" &&
+          <div className="px-0 flex-1 pb-4 overflow-y-auto container_list">
+            {data.map((item: any, index: number) => {
+              return (
+                <CollapseCourse
+                  key={index}
+                  title={title}
+                  data={data}
+                  numberVideo={9}
+                  timeDuration="01:51:09"
+                />
+              );
+            })}
+          </div>}
+
+        {activeTab == "description" &&
           <div className="p-4 flex-1 overflow-y-auto">
             <div className="text-black">
               Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi,
@@ -118,15 +114,14 @@ export default function StudyPage() {
               perferendis molestiae dolore nulla? Ad at perferendis illo nobis
               magni.
             </div>
-          </div>
-        )}
+          </div>}
 
         <div className="my-4">
           <div className="flex justify-around border-t pt-4">
             <button
-              className={`px-5 py-3 rounded-lg ${
-                activeTab === "course" ? "bg-slate-700" : "bg-slate-200"
-              }`}
+              className={`px-5 py-3 rounded-lg ${activeTab === "course"
+                ? "bg-slate-700"
+                : "bg-slate-200"}`}
               onClick={() => setActiveTab("course")}
             >
               <span
@@ -138,9 +133,9 @@ export default function StudyPage() {
               </span>
             </button>
             <button
-              className={`px-5 py-3 rounded-lg ${
-                activeTab === "description" ? "bg-slate-700" : "bg-slate-200"
-              }`}
+              className={`px-5 py-3 rounded-lg ${activeTab === "description"
+                ? "bg-slate-700"
+                : "bg-slate-200"}`}
               onClick={() => setActiveTab("description")}
             >
               <span

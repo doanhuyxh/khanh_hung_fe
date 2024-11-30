@@ -1,22 +1,31 @@
+.study_container {
+  margin: 0 auto;
+  max-width: calc(1694 / var(--h-page)* 100vh);
+  padding: 0 calc(15 / var(--h-page)* 100vh);
+  width: 100%;
+}
 
-
-.study_container{
-    margin: 0 auto;
-    max-width: calc(1694 / var(--h-page)* 100vh);
-    padding: 0 calc(15 / var(--h-page)* 100vh);
-    width: 100%;
+.title_course {
+  font-size: var(--f-sz);
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .video_list {
-    min-height: 64px;
+  min-height: 64px;
+  overflow-y: auto;
+}
+
+.container_list {
+  overflow-y: auto;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+
+@media (min-width: 1200px) {
+  .video_list {
+    height: calc(100vh - 16rem);
     overflow-y: auto;
   }
-  
- 
-  @media (min-width: 1200px) {
-    .video_list {
-      height: calc(100vh - 16rem); 
-      overflow-y: auto;
-    }
-  }
-  
+}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import LineIcon from "../Icon/line";
+import "./collapse.scss";
 
 interface CourseItem {
   image: string;
@@ -24,18 +26,20 @@ export default function CollapseCourse({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full rounded-md shadow-md">
+    <div className="w-full collapseContainer">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 text-left text-white font-semibold rounded-t-md hover:bg-hover_primary flex justify-between items-center"
+        className="w-full px-4 py-3 h-18 text-left text-white font-semibold rounded-t-md flex justify-between items-center"
       >
         <div>
-          <h2 className="text-lg">{title}</h2>
-          <p className="text-sm">
+          <h2 className="title_course text-color-primary">{title}</h2>
+          <p className="text-sm text-color-primary ">
             {numberVideo} videos • {timeDuration}
           </p>
         </div>
-        <span className="text-lg">{isOpen ? "-" : "+"}</span>
+        <div>
+          <LineIcon isOpen={isOpen} />
+        </div>
       </button>
 
       <div
@@ -48,7 +52,7 @@ export default function CollapseCourse({
           {data.map((item, index) => (
             <div
               key={index}
-              className="flex items-center cursor-pointer p-2 mb-2 bg-white rounded-md shadow-sm hover:shadow-md"
+              className="group flex items-center cursor-pointer p-2 mb-2 bg-white rounded-md shadow-sm hover:bg-hover-primary"
             >
               <div className="w-1/3">
                 <img
@@ -59,10 +63,10 @@ export default function CollapseCourse({
               </div>
 
               <div className="w-2/3 flex flex-col gap-10 px-4">
-                <h3 className="text-sm font-medium mb-2 text-black">
+                <h3 className="text-sm font-medium mb-2 text-black group-hover:text-white">
                   {item.name}
                 </h3>
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 group-hover:text-white">
                   <p>{item.isFree ? "Free" : "Paid"}</p>
                   <p>{item.timeDuration}</p>
                 </div>

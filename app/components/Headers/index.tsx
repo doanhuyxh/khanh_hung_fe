@@ -111,7 +111,7 @@ const Header = () => {
                 <a href="">
                   <span className="icon">
                     <Image
-                      src="/assets/images/ic-chanel-7.svg"
+                      src="/assets/images/ic-chanel-7.svg"    
                       width={20}
                       height={20}
                       alt=""
@@ -169,7 +169,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      
+
     </header>
   );
 };

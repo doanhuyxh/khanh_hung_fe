@@ -8,7 +8,7 @@
   --primary-color:#f41e92;
   --active-color: #7c0fd1;
   --hover-color-primary:#7c0fd1;
-  --text-color-primary:#7c0fd1;
+  --color-primary:#7c0fd1;
   --w-logo: 17.3rem;
   --size-hd-top: 4.4rem;
   --size-hd-bot: 6.8rem;
@@ -20,6 +20,7 @@
   --sz-hd-bot: 6.8rem;
   --sz-hd-menu: 4.8rem;
   --h-page: 950;
+  --f-sz: calc(20 / var(--h-page)* 100vh);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,6 +36,9 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  display: none; 
+}
 body {
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
