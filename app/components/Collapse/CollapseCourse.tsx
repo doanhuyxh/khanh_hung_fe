@@ -37,7 +37,7 @@ export default function CollapseCourse({
             {title}
           </h2>
           <div className="flex justify-between">
-            <p className="flex gap-2">
+            <p className="flex gap-2 text-nowrap">
               <span>
                 <Image
                   src="/assets/images/pro-box-note-1.svg"
@@ -51,7 +51,7 @@ export default function CollapseCourse({
                 {numberVideo} video
               </span>
             </p>
-            <p className="flex gap-2">
+            <p className="flex gap-2 text-nowrap">
               <span>
                 <Image
                   src="/assets/images/pro-box-note-2.svg"
@@ -65,8 +65,10 @@ export default function CollapseCourse({
             </p>
           </div>
         </div>
-        <div>
-          <LineIcon isOpen={isOpen} />
+        <div  className="transform sm:translate-y-0 md:translate-y-0 lg:translate-y-0 xl:translate-y-0 translate-y-[-20px]">
+          <LineIcon
+            isOpen={isOpen}
+          />
         </div>
       </button>
 

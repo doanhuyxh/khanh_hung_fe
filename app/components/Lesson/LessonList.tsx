@@ -5,9 +5,7 @@ import Image from "next/image";
 
 interface LessonListProps {
     isShowAllLesson: boolean;
-    setIsShowAllLesson: (state: boolean) => void;
-    activeTab: string;
-    setActiveTab: (tab: string) => void;
+    setIsShowAllLesson: (state: boolean) => void;    
     data: any[];
     title: string;
 }
