@@ -1,5 +1,5 @@
 import { useState } from "react";
-import LineIcon from "../Icon/line";
+import {PlushIcon} from "../Icon";
 import "./collapse.scss";
 import Image from "next/image";
 
@@ -27,10 +27,10 @@ export default function CollapseCourse({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full collapseContainer">
+    <div className={`w-full collapseContainer ${isOpen ? "sticky" :""}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-4 py-3 h-18 text-left text-white font-semibold rounded-t-md flex justify-between items-center"
+        className={`w-full px-3 py-3 h-18 text-left text-white font-semibold rounded-t-md flex justify-between items-center`}
       >
         <div>
           <h2 className="title_course text-color-primary text-wrap">
@@ -66,7 +66,7 @@ export default function CollapseCourse({
           </div>
         </div>
         <div  className="transform sm:translate-y-0 md:translate-y-0 lg:translate-y-0 xl:translate-y-0 translate-y-[-20px]">
-          <LineIcon
+          <PlushIcon
             isOpen={isOpen}
           />
         </div>
@@ -99,13 +99,14 @@ export default function CollapseCourse({
                 </h3>
                 <div className="flex justify-between text-xs text-gray-500 lg:group-hover:text-white">
                   <p className="flex gap-2">
-                    <span className="font-bold text-white bg-color-secondary px-3 py-2 rounded-lg flex gap-2">
+                    <span className="font-bold text-white bg-color-secondary px-3 py-2 rounded-lg flex gap-2 text-nowrap">
                       <span className="m-auto">
                         <Image
                           src="/assets/images/ic-tag-important.svg"
                           width={10}
                           height={10}
                           alt=""
+                          objectFit="contain"
                         />
                       </span>
                       Nổi bật
@@ -117,6 +118,7 @@ export default function CollapseCourse({
                           width={10}
                           height={10}
                           alt=""
+                          objectFit="contain"
                         />
                       </span>
                       {item.isFree ? "Free" : "Paid"}
@@ -131,6 +133,7 @@ export default function CollapseCourse({
                         height={20}
                         alt=""
                         className="hover:text-white"
+                        objectFit="contain"
                       />
                     </span>
                     <span className="font-bold m-auto">

@@ -24,7 +24,11 @@
 }
 
 .btn_register {
-    @extend .btn_header;
+    padding: 8px 18px;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    box-sizing: border-box !important;
     background-color: var(--primary-color);
     z-index: 3;
     position: relative;
@@ -53,4 +57,21 @@
         width: 100%;
     }
 
+}
+
+.btn_register_mobile {
+    @extend .btn_register;
+    padding: 4px 10px;
+    display: none;
+}
+
+
+@media screen and (max-width: 1300px) {
+    .btn_login, .btn_register {
+        display: none;
+    }
+
+    .btn_register_mobile{
+        display: block;
+    }
 }

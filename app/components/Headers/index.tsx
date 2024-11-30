@@ -1,8 +1,16 @@
+'use client'
+
+import nookies from 'nookies';
 import Image from "next/image";
 import "./index.scss";
 import Auth from "./Auth";
+import { BurgerIcon } from "../Icon";
 
 const Header = () => {
+
+
+  
+
   return (
     <header className="header">
       <div className="header_top">
@@ -55,6 +63,7 @@ const Header = () => {
         <div className="container">
           <div className="header_bottom_wrapper">
             <div className="header_bottom_wrapper_left">
+              <BurgerIcon />
               <a href="">
                 <span>
                   <Image
@@ -66,11 +75,10 @@ const Header = () => {
                 </span>
               </a>
             </div>
-
             <div className="header_bottom_wrapper_middle">
               <div className="header_bottom_wrapper_middle_list">
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/add-friend.svg"
                       width={20}
@@ -81,9 +89,8 @@ const Header = () => {
                   <span className="text">Kết bạn</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/ic-chanel-group.svg"
                       width={20}
@@ -94,9 +101,8 @@ const Header = () => {
                   <span className="text">Colleague Club</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/question-1.svg"
                       width={20}
@@ -107,11 +113,10 @@ const Header = () => {
                   <span className="text">Hỏi tôi</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
-                      src="/assets/images/ic-chanel-7.svg"    
+                      src="/assets/images/ic-chanel-7.svg"
                       width={20}
                       height={20}
                       alt=""
@@ -120,9 +125,8 @@ const Header = () => {
                   <span className="text">Hoạt động</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/ic-chanel-2.svg"
                       width={20}
@@ -133,9 +137,8 @@ const Header = () => {
                   <span className="text">Blog</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/icon_fb.svg"
                       width={20}
@@ -146,9 +149,8 @@ const Header = () => {
                   <span className="text">Fanpage</span>
                 </a>
 
-                
                 <a href="">
-                  <span className="icon">
+                  <span>
                     <Image
                       src="/assets/images/MTczMjAwNjc1MQ.png"
                       width={20}
@@ -158,18 +160,14 @@ const Header = () => {
                   </span>
                   <span className="text">Tiktok</span>
                 </a>
-
-                
               </div>
             </div>
-
             <div className="header_bottom_wrapper_right">
               <Auth />
             </div>
           </div>
         </div>
       </div>
-
     </header>
   );
 };

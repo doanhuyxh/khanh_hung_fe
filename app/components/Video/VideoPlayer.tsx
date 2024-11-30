@@ -4,14 +4,12 @@ interface VideoPlayerProps {
   title: string;
   timeDuration: string;
   views: number;
-  isFree: boolean;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   title,
   timeDuration,
   views,
-  isFree
 }) => {
   return (
     <div className="flex-1">
@@ -59,7 +57,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 alt=""
               />
             </span>
-            {isFree ? "Free" : "Paid"}
+            <span className="md:divide-none hidden md:inline-block">Free</span>
           </span>
         </p>
       </div>

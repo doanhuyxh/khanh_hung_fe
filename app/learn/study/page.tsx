@@ -12,9 +12,9 @@ export default function StudyPage() {
   const [isShowAllLesson, setIsShowAllLesson] = useState(false);
 
   useEffect(() => {
-    let temp_arr = [];
+    const temp_arr = [];
     for (let i = 0; i < 30; i++) {
-      let temp = {
+      const temp = {
         image: "/assets/images/course/co-hoi-cua-chuyen-gia.png",
         type: "quan_trong",
         isFree: true,
@@ -34,7 +34,6 @@ export default function StudyPage() {
           title="ActiveSpin Cách để nói trúng tim đen autience - Avatar"
           timeDuration="10:35"
           views={565}
-          isFree={true}
         />
       </div>
 

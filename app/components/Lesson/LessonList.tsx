@@ -21,13 +21,13 @@ const LessonList: React.FC<LessonListProps> = ({
     return (
         <>
             {activeTab == "course" &&
-                <h2 className="text-lg font-semibold ml-0 mb-4 text-black flex gap-2">
+                <h2 className="text-lg font-semibold ml-0 mb-4 text-black gap-2 hidden md:flex">
                     <ActiveSpin isActive={isShowAllLesson} onToggle={setIsShowAllLesson} />
                     Trải nghiệm toàn bộ 202 videos- Hơn 35 giờ
                 </h2>
             }
             {activeTab == "course" &&
-                <div className="px-0 flex-1 pb-4 overflow-y-auto container_list">
+                <div className="px-0 flex-1 pb-4 overflow-y-auto container_list mt-3 md:mt-0">
                     {[...Array(5)].map((_, index) => {
                         return (
                             <CollapseCourse
@@ -97,7 +97,7 @@ const LessonList: React.FC<LessonListProps> = ({
                     </div>
                 </div>}
 
-            <div className="my-4    ">
+            <div className="my-4">
                 <div className="flex justify-around border-t pt-4">
                     <button
                         className={`px-5 py-3 rounded-lg flex gap-2`}
