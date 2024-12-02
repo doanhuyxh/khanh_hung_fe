@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { geistSans, geistMono, metadata } from "./configs/layout-config";
 import "./styles/global.css";
 import Header from "./components/Headers";
@@ -14,11 +15,18 @@ export default function RootLayout({
       : "Description";
 
   return (
-    <html lang="en">
-      <head>
+    <html lang="vi_VN">
+      <Head>
+        <meta charSet="UTF-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
         <title>{title}</title>
         <meta name="description" content={description} />
-      </head>
+        <meta name="keywords" content="nextjs, layout, meta tags" />
+        <meta name="author" content="Khanh hung " />
+      </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

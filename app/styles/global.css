@@ -5,10 +5,15 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --primary-color:#f41e92;
+  --primary-color: #f41e92;
   --active-color: #7c0fd1;
-  --hover-color-primary:#7c0fd1;
-  --color-primary:#7c0fd1;
+  --hover-color-primary: #7c0fd1;
+  --color-primary: #7c0fd1;
+  --bg-gradient-primary: linear-gradient(
+    79.78deg,
+    #a32dff -0.15%,
+    #f41e92 87.57%
+  );
   --w-logo: 17.3rem;
   --size-hd-top: 4.4rem;
   --size-hd-bot: 6.8rem;
@@ -19,8 +24,22 @@
   --sz-hd-top: 4.4rem;
   --sz-hd-bot: 6.8rem;
   --sz-hd-menu: 4.8rem;
+  --sz-hd-top: 4.4rem;
+  --sz-hd-bot: 6.8rem;
+  --sz-hd-foot: 4.8rem;
+  --sz-hd: calc(var(--sz-hd-top) + var(--sz-hd-bot));
   --h-page: 950;
-  --f-sz: calc(20 / var(--h-page)* 100vh);
+  --f-sz: calc(20 / var(--h-page) * 100vh);
+  --rg: 0rem;
+  --cg: 0rem;
+  --sz-ic-mb: 4.4rem;
+  --pd-wr-mb: 1.6rem;
+  --w-mb: calc(var(--sz-ic-mb) + var(--pd-wr-mb) * 2);
+  --sz-ic: var(--sz-ic-mb);
+  --pd-wr: var(--pd-wr-mb);
+  --h-btn: 5.2rem;
+  --h-burger: 2rem;
+  --w-sitebar: 270px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,24 +49,22 @@
   }
 }
 
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 body {
   background-color: #fff;
   font-family: Arial, Helvetica, sans-serif;
-  width: 100vw
-
+  width: 100vw;
 }
 
-.main{
+.main {
   padding-top: 20px;
   min-height: 68vh;
-
 }

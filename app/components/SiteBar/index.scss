@@ -1,0 +1,55 @@
+.sitebar_container {
+    flex-shrink: 0;
+    max-height: calc(100vh - var(--sz-hd-foot));
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
+    width: var(--w-sitebar);
+}
+
+.sitebar_content {
+    padding: var(--pd-wr);
+    width: calc(--w-sitebar - 10px);
+    max-width: 100%;
+}
+
+.stiebar_top {
+    padding: auto;
+
+    .stiebar_top_wrap {
+        background: var(--bg-gradient-primary);
+        display: flex;
+        align-items: center;
+        border-radius: 0.8rem;
+        gap: 1.2rem;
+        justify-content: center;
+        overflow: hidden;
+        padding: 1.2rem;
+        position: relative;
+        width: 230px;
+        height: 50px;
+
+        .icon_thuner {
+            padding: auto;
+        }
+
+        span {
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+        }
+    }
+}
+
+.stibar_body {
+    width: 100%;
+    margin: 0;
+
+   
+
+    .stibar_body_wrap {
+    }
+}
+
+.stibar_body_block {
+}
