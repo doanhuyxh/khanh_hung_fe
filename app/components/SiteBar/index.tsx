@@ -14,7 +14,6 @@ function SiteBar() {
                 width={20}
                 height={31}
                 alt=""
-                objectFit="cover"
                 src={"/assets/images/ic-thunder.svg"}
               />
             </span>

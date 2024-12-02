@@ -37,7 +37,7 @@ export default function StudyPage() {
         />
       </div>
 
-      <div className="video_list lg:w-1/3 w-full rounded-md lg:mt-0 flex flex-col">
+      <div className="video_list lg:w-1/3 w-full rounded-md mt-10 lg:mt-0 flex flex-col">
         <LessonList
           data={data}
           isShowAllLesson={isShowAllLesson}

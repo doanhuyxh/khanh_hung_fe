@@ -27,7 +27,7 @@ export default function CollapseCourse({
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`w-full collapseContainer ${isOpen ? "sticky" :""}`}>
+    <div className={`w-11/12 m-auto collapseContainer ${isOpen ? "sticky" :""}`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full px-3 py-3 h-18 text-left text-white font-semibold rounded-t-md flex justify-between items-center`}
@@ -65,7 +65,7 @@ export default function CollapseCourse({
             </p>
           </div>
         </div>
-        <div  className="transform sm:translate-y-0 md:translate-y-0 lg:translate-y-0 xl:translate-y-0 translate-y-[-20px]">
+        <div  className="transform translate-y-[-27px] hidden md:block">
           <PlushIcon
             isOpen={isOpen}
           />
@@ -82,24 +82,24 @@ export default function CollapseCourse({
           {data.map((item, index) =>
             <div
               key={index}
-              className="group flex items-center px-2 cursor-pointer rounded-md lg:hover:bg-hover-primary h-28"
+              className="group flex items-center px-2 cursor-pointer rounded-md lg:hover:bg-hover-primary py-4 lg:h-36 mb-4"
             >
               <div className="w-1/4">
                 <Image
                   src={item.image}
                   alt={item.name}
-                  width={100}
-                  height={100}
+                  width={80}
+                  height={80}
                   className="lg:w-full w-11/12 h-auto rounded-md object-cover m-auto"
                 />
               </div>
-              <div className="w-3/4 flex flex-col gap-1 px-2">
-                <h3 className="text-sm font-bold opacity-60 mb-2 text-black lg:group-hover:text-white">
+              <div className="w-3/4 flex flex-col gap-3 px-2">
+                <h3 className="txt_title font-bold opacity-60 mb-2 text-black lg:group-hover:text-white group-hover:opacity-100">
                   {item.name}
                 </h3>
                 <div className="flex justify-between text-xs text-gray-500 lg:group-hover:text-white">
                   <p className="flex gap-2">
-                    <span className="font-bold text-white bg-color-secondary px-3 py-2 rounded-lg flex gap-2 text-nowrap">
+                    <span className="font-bold text-white bg-color-secondary px-3 py-3 rounded-lg flex gap-2 text-nowrap">
                       <span className="m-auto">
                         <Image
                           src="/assets/images/ic-tag-important.svg"
@@ -124,7 +124,6 @@ export default function CollapseCourse({
                       {item.isFree ? "Free" : "Paid"}
                     </span>
                   </p>
-
                   <p className="flex justify-items-center align-middle">
                     <span className="m-auto">
                       <Image

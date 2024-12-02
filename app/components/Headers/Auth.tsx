@@ -13,8 +13,8 @@ export default function Auth() {
           <span className="text-nowrap">Đăng ký và học thử ngay</span>
         </div>
         <div className="btn_register_mobile flex-col">
-          <p className="text-nowrap text-center text-white text-sm">Học ngay</p>
-          <p className="text-nowrap uppercase text-center text-white text-sm">Hoàn toàn miễn phí</p>
+          <p className="text-nowrap text-center text-white">Học ngay</p>
+          <p className="text-nowrap uppercase text-center text-white">Hoàn toàn miễn phí</p>
         </div>
         
       </div>

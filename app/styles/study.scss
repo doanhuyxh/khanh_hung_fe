@@ -6,8 +6,8 @@
   width: 100%;
 }
 
-.video_section{
- max-height: 60vh;
+.video_section {
+  max-height: 60vh;
 }
 
 .title_course {
@@ -16,7 +16,7 @@
   text-transform: uppercase;
 }
 
-.lesson_name{
+.lesson_name {
   font-size: var(--f-sz);
   font-weight: 600;
   text-transform: uppercase;
@@ -32,11 +32,11 @@
   border: 1px solid #e0e0e0;
 }
 
-.border_top_nav_course{
+.border_top_nav_course {
   border-top: 3px solid var(--color-primary);
 }
 
-.line{
+.line {
   width: 2px;
   height: 20px;
   background-color: gray;
@@ -44,12 +44,11 @@
 
 @media (min-width: 1200px) {
   .video_list {
-    height: calc(100vh - 10rem);
+    height: auto;
+    max-height: calc(100vh - 10rem);
     overflow-y: auto;
   }
 }
-
-
 
 @media screen and (max-width: 1300px) {
   .study_container {

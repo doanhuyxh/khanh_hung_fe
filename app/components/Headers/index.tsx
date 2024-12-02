@@ -1,6 +1,5 @@
 'use client'
 
-import nookies from 'nookies';
 import Image from "next/image";
 import "./index.scss";
 import Auth from "./Auth";
