@@ -4,7 +4,6 @@
 
 :root {
   --primary-color: #f41e92;
-  --active-color: #7c0fd1;
   --hover-color-primary: #7c0fd1;
   --color-primary: #7c0fd1;
   --background: #ffffff;
@@ -41,7 +40,7 @@
   --pd-wr: var(--pd-wr-mb);
   --h-btn: 5.2rem;
   --h-burger: 2rem;
-  --w-sitebar: 270px;
+  --w-sidebar: 350px;
   --f-sz-name: calc(14 / var(--h-page)* 100vh);
 }
 

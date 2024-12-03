@@ -1,10 +1,10 @@
-import SiteBar from "@/app/components/SiteBar"
+import Sidebar from "@/app/components/Sidebar"
 
 
 function ProfilePage(){
     return (
         <div className="flex flex-row flex-wrap">
-            <SiteBar />
+            <Sidebar />
             <div className="container"></div>
         </div>
     )

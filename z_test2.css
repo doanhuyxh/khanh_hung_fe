@@ -1259,7 +1259,7 @@ video {
   --pd-wr: var(--pd-wr-mb);
   --h-btn: 5.2rem;
   --h-burger: 2rem;
-  --w-sitebar: 270px;
+  --w-sidebar: 270px;
 }
 
 @media (prefers-color-scheme: dark) {
