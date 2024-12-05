@@ -42,6 +42,8 @@
   --h-burger: 2rem;
   --w-sidebar: 350px;
   --f-sz-name: calc(14 / var(--h-page)* 100vh);
+  --bg-color-modal: #ffffff;
+  --bg-color-modal-notify: linear-gradient(180deg, #710EBE 32.63%, #F41E92 163.15%);
 }
 
 @media (prefers-color-scheme: dark) {

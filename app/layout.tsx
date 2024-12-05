@@ -2,6 +2,7 @@ import Head from "next/head";
 import { geistSans, geistMono, metadata } from "./configs/layout-config";
 import "./styles/global.css";
 import Header from "./components/Headers";
+import { ModalNotify } from "./components/Modal";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,7 @@ export default function RootLayout({
       : "Description";
 
   return (
-    <html lang="vi_VN">
+    <html lang="vi">
       <Head>
         <meta charSet="UTF-8" />
         <meta
@@ -32,6 +33,7 @@ export default function RootLayout({
       >
         <Header />
         <main className="main">{children}</main>
+        <ModalNotify />
       </body>
     </html>
   );

@@ -9,7 +9,7 @@
 .btn_login {
     @extend .btn_header;
 
-    span{
+    span {
         color: #000;
     }
 
@@ -65,13 +65,68 @@
     display: none;
 }
 
+.btn-upgrade {
+
+    display: block;
+
+    .btn-upgrade-link {
+        align-items: center;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        padding: 8px 24px;
+        position: relative;
+        z-index: 5;
+        background: linear-gradient(77deg, #7c0fd1 17.91%, #d61ef4 90.76%);
+        border-radius: .8rem;
+        overflow: hidden;
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: #fff;
+        text-transform: uppercase;
+
+        .star {
+            background-image: url('/assets/images/btn-upgrade-star.png');
+            animation: buttonUpAni 10s linear infinite;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            width: 100%;
+        }
+    }
+}
+
+
+.btn_profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .btn_profile_content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn_profile_avatar {
+        width: 3.6rem;
+        height: 3.6rem;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
 
 @media screen and (max-width: 1300px) {
-    .btn_login, .btn_register {
+
+    .btn_login,
+    .btn_register {
         display: none;
     }
 
-    .btn_register_mobile{
+    .btn_register_mobile {
         display: block;
     }
 }
