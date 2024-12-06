@@ -1,20 +1,41 @@
 "use client";
 
+import dynamic from "next/dynamic"
 import { useEffect, useState } from "react";
-import VideoPlayer from "@/app/components/Video/VideoPlayer";
+const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoPlayer"), { ssr: false });
+const LessonList = dynamic(() => import("@/app/components/Lesson/LessonList"), { ssr: false });
 import "../../styles/study.scss";
-import LessonList from "@/app/components/Lesson/LessonList";
+import { LessonData } from "@/app/components/Lesson/LessonList";
+
+interface CourseData {
+  id: string | number;
+  title: string;
+  image: string;
+  type: string;
+  isFree: boolean;
+  timeDuration: string;
+  name: string;
+}
 
 export default function StudyPage() {
   const title = "TIỀM NĂNG CỰC KÌ LỚN CỦA MÔ HÌNH DẠY BẰNG BỘ VIDEO";
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<LessonData[]>([]);
 
   const [isShowAllLesson, setIsShowAllLesson] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
 
   useEffect(() => {
     const temp_arr = [];
     for (let i = 0; i < 30; i++) {
       const temp = {
+        id: i,
+        title: "Giáo trình khóa học free",
         image: "/assets/images/course/co-hoi-cua-chuyen-gia.png",
         type: "quan_trong",
         isFree: true,
@@ -25,7 +46,10 @@ export default function StudyPage() {
       temp_arr.push(temp);
     }
     setData(temp_arr);
+
+
   }, []);
+
 
   return (
     <div className="study_container flex flex-col lg:flex-row lg:gap-4 lg:px-10">

@@ -16,7 +16,6 @@ export const geistMono = localFont({
 
 
 
-
 export const metadata: Metadata = {
   title: "Khánh Hùng Academy",
   description: "Khánh Hùng Academy",

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import BlockItem from "./BlockItem";
 import "./index.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Sidebar() {
 
@@ -102,9 +102,13 @@ function Sidebar() {
     }
   ]
 
-  useEffect(() => {
+  const [isClient, setIsClient] = useState(false);
 
+  useEffect(() => {
+    setIsClient(true);
   })
+
+  if (!isClient) return null;
 
   return (
     <div className="sidebar_container">

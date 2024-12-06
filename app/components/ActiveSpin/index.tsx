@@ -1,5 +1,4 @@
-import React from "react";
-
+'use client';
 interface ActiveSpinProps {
   isActive: boolean;
   onToggle: (newState: boolean) => void;

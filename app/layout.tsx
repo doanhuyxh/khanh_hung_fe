@@ -1,39 +1,55 @@
-import Head from "next/head";
-import { geistSans, geistMono, metadata } from "./configs/layout-config";
+import { Metadata } from 'next';
+import dynamic from 'next/dynamic';
+
 import "./styles/global.css";
-import Header from "./components/Headers";
-import { ModalNotify } from "./components/Modal";
+const Header = dynamic(() => import("./components/Headers"), { ssr: true });
+
+export const metadata: Metadata = {
+  viewport: "initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width",
+  title: 'Tên Website của bạn',
+  description: 'Mô tả website của bạn ở đây',
+  keywords: 'từ khóa 1, từ khóa 2, từ khóa 3',
+  openGraph: {
+    title: 'Tên Website của bạn',
+    description: 'Mô tả website của bạn ở đây',
+    url: 'https://your-domain.com',
+    siteName: 'Tên Website',
+    images: [
+      {
+        url: 'https://your-domain.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+      }
+    ],
+    locale: 'vi_VN',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  icons: {
+    icon: '/favicon.ico',
+  },
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const title = typeof metadata.title === "string" ? metadata.title : "Title";
-  const description =
-    typeof metadata.description === "string"
-      ? metadata.description
-      : "Description";
-
   return (
     <html lang="vi">
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <meta name="keywords" content="nextjs, layout, meta tags" />
-        <meta name="author" content="Khanh hung " />
-      </Head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        <main className="main">{children}</main>
-        <ModalNotify />
+      <body>
+        <Header/>
+      <main className="main">{children}</main>
       </body>
     </html>
   );
