@@ -7,15 +7,6 @@ const LessonList = dynamic(() => import("@/app/components/Lesson/LessonList"), {
 import "../../styles/study.scss";
 import { LessonData } from "@/app/components/Lesson/LessonList";
 
-interface CourseData {
-  id: string | number;
-  title: string;
-  image: string;
-  type: string;
-  isFree: boolean;
-  timeDuration: string;
-  name: string;
-}
 
 export default function StudyPage() {
   const title = "TIỀM NĂNG CỰC KÌ LỚN CỦA MÔ HÌNH DẠY BẰNG BỘ VIDEO";
