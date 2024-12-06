@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {PlushIcon} from "../Icon";
 import "./collapse.scss";
 import Image from "next/image";
@@ -25,15 +25,38 @@ export default function CollapseCourse({
   data
 }: CollapseCourseProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(()=>{
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.getAttribute("data-index") || "0");
+          if (entry.isIntersecting) {
+            setActiveIndex(index); // Cập nhật phần tử sticky hiện tại
+          }
+        });
+      },
+      { threshold: 0.5 } // Kích hoạt khi 50% phần tử nằm trong viewport
+    );
+
+    // Quan sát từng phần tử
+    sectionRefs.current.forEach((section) => {
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  },[])
 
   return (
-    <div className={`w-11/12 m-auto collapseContainer ${isOpen ? "sticky" :""}`}>
+    <div className={`w-11/12 m-auto collapseContainer`}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`w-full px-3 py-3 h-18 text-left text-white font-semibold rounded-t-md flex justify-between items-center`}
+        className={`w-full px-3 py-3 h-18 text-left font-semibold rounded-t-md flex justify-between items-center  ${isOpen ? "sticky top-0 z-20 bg-white" :""}`}
       >
-        <div>
-          <h2 className="title_course text-color-primary text-wrap">
+        <div className={`${isOpen ? "bg-white w-full px-3 py-3 h-18" :""}`}>
+          <h2 className="title_course text-color-primary text-wrap max-w-screen-xl xl:pr-2">
             {title}
           </h2>
           <div className="flex justify-between">
