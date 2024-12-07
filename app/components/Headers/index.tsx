@@ -8,7 +8,7 @@ import './index.scss';
 
 const Header = () => {
   const [isClient, setIsClient] = useState(false);
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
