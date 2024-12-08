@@ -1,6 +1,6 @@
 'use client';
 
-import Sidebar from "@/app/components/Sidebar"
+import Sidebar from "@/app/components/Sidebar/Customer"
 
 
 function ProfilePage(){

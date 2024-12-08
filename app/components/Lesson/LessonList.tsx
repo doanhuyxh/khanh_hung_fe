@@ -62,7 +62,7 @@ const LessonList: React.FC<LessonListProps> = ({
 
             {activeTab === "description" && <Description />}
 
-            <TabButtons activeTab={activeTab} setActiveTab={setActiveTab} />
+            <TabButtons activeTab={activeTab} setActiveTab={setActiveTab}/>
         </>
     );
 };

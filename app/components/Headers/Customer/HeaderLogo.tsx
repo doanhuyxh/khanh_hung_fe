@@ -1,7 +1,7 @@
 'use client';
 import React from "react";
 import Image from "next/image";
-import { BurgerIcon } from "../Icon";
+import { BurgerIcon } from "../../Icon";
 
 const HeaderLogo = ({isLogin}: {isLogin: boolean}) => (
   <div className="header_bottom_wrapper_left">

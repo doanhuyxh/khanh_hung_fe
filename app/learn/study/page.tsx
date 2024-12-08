@@ -4,7 +4,7 @@ import dynamic from "next/dynamic"
 import { useEffect, useState } from "react";
 const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoPlayer"), { ssr: false });
 const LessonList = dynamic(() => import("@/app/components/Lesson/LessonList"), { ssr: false });
-import "../../styles/study.scss";
+
 import { LessonData } from "@/app/components/Lesson/LessonList";
 
 

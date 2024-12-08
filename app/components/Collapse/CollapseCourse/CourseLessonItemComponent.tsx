@@ -9,7 +9,7 @@ interface CourseItemComponentProps {
 
 const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
   return (
-    <div className="group flex items-center px-2 cursor-pointer rounded-md lg:hover:bg-hover-primary py-4 lg:h-36 mb-4">
+    <div className="group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 lg:h-40 mb-4">
       <div className="w-1/4">
         <Image
           src={item.image}

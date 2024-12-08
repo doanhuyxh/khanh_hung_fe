@@ -1,8 +1,6 @@
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
-
 import "./styles/global.css";
-const Header = dynamic(() => import("./components/Headers"), { ssr: true });
+
 
 export const metadata: Metadata = {
   viewport: "initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width",
@@ -48,8 +46,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body>
-        <Header/>
-      <main className="main">{children}</main>
+        {children}
       </body>
     </html>
   );
