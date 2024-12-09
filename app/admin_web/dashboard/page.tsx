@@ -1,7 +1,17 @@
 'user client'
 
-export default function Dashboard(){
+export default async function Dashboard() {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return (
-        <div>dashboard</div>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+            <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                    <h4 className="text-xl font-semibold text-black dark:text-white">
+                        Dashboard
+                    </h4>
+                </div>
+            </div>
+        </div>
     )
 }

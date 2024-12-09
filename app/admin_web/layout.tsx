@@ -1,48 +1,49 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname  } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AdminSideBar } from '../components/Sidebar';
 import { AdminHeader } from '../components/Headers';
+import '../styles/admin_web.css';
+import Loading from '@/app/components/Loading';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  
+  const pathname = usePathname();
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  const GetUser = () => {
-    let userJson = localStorage.getItem("user") ?? "{}";
-  
-    if (userJson == "{}"){
-      return false
-    }
-
-    return true
-
-  };
-  
   useEffect(() => {
-    const user = GetUser();
-    if (user) {
-      setIsAuthenticated(true);
-    } else {
+    const userJson = localStorage.getItem("user") ?? "{}";
+    const userExists = userJson !== "{}";
+
+    if (!userExists) {
       router.push('/admin_web/auth/login');
     }
-  }, [router, isAuthenticated]);
-  
-  if (!isAuthenticated){
+  }, [pathname, router]);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient) {
+    return <Loading />
+  }
+
+  if (pathname.includes("admin_web/auth")) {
     return (
       <>
-      {children}
+        {children}
       </>
     )
   }
 
   return (
-    <>
-      <div className="flex" style={{fontSize:"16px"}}>
+    <div className="dark:bg-boxdark-2 dark:text-bodydark">
+      <div className='flex h-screen overflow-hidden'>
         <AdminSideBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-        <div className="relative flex flex-1 flex-col">
+        <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
           <AdminHeader sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
           <main>
             <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
@@ -51,7 +52,6 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </main>
         </div>
       </div>
-
-    </>
+    </div>
   );
 }

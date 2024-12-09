@@ -1,6 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';    
+
+import axiosInstance from '@/app/configs/axiosConfig';
 
 export default function Login() {
     const [email, setEmail] = useState<string>('admin');
@@ -8,28 +11,24 @@ export default function Login() {
     const router = useRouter()
 
     const HandleLogin = async () => {
-        fetch("http://127.0.0.1:5123/api/v1/AdminAuth/Login", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include', // Cho phép gửi và nhận cookies
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+        
+        const response = await axiosInstance.post("/auth/login", {
+            email: email,
+            password: password
         })
-            .then(res => res.json())
-            .then(res => {
 
-                if (res.code == 200) {
-                    let data = res.data
-                    localStorage.setItem("refreshToken", data.refreshToken)
-                    localStorage.setItem("user", JSON.stringify(data.user))
-                    router.push("/admin_web/dashboard")
-                }
-
+        if (response.code == 200) {
+            let data = response.data
+            localStorage.setItem("refreshToken", data.refreshToken)
+            localStorage.setItem("accessToken", data.accessToken)
+            localStorage.setItem("user", JSON.stringify(data.user))
+            router.push("/admin_web/dashboard")
+        }else{
+            toast.error(response.message, {
+                duration: 5000,
+                position: "top-right"
             })
+        }
     }
 
     return (
@@ -85,7 +84,7 @@ export default function Login() {
                         </div>
 
                         <div className="text-sm sm:text-base">
-                            <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+                            <a href="/admin_web/auth/forgot-password" className="font-medium text-blue-600 hover:text-blue-500">
                                 Quên mật khẩu?
                             </a>
                         </div>

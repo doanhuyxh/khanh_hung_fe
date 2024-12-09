@@ -1,8 +1,9 @@
 import { Header } from './components/Headers';
 
 export default async function Home() {
-  // Delay 10 giây
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+  
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
 
   return (
     <>

@@ -11,7 +11,10 @@ const nextConfig: NextConfig = {
     includePaths: ["./app/styles", "./app/components"],
     quietDeps: true,
   },
-  reactStrictMode: true
+  reactStrictMode: false,
+  images: {
+    domains: ['localhost', "res.cloudinary.com", "api.yody.lokid.xyz"],
+  },
 };
 
 export default nextConfig;

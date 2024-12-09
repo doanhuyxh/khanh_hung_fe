@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import "./styles/global.css";
-
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   viewport: "initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: '/favicon.ico',
-  },
+  }
 };
 
 export default function RootLayout({
@@ -45,8 +45,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body>
+      <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+      </head>
+      <body className='sidebar-expanded'>
         {children}
+        <Toaster />
       </body>
     </html>
   );
