@@ -8,10 +8,6 @@ export default function FormLesson({lesson, setLesson, saveLesson}:{lesson:any, 
         setLesson({ ...lesson, LessonContent: content });
     };
 
-    const handleEditorChangeDescription = (content: string) => {
-        setLesson({ ...lesson, Description: content });
-    };
-
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
@@ -23,11 +19,6 @@ export default function FormLesson({lesson, setLesson, saveLesson}:{lesson:any, 
                     value={lesson.Name}
                     onChange={(e) => setLesson({ ...lesson, Name: e.target.value })}
                 />
-            </div>
-
-            <div className="flex flex-col gap-2">
-                <label className="font-semibold">Thông tin bài học</label>
-                <Editor value={lesson.Description} onChange={handleEditorChangeDescription} />
             </div>
 
             <div className="flex flex-col gap-2">

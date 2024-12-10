@@ -11,25 +11,27 @@ interface LessonItemProps {
 
 const LessonItemAdmin: React.FC<LessonItemProps> = ({
     item,
-    toggleDescription,
     toggleLessonContent,
     HandleCreateOrUpdateLesson,
     HandleDeleteLesson,
 }) => {
     return (
-        <div className='w-full flex justify-between items-center gap-4 mb-4 shadow-lg p-4 rounded-lg'>
+        <div className='w-full flex justify-between items-center gap-4 shadow-lg px-4 py-5 mb-6 rounded-lg'>
             <div className='flex gap-5'>
-                <div className='max-w-[300px] h-[200px]'>
-                    <Image
-                        src={item.imageThumbnail || ""}
+                <div className='max-w-[200px] h-[100px]'>
+                    {item.imageThumbnail && (
+                        <Image
+                            src={item.imageThumbnail || ""}
                         alt={item.name || ""}
                         width={200}
                         height={200}
+                        loading='lazy'
                         objectFit="contain"
                         layout="responsive"
-                    />
+                        />
+                    )}
                 </div>
-                <div>
+                <div className='max-w-[200px] h-[100px]'>
                     {item.video && (
                         <video src={item.video || ""} controls />
                     )}
@@ -37,16 +39,6 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                 <div>
                     <p className='text-xl font-bold'>Bài học: {item.name || ""}</p>
                     <span className='text-sm'>Thời lượng: {item.duration || ""}</span>
-
-                    <div className='flex gap-2'>
-                        <span className="font-semibold text-lg">Giới thiệu</span>
-                        <button 
-                            className="text-blue-500 underline"
-                            onClick={() => toggleDescription(item.id)}>
-                            Xem
-                        </button>
-                        
-                    </div>
 
                     <div className='flex gap-2'>
                         <span className="font-semibold text-lg">Nội dung:</span>
@@ -60,8 +52,12 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                 </div>
             </div>
             <div className='flex flex-col gap-2'>
-                <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={() => HandleCreateOrUpdateLesson(item.id)}>Chỉnh sửa</button>
-                <button className='bg-red-500 text-white px-4 py-2 rounded-md' onClick={() => HandleDeleteLesson(item.id)}>Xóa</button>
+                <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={() => HandleCreateOrUpdateLesson(item.id)}>
+                    <i className="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button className='bg-red-500 text-white px-4 py-2 rounded-md' onClick={() => HandleDeleteLesson(item.id)}>
+                    <i className="fa-solid fa-trash"></i>
+                </button>
             </div>
         </div>
     );

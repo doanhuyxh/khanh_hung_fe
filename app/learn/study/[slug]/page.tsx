@@ -49,7 +49,6 @@ const [data, setData] = useState<CourseData[]>([]);
         course.lesson.push({
           id: lesson.id,
           name: lesson.name,
-          description: lesson.description,
           lessonContent: lesson.lessonContent,
           imageThumbnail: lesson.imageThumbnail,
           video: lesson.video,

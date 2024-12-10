@@ -20,7 +20,6 @@ export default function CourseForm() {
         Name: '',
         Image: '',
         VideoIntro: '',
-        Description: '',
         CourseContent: '',
         CourseType: '',
         CostPrice: 0,
@@ -32,10 +31,6 @@ export default function CourseForm() {
 
     const handleEditorChangeCourseContent = (content: string) => {
         setCourse({ ...course, CourseContent: content });
-    };
-
-    const handleEditorChangeDescription = (content: string) => {
-        setCourse({ ...course, Description: content });
     };
 
     const HandleSaveCourse = async () => {
@@ -56,7 +51,6 @@ export default function CourseForm() {
                     Name: data.name,
                     Image: data.image,
                     VideoIntro: data.videoIntro,
-                    Description: data.description,
                     CourseContent: data.courseContent,
                     CourseType: data.courseType,
                     CostPrice: data.costPrice,
@@ -149,12 +143,6 @@ export default function CourseForm() {
                                 />
                             </div>
 
-                        </div>
-                        <div className="mb-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Giới thiệu khoá học
-                            </label>
-                            <Editor value={course.Description} onChange={handleEditorChangeDescription} />
                         </div>
 
                         <div className="mb-4">

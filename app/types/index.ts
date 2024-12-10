@@ -1,7 +1,6 @@
 export interface LessonData {
     id: string;
     name: string;
-    description: string;
     lessonContent: string;
     imageThumbnail: string;
     video: boolean;

@@ -2,7 +2,7 @@
 
 import axiosInstance, { postFormData } from '@/app/configs/axiosConfig';
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Loading from '@/app/components/Loading';
 import ModalScroll from '@/app/components/Modal/ModalScroll';
 import { FormLesson } from '@/app/components/Form';
@@ -12,6 +12,8 @@ export default function CourseLesson() {
     const [loading, setLoading] = useState(true)
     const param = useParams()
     const { courseId } = param
+
+    const router = useRouter()
 
     const [isOpen, setIsOpen] = useState(false)
     const [course, setCourse] = useState<any>(null)
@@ -56,9 +58,8 @@ export default function CourseLesson() {
     }
 
     const HandleDeleteLesson = async (id: string) => {
-        await axiosInstance.delete(`/lesson/Delete?id=${id}`);
-        const res = await axiosInstance.get(`/lesson/GetByCourseId?courseId=${courseId}&page=1&pageSize=30`);
-        setCourseLesson(res.data);
+        await axiosInstance.get(`/lesson/delete?id=${id}`);
+        await GetDataLesson()
     }
 
     const saveLesson = async () => {
@@ -79,14 +80,11 @@ export default function CourseLesson() {
     }
 
 
-
     useEffect(() => {
         GetDataCourse()
         GetDataLesson()
         setLoading(false)
     }, [])
-
-
 
     if (loading) {
         return <Loading />
@@ -96,6 +94,10 @@ export default function CourseLesson() {
         <>
             <div className='w-full'>
                 <div className='w-full bg-white shadow-lg p-4 rounded-lg flex justify-between items-center mb-5'>
+                    <button className='float-left hover:bg-blue-400 px-4 py-3 rounded-md' onClick={() => router.push('/admin_web/course')}>
+                        <i className="fa-solid fa-arrow-left" style={{ color: "#1c6bf2" }}></i>
+                    </button>
+
                     <h1 className='text-2xl font-bold'>Khoá học: {course?.name || ""}</h1>
 
                     <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={() => HandleCreateOrUpdateLesson('')}>Bài học mới</button>
@@ -103,8 +105,9 @@ export default function CourseLesson() {
 
                 <div className='w-full p-4 rounded-lg flex flex-col gap-4'>
                     <h2 className='text-center text-lg font-bold'>Danh sách bài học</h2>
+                    {courseLesson.length == 0 && <p className='text-center text-lg font-bold'>Không có bài học nào</p>}
 
-                    {courseLesson.map((item: any, index: number) => (
+                    {courseLesson.length > 0 && courseLesson.map((item: any, index: number) => (
                         <LessonItemAdmin
                             key={index}
                             item={item}
