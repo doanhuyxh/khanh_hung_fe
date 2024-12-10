@@ -4,30 +4,19 @@ import ActiveSpin from "@/app/components/ActiveSpin";
 import { CollapseCourse } from "@/app/components/Collapse";
 import TabButtons from "./TabButtons";
 import Description from "./Description";
+import { CourseData } from "@/app/types";
 
-export interface LessonData {
-    id: string | number;
-    title: string;
-    name: string;
-    image: string;
-    type: string;
-    isFree: boolean;
-    timeDuration: string;
-    content?: string;
-}
 
 interface LessonListProps {
     isShowAllLesson: boolean;
     setIsShowAllLesson: (state: boolean) => void;
-    data: LessonData[];
-    title: string;
+    data: CourseData[];
 }
 
 const LessonList: React.FC<LessonListProps> = ({
     isShowAllLesson,
     setIsShowAllLesson,
-    data,
-    title,
+    data
 }) => {
     const [isClient, setIsClient] = useState(false);
     const [activeTab, setActiveTab] = useState("course");
@@ -48,21 +37,22 @@ const LessonList: React.FC<LessonListProps> = ({
             )}
             {activeTab === "course" && (
                 <div className="flex flex-col pb-4 overflow-y-auto container_list mt-3 md:mt-0">
-                    {[...Array(5)].map((_, index) => (
-                        <CollapseCourse
-                            key={index}
-                            title={title}
-                            data={data}
-                            numberVideo={9}
-                            timeDuration="01:51:09"
-                        />
+                    {data && data.length > 0 && data.map((item, index) => (
+                    <CollapseCourse
+                        key={index}
+                        title={item.name}
+                        numberOfLessons={item.numberOfLessons}
+                        totalTimeDuration={item.totalTimeDuration}
+                        data={item.lesson}
+    
+                    />
                     ))}
                 </div>
             )}
 
             {activeTab === "description" && <Description />}
 
-            <TabButtons activeTab={activeTab} setActiveTab={setActiveTab}/>
+            <TabButtons activeTab={activeTab} setActiveTab={setActiveTab} />
         </>
     );
 };

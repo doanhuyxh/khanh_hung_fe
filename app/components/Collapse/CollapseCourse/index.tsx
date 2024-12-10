@@ -4,36 +4,39 @@ import { useState } from "react";
 import CollapseHeader from "./CollapseHeader";
 import CourseLessonItemComponent from "./CourseLessonItemComponent";
 import "./index.scss";
+import { LessonData } from "@/app/types";
 
 export interface CourseItem {
-  image: string;
-  type: string;
-  isFree: boolean;
-  timeDuration: string;
+  id: string;
   name: string;
+  description: boolean;
+  lessonContent: string;
+  imageThumbnail: string;
+  video: string;
+  duration: string;
 }
 
 interface CollapseCourseProps {
   title: string;
-  numberVideo: number;
-  timeDuration: string;
-  data: CourseItem[];
+  numberOfLessons: number;
+  totalTimeDuration: string;
+  data: LessonData[];
 }
 
 export default function CollapseCourse({
   title,
-  numberVideo,
-  timeDuration,
+  numberOfLessons,
+  totalTimeDuration,
   data
 }: CollapseCourseProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className={`w-11/12 m-auto collapseContainer`}>
       <CollapseHeader
         title={title}
-        numberVideo={numberVideo}
-        timeDuration={timeDuration}
+        numberVideo={numberOfLessons}
+        timeDuration={totalTimeDuration}
         isOpen={isOpen}
         onClick={() => setIsOpen(!isOpen)}
       />

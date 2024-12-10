@@ -1,11 +1,12 @@
+'use client'
+
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: 'https://localhost:44387/api/v1/admin',
+const axiosCustomerConfig = axios.create({
+  baseURL: 'https://localhost:44387/api/v1',
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
   },
   withCredentials: true,
 });
@@ -17,12 +18,24 @@ export const postFormData = (url: string, data: any) => {
     formData.append(key, data[key]);
   }
 
-  return axiosInstance.post(url, formData, {
+  return axiosCustomerConfig.post(url, formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
 };
 
-axiosInstance.interceptors.response.use(
+axiosCustomerConfig.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
+
+axiosCustomerConfig.interceptors.response.use(
   async (response) => {
     const data = response.data;
     return data;
@@ -37,7 +50,7 @@ axiosInstance.interceptors.response.use(
 
         if (refreshToken) {
           try {
-            const refreshResponse = await axiosInstance.post('/auth/RefreshToken', {
+            const refreshResponse = await axiosCustomerConfig.post('/Auth/RefreshToken', {
               userId,
               refreshToken
             });
@@ -50,16 +63,16 @@ axiosInstance.interceptors.response.use(
             // Retry original request with new token
             const originalRequest = error.config;
             originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-            return axiosInstance(originalRequest);
+            return axiosCustomerConfig(originalRequest);
 
           } catch (refreshError) {
             localStorage.clear();
-            window.location.href = '/admin_web/auth/login';
+            window.location.href = '/';
             return Promise.reject(refreshError);
           }
         } else {
           localStorage.clear();
-          window.location.href = '/admin_web/auth/login';
+          window.location.href = '/';
           return Promise.reject(error.response.data);
         }
       }
@@ -75,4 +88,4 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export default axiosCustomerConfig;

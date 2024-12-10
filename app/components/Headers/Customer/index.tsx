@@ -5,28 +5,28 @@ const HeaderContact = dynamic(() => import("./HeaderContact"), { ssr: false });
 const HeaderBottom = dynamic(() => import("./HeaderBottom"), { ssr: false });
 import { useEffect, useState } from "react";
 import './index.scss';
+import { GetInfo } from "@/app/services/ApiCustomerServices";
 
 const Header = () => {
   const [isClient, setIsClient] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState(null);
 
+  const GetUserInfo = async () => {
+
+    let token = localStorage.getItem("token");
+    if (token) {
+      let user:any = await GetInfo();
+      if (user.data) {
+        setUser(user.data);
+        setIsLogin(true);
+      }
+    }
+  }
+  
   useEffect(() => {
     setIsClient(true);
-    const getCookie = (name: string) => {
-      const value = `; ${document.cookie}`;
-      const parts = value.split(`; ${name}=`);
-      if (parts.length === 2) {
-        const cookieValue = parts.pop()?.split(';').shift();
-        return cookieValue;
-      }
-      return null;
-    };
-
-    const token = getCookie('token');
-    if (token) {
-      alert('token'); 
-      setIsLogin(true);
-    }
+    GetUserInfo();
   }, []);
 
   if (!isClient) return null;
@@ -37,7 +37,7 @@ const Header = () => {
         <HeaderNews />
         <HeaderContact />
       </div>
-      <HeaderBottom isLogin={isLogin} />
+      <HeaderBottom isLogin={isLogin} user={user} />
     </header>
   );
 }

@@ -18,7 +18,7 @@ const menuGroups = [
     menuItems: [
       {
         icon: <Image src="/assets/images/menu.png" alt="Dashboard" width={18} height={18} />,
-        label: "Dashboard",
+        label: "Trang chủ",
         route: "/admin_web/dashboard",
       },
     ],
@@ -33,6 +33,20 @@ const menuGroups = [
         children: [
           { label: "Khoá học", route: "/admin_web/course" },
           { label: "Cài đặt", route: "/admin_web/course/setting" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Tài khoản",
+    menuItems: [
+      {
+        icon: <i className="fa-solid fa-users"></i>,
+        label: "Tài khoản",
+        route: "#",
+        children: [
+          { label: "Khách hàng", route: "/admin_web/account/customer" },
+          { label: "Quản trị viên", route: "/admin_web/account/admin" },
         ],
       },
     ],

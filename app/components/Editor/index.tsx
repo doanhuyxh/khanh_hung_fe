@@ -57,7 +57,6 @@ const CLOUD_SERVICES_TOKEN_URL =
 	'https://kf9vxwqg03w2.cke-cs.com/token/dev/a965ebdd7b10e685732c9fc9b3d834fbcb59da8864a2f8fd3ee7d2985d03?limit=10';
 
 export default function Editor({ value, onChange }: { value: string, onChange: (data: string) => void }) {
-	const editorContainerRef = useRef(null);
 	const editorRef = useRef(null);
 	const [isLayoutReady, setIsLayoutReady] = useState(false);
 
@@ -216,8 +215,7 @@ export default function Editor({ value, onChange }: { value: string, onChange: (
 						'ckboxImageEdit'
 					]
 				},
-				initialData:
-					value,
+				data: value,
 				licenseKey: LICENSE_KEY,
 				link: {
 					addTargetToExternalLinks: true,
@@ -245,7 +243,7 @@ export default function Editor({ value, onChange }: { value: string, onChange: (
 				}
 			}
 		};
-	}, [isLayoutReady]);
+	}, [isLayoutReady, value]);
 
     const handleEditorChange = (event: any, editor: any) => {
 		const data = editor.getData();

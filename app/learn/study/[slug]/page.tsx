@@ -8,16 +8,28 @@ import { LessonData, CourseData } from "@/app/types";
 
 import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig";
 import Loading from "@/app/components/Loading";
+import { useParams } from "next/navigation";
 
 
 export default function StudyPage() {
 
   const [loading, setLoading] = useState(true);
 
-
-  const [data, setData] = useState<CourseData[]>([]);
+  const [lesson, setLesson] = useState<any>([]);
+const [data, setData] = useState<CourseData[]>([]);
 
   const [isShowAllLesson, setIsShowAllLesson] = useState(false);
+
+  const { slug } = useParams();
+
+  const getLesson = async () => {
+    const response = await axiosCustomerConfig.get(`/course/lesson?id=${slug}`);
+    const data = response.data;
+    
+    setLesson(data);
+
+    setLoading(false);
+  }
 
   const getAllCourse = async () => {
     const response = await axiosCustomerConfig.get("/course/GetAllCourse");
@@ -47,7 +59,6 @@ export default function StudyPage() {
       temp_arr.push(course);
     });
     setData(temp_arr);
-    setLoading(false);
   }
 
   useEffect(() => {
@@ -55,6 +66,8 @@ export default function StudyPage() {
       if (window.innerWidth < 1024) {
         window.scrollTo(0, 0);
       }
+      getLesson();
+      
       getAllCourse();
     }
   }, [])
@@ -67,9 +80,9 @@ export default function StudyPage() {
     <div className="study_container flex flex-col lg:flex-row lg:gap-4 lg:px-10">
       <div className="lg:w-2/3 w-ful">
         <VideoPlayer
-          title="ActiveSpin Cách để nói trúng tim đen autience - Avatar"
-          timeDuration="10:35"
-          views={565}
+          title={lesson.name}
+          timeDuration={lesson.duration}
+          views={lesson.totalView}
         />
       </div>
 

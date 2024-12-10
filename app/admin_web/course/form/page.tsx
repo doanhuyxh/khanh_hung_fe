@@ -11,8 +11,8 @@ export default function CourseForm() {
     const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
     const id = searchParams?.get('id');
-
     const router = useRouter();
+    const [title, setTitle] = useState('Tạo khoá học mới');
 
 
     const [course, setCourse] = useState({
@@ -40,16 +40,33 @@ export default function CourseForm() {
 
     const HandleSaveCourse = async () => {
 
-        const response = await postFormData('/course/CreateCourse', course);
-        console.log(response)
+        await postFormData('/course/CreateCourse', course);
+
     }
 
 
     useEffect(() => {
 
         if (id) {
-            setCourse(course);
+            setTitle('Cập nhật khoá học');
+            axiosInstance.get(`/course/GetCourseById?id=${id}`).then((res) => {
+                let data = res.data;
+                setCourse({
+                    Id: data.id,
+                    Name: data.name,
+                    Image: data.image,
+                    VideoIntro: data.videoIntro,
+                    Description: data.description,
+                    CourseContent: data.courseContent,
+                    CourseType: data.courseType,
+                    CostPrice: data.costPrice,
+                    NumberOfLessons: data.numberOfLessons,
+                    TotalTimeDuration: data.totalTimeDuration,
+                    Status: data.status,
+                });
+            })
         }
+        setLoading(false);
     }, [id]);
 
     if (loading) {
@@ -58,10 +75,13 @@ export default function CourseForm() {
 
     return (
         <div className="p-5">
-            <h1 className="text-center text-2xl font-bold mb-5">Khoá học mới</h1>
+            <button className='float-left hover:bg-blue-400 px-4 py-3 rounded-md' onClick={() => router.push('/admin_web/course')}>
+                <i className="fa-solid fa-arrow-left" style={{ color: "#1c6bf2" }}></i>
+            </button>
+            <h1 className="text-center text-2xl font-bold mb-5">{title}</h1>
             <div className="grid grid-cols-3 gap-4">
 
-                <div className="col-span-2">
+                <div className="col-span-2 shadow-lg p-4 rounded-lg">
                     <div className="bg-white rounded-lg p-4 shadow-sm">
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -102,7 +122,7 @@ export default function CourseForm() {
                                 />
                             </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-2 gap-4">
                             <div className="mb-4">
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -134,12 +154,12 @@ export default function CourseForm() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Giới thiệu khoá học
                             </label>
-                            <Editor value={course.CourseContent} onChange={handleEditorChangeDescription} />
+                            <Editor value={course.Description} onChange={handleEditorChangeDescription} />
                         </div>
 
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Nội dung chi tiết
+                                Nội dung khoá mục
                             </label>
                             <Editor value={course.CourseContent} onChange={handleEditorChangeCourseContent} />
                         </div>
@@ -147,7 +167,7 @@ export default function CourseForm() {
                 </div>
 
 
-                <div className="col-span-1">
+                <div className="col-span-1 ">
                     <div className="bg-white rounded-lg p-4 shadow-sm mb-4">
                         <div className="mb-4">
                             <label className="block text-sm font-medium text-gray-700 mb-2">

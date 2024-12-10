@@ -20,7 +20,7 @@ export const CollapseCourse: React.FC<CollapseCourseProps> = ({
             <div className="course-details">
                 {data.slice(0, numberVideo).map((lesson) => (
                     <div key={lesson.id} className="lesson">
-                        <p>{lesson.title}</p>
+                        <p>{lesson.name}</p>
                         <p>{timeDuration}</p>
                     </div>
                 ))}

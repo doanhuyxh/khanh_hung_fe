@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
   },
   reactStrictMode: false,
   images: {
-    domains: ['localhost', "res.cloudinary.com", "api.yody.lokid.xyz"],
+    domains: ['localhost', "res.cloudinary.com", "api.yody.lokid.xyz", "your-image-domain.com"],
   },
   logging: {
     fetches: {

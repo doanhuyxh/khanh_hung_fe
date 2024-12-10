@@ -33,8 +33,8 @@ export default function Course() {
         setIsLoading(false);
     }
 
-    const handleAddCourse = () => {
-        router.push('/admin_web/course/form');
+    const handleAddOrUpdateCourse = (id: string) => {
+        router.push(`/admin_web/course/form?id=${id}`);
     }
 
     const handleDetailCourse = (id: string) => {
@@ -52,7 +52,7 @@ export default function Course() {
             <div className="w-full flex justify-between items-center mb-10">
                 <div className="flex gap-2">
                     <h1 className="text-2xl font-bold">Khoá học</h1>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={handleAddCourse}>+</button>
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded-md" onClick={() => handleAddOrUpdateCourse('')}>+</button>
                 </div>
 
                 <div className="flex gap-2">
@@ -81,6 +81,7 @@ export default function Course() {
                             <th className="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Số bài học</th>
                             <th className="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Tổng thời lượng</th>
                             <th className="py-4 px-4 font-medium text-black dark:text-white">Trạng thái</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,10 +105,30 @@ export default function Course() {
                                     {course.status === 'hidden' && <span className="text-gray-500">Ẩn</span>}
                                     {course.status === 'delete' && <span className="text-red-500">Xoá</span>}
                                 </td>
-                                <td className="absolute top-0 left-0 w-full h-full bg-gray-700 hidden group-hover:flex items-center justify-center text-white font-semibold cursor-pointer">                                    <div className='flex gap-10'>
-                                    <button className='bg-blue-400 px-4 py-3 rounded-md'>Cập nhật thông tin</button>
-                                    <button className='bg-orange-500 px-4 py-3 rounded-md' onClick={()=> handleDetailCourse(course.id)}>Quản lý bài học</button>
-                                </div>
+                                <td className="relative">
+                                    <div className="dropdown inline-block relative">
+
+                                        <button className=" px-4 py-2 rounded-md">
+                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                            </svg>
+                                        </button>
+                                        
+                                        <div className="dropdown-content hidden absolute right-0 mt-2 w-12 bg-white rounded-md shadow-lg z-50 group-hover:block">
+                                            <button 
+                                                className="block w-full text-center px-4 py-2 hover:bg-gray-100" 
+                                                onClick={() => handleAddOrUpdateCourse(course.id)}
+                                            >
+                                                <i className="fa-solid fa-pen-to-square" style={{ color: "#000000" }}></i>
+                                            </button>
+                                            <button 
+                                                className="block w-full text-center px-4 py-2 hover:bg-gray-100"
+                                                onClick={() => handleDetailCourse(course.id)}
+                                            >
+                                                <i className="fa-solid fa-person-chalkboard" style={{ color: "#e67519" }}></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         ))}

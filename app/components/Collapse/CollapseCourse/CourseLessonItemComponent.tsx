@@ -1,26 +1,33 @@
 'use client';
 
-import { CourseItem } from ".";
 import Image from "next/image";
+import { LessonData } from "@/app/types";
+
+import { useRouter } from "next/navigation";
 
 interface CourseItemComponentProps {
-  item: CourseItem;
+  item: LessonData;
 }
 
 const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/learn/study/${item.id}`);
+  };
+
   return (
-    <div className="group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 lg:h-40 mb-4">
-      <div className="w-1/4">
+    <div className="group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 mb-4" onClick={handleClick}>
+      <div className="w-auto border border-none rounded-md overflow-hidden">
         <Image
-          src={item.image}
+          src={item.imageThumbnail}
           alt={item.name}
-          width={80}
-          height={80}
-          className="lg:w-full w-11/12 h-auto rounded-md object-cover m-auto"
+          width={152}
+          height={90}
         />
       </div>
       <div className="w-3/4 flex flex-col gap-3 px-2">
-        <h3 className="txt_title font-bold opacity-60 mb-2 text-black lg:group-hover:text-white group-hover:opacity-100">
+        <h3 className="font-bold mb-2 text-black lg:group-hover:text-white group-hover:opacity-100 lg:text-xl">
           {item.name}
         </h3>
         <div className="flex justify-between text-xs text-gray-500 lg:group-hover:text-white">
@@ -47,7 +54,7 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
                   objectFit="contain"
                 />
               </span>
-              {item.isFree ? "Free" : "Paid"}
+              {item ? "Free" : "Paid"}
             </span>
           </p>
           <p className="flex justify-items-center align-middle">
@@ -61,7 +68,7 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
                 objectFit="contain"
               />
             </span>
-            <span className="font-bold m-auto">{item.timeDuration}</span>
+            <span className="font-bold m-auto">{item.duration}</span>
           </p>
         </div>
       </div>

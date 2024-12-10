@@ -1,11 +1,12 @@
+import Link from 'next/link';
 import React from 'react';
 
 export default function GuestActions() {
     return (
         <div className="flex gap-2">
-            <div className="btn_login">
+            <Link href={"/learn/login"} className="btn_login">
                 <span className="text-nowrap">Đăng nhập</span>
-            </div>
+            </Link>
             <div className="btn_register">
                 <span className="text-nowrap">Đăng ký và học thử ngay</span>
             </div>

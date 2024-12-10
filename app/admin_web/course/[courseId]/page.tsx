@@ -1,25 +1,126 @@
 'use client';
 
-import axiosInstance from '@/app/configs/axiosConfig';
+import axiosInstance, { postFormData } from '@/app/configs/axiosConfig';
 import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
+import Loading from '@/app/components/Loading';
+import ModalScroll from '@/app/components/Modal/ModalScroll';
+import { FormLesson } from '@/app/components/Form';
+import { LessonItemAdmin } from '@/app/components/Lesson';
 
 export default function CourseLesson() {
     const [loading, setLoading] = useState(true)
     const param = useParams()
-    const {courseId} = param
-    
-    const [course, setCourse] = useState(null)
-    console.error('Debug log:', courseId);
+    const { courseId } = param
 
-    useEffect(()=>{
-        axiosInstance.get(`/course/GetCourseById?id=${courseId}`)
-        .then(res=>{
-            console.log("res:: ", res)
-        })
-    }, [courseId])
+    const [isOpen, setIsOpen] = useState(false)
+    const [course, setCourse] = useState<any>(null)
+    const [courseLesson, setCourseLesson] = useState<any[]>([])
+    const [lesson, setLesson] = useState({
+        Id: "",
+        Name: "",
+        Description: "",
+        LessonContent: "",
+        ImageThumbnail: '',
+        Video: '',
+        Duration: '',
+        CourseId: courseId
+    })
 
-    if (loading){
-        return null
+    const HandleCreateOrUpdateLesson = (id: string) => {
+        if (id == "") {
+            setLesson({
+                Id: "",
+                Name: "",
+                Description: "",
+                LessonContent: "",
+                ImageThumbnail: '',
+                Video: '',
+                Duration: '',
+                CourseId: courseId
+            })
+        } else {
+            let lesson = courseLesson.find((item: any) => item.id == id)
+            setLesson({
+                Id: lesson.id,
+                Name: lesson.name,
+                Description: lesson.description,
+                LessonContent: lesson.lessonContent,
+                ImageThumbnail: lesson.imageThumbnail,
+                Video: lesson.video,
+                Duration: lesson.duration,
+                CourseId: courseId
+            })
+        }
+        setIsOpen(true)
     }
+
+    const HandleDeleteLesson = async (id: string) => {
+        await axiosInstance.delete(`/lesson/Delete?id=${id}`);
+        const res = await axiosInstance.get(`/lesson/GetByCourseId?courseId=${courseId}&page=1&pageSize=30`);
+        setCourseLesson(res.data);
+    }
+
+    const saveLesson = async () => {
+        await postFormData('/lesson/CreateOrUpdate', lesson);
+        GetDataLesson()
+        setIsOpen(false)
+
+    }
+
+    const GetDataCourse = async () => {
+        const res = await axiosInstance.get(`/course/GetCourseById?id=${courseId}`)
+        setCourse(res.data)
+    }
+
+    const GetDataLesson = async () => {
+        const res = await axiosInstance.get(`/lesson/GetByCourseId?courseId=${courseId}&page=1&pageSize=30`)
+        setCourseLesson(res.data)
+    }
+
+
+
+    useEffect(() => {
+        GetDataCourse()
+        GetDataLesson()
+        setLoading(false)
+    }, [])
+
+
+
+    if (loading) {
+        return <Loading />
+    }
+
+    return (
+        <>
+            <div className='w-full'>
+                <div className='w-full bg-white shadow-lg p-4 rounded-lg flex justify-between items-center mb-5'>
+                    <h1 className='text-2xl font-bold'>Khoá học: {course?.name || ""}</h1>
+
+                    <button className='bg-blue-500 text-white px-4 py-2 rounded-md' onClick={() => HandleCreateOrUpdateLesson('')}>Bài học mới</button>
+                </div>
+
+                <div className='w-full p-4 rounded-lg flex flex-col gap-4'>
+                    <h2 className='text-center text-lg font-bold'>Danh sách bài học</h2>
+
+                    {courseLesson.map((item: any, index: number) => (
+                        <LessonItemAdmin
+                            key={index}
+                            item={item}
+                            toggleDescription={() => { }}
+                            toggleLessonContent={() => { }}
+                            HandleCreateOrUpdateLesson={HandleCreateOrUpdateLesson}
+                            HandleDeleteLesson={HandleDeleteLesson}
+                        />
+                    ))}
+
+                </div>
+            </div>
+
+            <ModalScroll isOpen={isOpen} onClose={() => setIsOpen(false)} title={`${lesson.Id == "" ? "Tạo bài học mới" : "Chỉnh sửa bài học"} cho khoá học: ${course?.name || ""}`}>
+                <FormLesson lesson={lesson} setLesson={setLesson} saveLesson={saveLesson} />
+            </ModalScroll>
+        </>
+    )
 }

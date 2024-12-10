@@ -1,6 +1,8 @@
 'use client'
 
+import  { postFormData } from '@/app/configs/axiosConfig';
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 interface ImageUploadProps {
   initialLink: string;
@@ -16,15 +18,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ initialLink = "", onChange })
     setImageUrl(value);
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageUrl(reader.result as string);
-        onChange(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    if (file) {      
+      const res = await postFormData('/upload/img', { file: file });
+      setImageUrl(res.data.file_strong_url)
+      onChange(res.data.file_strong_url)
     }
   };
 
@@ -34,10 +33,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ initialLink = "", onChange })
       <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
         <div className="mb-2">
           {imageUrl ? (
-            <img
+            <Image
               src={imageUrl}
               alt="Uploaded Thumbnail"
-              className="mx-auto h-auto w-4/5 max-h-48 object-contain" // Chiếm 80% chiều rộng vùng hiển thị
+              width={400}
+              height={300}
+              className="mx-auto h-auto w-4/5 max-h-48 object-contain"
+              unoptimized={imageUrl.startsWith('data:')}
             />
           ) : (
             <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">

@@ -1,17 +1,13 @@
 import { Header } from './components/Headers';
 
-export default async function Home() {
-  
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  
+export default function Home() {
+
 
   return (
     <>
       <Header />
       <main>
-        <div>
-          Xin chào
-        </div>
+        
       </main>
     </>
   );

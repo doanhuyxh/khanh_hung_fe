@@ -13,7 +13,7 @@ const menuItems = [
   { href: "", icon: "/assets/images/MTczMjAwNjc1MQ.png", text: "Tiktok" },
 ];
 
-const HeaderBottom = ({isLogin}: {isLogin: boolean}) => (
+const HeaderBottom = ({isLogin, user}: {isLogin: boolean, user: any}) => (
   <div className="header_bottom">
     <div className="container">
       <div className="header_bottom_wrapper">
@@ -26,7 +26,7 @@ const HeaderBottom = ({isLogin}: {isLogin: boolean}) => (
           </div>
         </div>
         <div className="header_bottom_wrapper_right">
-          <Auth isLogin={isLogin} />
+          <Auth isLogin={isLogin} user={user} />
         </div>
       </div>
     </div>

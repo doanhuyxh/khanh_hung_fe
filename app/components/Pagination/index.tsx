@@ -13,11 +13,11 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
             {length > 0 && (
                 <div className="flex justify-center items-center gap-4 mt-4">
                     <button
-                        className={`bg-blue-500 text-white px-4 py-2 rounded-md ${page === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+                        className={`bg-blue-200 text-white px-4 py-2 rounded-md ${page === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-300'}`}
                         disabled={page === 1}
                         onClick={() => onPageChange(page - 1)}
                     >
-                        Trang trước
+                        <i className="fa-solid fa-left-long"></i>
                     </button>
 
                     <div className="flex items-center gap-2">
@@ -40,11 +40,11 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
                     </div>
 
                     <button
-                        className={`bg-blue-500 text-white px-4 py-2 rounded-md ${page === totalPage ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+                        className={`bg-blue-200 text-white px-4 py-2 rounded-md ${page === totalPage ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-300'}`}
                         disabled={page === totalPage}
                         onClick={() => onPageChange(page + 1)}
                     >
-                        Trang sau
+                        <i className="fa-solid fa-right-long"></i>
                     </button>
                 </div>
             )}
