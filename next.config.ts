@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { tree } from "next/dist/build/templates/app-page";
 const nextConfig: NextConfig = {
   experimental: {
 
@@ -15,6 +16,11 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['localhost', "res.cloudinary.com", "api.yody.lokid.xyz"],
   },
+  logging: {
+    fetches: {
+      fullUrl: true
+    }
+  }
 };
 
 export default nextConfig;
