@@ -1,11 +1,10 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://localhost:44387/api/v1/admin',
+  baseURL: 'http://localhost:5035/api/v1/admin',
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
   },
   withCredentials: true,
 });
@@ -31,37 +30,9 @@ axiosInstance.interceptors.response.use(
     if (error.response) {
       // Handle 401 - Token expired, try refresh
       if (error.response.status === 401) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const user = localStorage.getItem('user') ?? "{}";
-        const userId = JSON.parse(user).id;
-
-        if (refreshToken) {
-          try {
-            const refreshResponse = await axiosInstance.post('/auth/RefreshToken', {
-              userId,
-              refreshToken
-            });
-
-            const { accessToken, refreshToken: newRefreshToken } = refreshResponse.data;
-
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', newRefreshToken);
-
-            // Retry original request with new token
-            const originalRequest = error.config;
-            originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-            return axiosInstance(originalRequest);
-
-          } catch (refreshError) {
-            localStorage.clear();
-            window.location.href = '/admin_web/auth/login';
-            return Promise.reject(refreshError);
-          }
-        } else {
-          localStorage.clear();
-          window.location.href = '/admin_web/auth/login';
-          return Promise.reject(error.response.data);
-        }
+        await axiosInstance.post("/auth/RefreshToken")
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+        return axiosInstance
       }
 
       // Handle 402 - Insufficient permissions

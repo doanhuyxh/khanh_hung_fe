@@ -4,24 +4,8 @@ import { useState } from "react";
 import CollapseHeader from "./CollapseHeader";
 import CourseLessonItemComponent from "./CourseLessonItemComponent";
 import "./index.scss";
-import { LessonData } from "@/app/types";
+import { CollapseCourseProps } from "@/app/types";
 
-export interface CourseItem {
-  id: string;
-  name: string;
-  description: boolean;
-  lessonContent: string;
-  imageThumbnail: string;
-  video: string;
-  duration: string;
-}
-
-interface CollapseCourseProps {
-  title: string;
-  numberOfLessons: number;
-  totalTimeDuration: string;
-  data: LessonData[];
-}
 
 export default function CollapseCourse({
   title,

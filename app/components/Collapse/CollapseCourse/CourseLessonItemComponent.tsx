@@ -19,12 +19,13 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
   return (
     <div className="group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 mb-4" onClick={handleClick}>
       <div className="w-auto border border-none rounded-md overflow-hidden">
-        <Image
+        {item.imageThumbnail && <Image
           src={item.imageThumbnail}
           alt={item.name}
           width={152}
           height={90}
-        />
+        />}
+        {!item.imageThumbnail && <div className="w-[152px] h-[92px]"></div>}
       </div>
       <div className="w-3/4 flex flex-col gap-3 px-2">
         <h3 className="font-bold mb-2 text-black lg:group-hover:text-white group-hover:opacity-100 lg:text-xl">

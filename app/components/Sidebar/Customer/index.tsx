@@ -106,7 +106,7 @@ function Sidebar() {
 
   useEffect(() => {
     setIsClient(true);
-  })
+  }, []);
 
   if (!isClient) return null;
 
@@ -114,7 +114,7 @@ function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_content">
         <div className="sidebar_top">
-          <a href="" className="sidebar_top_wrap">
+          <a href="/learn/profile" className="sidebar_top_wrap">
             <span className="icon_thunder">
               <Image
                 width={20}
@@ -127,8 +127,8 @@ function Sidebar() {
           </a>
         </div>
 
-        <div className="stitebar_body">
-          <div className="stitebar_body_wrap">
+        <div className="sidebar_body">
+          <div className="sidebar_body_wrap">
             <div
               style={{
                 height: "43.9941px",

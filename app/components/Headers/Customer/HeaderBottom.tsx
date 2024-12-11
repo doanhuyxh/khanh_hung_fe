@@ -3,6 +3,10 @@ import HeaderLogo from "./HeaderLogo";
 import HeaderMenuItem from "./HeaderMenuItem";
 import Auth from "./Auth";
 
+import { User } from "@/app/types";
+
+
+
 const menuItems = [
   { href: "", icon: "/assets/images/add-friend.svg", text: "Kết bạn" },
   { href: "", icon: "/assets/images/ic-chanel-group.svg", text: "Colleague Club" },
@@ -13,7 +17,8 @@ const menuItems = [
   { href: "", icon: "/assets/images/MTczMjAwNjc1MQ.png", text: "Tiktok" },
 ];
 
-const HeaderBottom = ({isLogin, user}: {isLogin: boolean, user: any}) => (
+const HeaderBottom = ({isLogin, user}: {isLogin: boolean, user: User | null}) => (
+
   <div className="header_bottom">
     <div className="container">
       <div className="header_bottom_wrapper">

@@ -1,5 +1,5 @@
 import React from "react";
-import { LessonData } from "./LessonList"; // Import type LessonData
+import { LessonData } from "@/app/types";
 
 interface CollapseCourseProps {
     title: string;

@@ -2,13 +2,22 @@
 
 import { useState } from "react";
 
-export default function BurgerIcon() {
+export default function BurgerIcon({
+  setIsOpenSidebar,
+  isOpenSidebar,
+}: {
+  setIsOpenSidebar: (value: boolean) => void;
+  isOpenSidebar: boolean;
+}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div
       className="burger-icon relative flex flex-col justify-between  w-8 h-6 cursor-pointer"
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={() => {
+        setIsOpen(!isOpen)
+        setIsOpenSidebar(!isOpenSidebar)
+      }}
     >
       <div
         className={`h-1 bg-color-primary w-full transition-all duration-300 ${isOpen

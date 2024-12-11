@@ -14,9 +14,9 @@ const Header = () => {
 
   const GetUserInfo = async () => {
 
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
-      let user:any = await GetInfo();
+      const user = await GetInfo();
       if (user.data) {
         setUser(user.data);
         setIsLogin(true);

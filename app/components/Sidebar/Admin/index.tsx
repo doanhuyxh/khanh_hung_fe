@@ -24,7 +24,7 @@ const menuGroups = [
     ],
   },
   {
-    name: "Sản phẩm",
+    name: "",
     menuItems: [
       {
         icon: <Image src="/assets/images/course/learning.png" alt="Khoá học" width={18} height={18} />,
@@ -38,7 +38,21 @@ const menuGroups = [
     ],
   },
   {
-    name: "Tài khoản",
+    name: "",
+    menuItems: [
+      {
+        icon: <i className="fa-solid fa-users"></i>,
+        label: "Tài khoản",
+        route: "#",
+        children: [
+          { label: "Khách hàng", route: "/admin_web/account/customer" },
+          { label: "Quản trị viên", route: "/admin_web/account/admin" },
+        ],
+      },
+    ],
+  },
+  {
+    name: "",
     menuItems: [
       {
         icon: <i className="fa-solid fa-users"></i>,

@@ -2,12 +2,8 @@
 
 import { useState } from 'react';
 import { login } from '@/app/services/ApiCustomerServices';
-import { useRouter } from 'next/navigation';
-
 
 export default function Login() {
-
-    const router = useRouter();
     
     const [acc, setAcc] = useState({
         email: 'user1',
@@ -21,7 +17,6 @@ export default function Login() {
             localStorage.setItem("token", res_data.accessToken);
             localStorage.setItem("refreshToken", res_data.refreshToken);
             window.location.href = "/learn/profile";
-            //router.push("/learn/profile");
         } else {
             alert("Đăng nhập thất bại");
         }

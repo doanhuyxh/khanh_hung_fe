@@ -1,27 +1,16 @@
 'use client'
 
 import axios from 'axios';
+import axiosInstance from './axiosConfig';
 
 const axiosCustomerConfig = axios.create({
-  baseURL: 'https://localhost:44387/api/v1',
+  baseURL: 'http://localhost:5035/api/v1',
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: true,
 });
-
-export const postFormData = (url: string, data: any) => {
-
-  const formData = new FormData();
-  for (const key in data) {
-    formData.append(key, data[key]);
-  }
-
-  return axiosCustomerConfig.post(url, formData, {
-    headers: { 'Content-Type': 'multipart/form-data' }
-  });
-};
 
 axiosCustomerConfig.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
@@ -44,39 +33,16 @@ axiosCustomerConfig.interceptors.response.use(
     if (error.response) {
       // Handle 401 - Token expired, try refresh
       if (error.response.status === 401) {
-        const refreshToken = localStorage.getItem('refreshToken');
-        const user = localStorage.getItem('user') ?? "{}";
-        const userId = JSON.parse(user).id;
 
-        if (refreshToken) {
-          try {
-            const refreshResponse = await axiosCustomerConfig.post('/Auth/RefreshToken', {
-              userId,
-              refreshToken
-            });
+        await axiosCustomerConfig.post("/Auth/RefreshToken")
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+        return axiosInstance
 
-            const { accessToken, refreshToken: newRefreshToken } = refreshResponse.data;
-
-            localStorage.setItem('accessToken', accessToken);
-            localStorage.setItem('refreshToken', newRefreshToken);
-
-            // Retry original request with new token
-            const originalRequest = error.config;
-            originalRequest.headers['Authorization'] = `Bearer ${accessToken}`;
-            return axiosCustomerConfig(originalRequest);
-
-          } catch (refreshError) {
-            localStorage.clear();
-            window.location.href = '/';
-            return Promise.reject(refreshError);
-          }
         } else {
           localStorage.clear();
-          window.location.href = '/';
           return Promise.reject(error.response.data);
         }
       }
-
       // Handle 402 - Insufficient permissions
       if (error.response.status === 402) {
         return Promise.reject(error.response.data);
@@ -84,8 +50,7 @@ axiosCustomerConfig.interceptors.response.use(
 
       return Promise.reject(error.response.data);
     }
-    return Promise.reject(error);
-  }
+   
 );
 
 export default axiosCustomerConfig;
