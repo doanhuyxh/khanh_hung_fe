@@ -30,27 +30,27 @@ function Sidebar() {
         {
           name: "Dashboard",
           imageSrc:"/assets/images/mb-ic-1.svg",
-          link: ""
+          link: "/learn/dashboard"
         },
         {
           name: "Đổi mật khẩu",
           imageSrc:"/assets/images/mb-ic-2.svg",
-          link: ""
+          link: "/learn/change-password"
         },
         {
           name: "Profile C1",
           imageSrc:"/assets/images/mb-ic-3.svg",
-          link: ""
+          link: "/learn/profile"
         },
         {
           name: "Ticket của bạn",
           imageSrc:"/assets/images/mb-ic-4.svg",
-          link: ""
+          link: "/learn/ticket"
         },
         {
           name: "Thông báo của bạn",
           imageSrc:"/assets/images/ic-history-email.svg",
-          link: ""
+          link: "learn/notification"
         },
         
       ]

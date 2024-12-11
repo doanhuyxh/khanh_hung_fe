@@ -31,8 +31,7 @@ const menuGroups = [
         label: "Khoá học",
         route: "#",
         children: [
-          { label: "Khoá học", route: "/admin_web/course" },
-          { label: "Cài đặt", route: "/admin_web/course/setting" },
+          { label: "Khoá học", route: "/admin_web/course" }
         ],
       },
     ],
@@ -56,11 +55,27 @@ const menuGroups = [
     menuItems: [
       {
         icon: <i className="fa-solid fa-users"></i>,
-        label: "Tài khoản",
+        label: "Chăm sóc khách hàng",
         route: "#",
         children: [
-          { label: "Khách hàng", route: "/admin_web/account/customer" },
-          { label: "Quản trị viên", route: "/admin_web/account/admin" },
+          { label: "Thông báo mail", route: "/admin_web/customer/notification" },
+          { label: "Ticket", route: "/admin_web/customer/ticket" },
+        ],
+      },
+    ],
+  },
+  
+  {
+    name: "",
+    menuItems: [
+      {
+        icon: <i className="fa-solid fa-gear"></i>,
+        label: "Cấu hình Website",
+        route: "#",
+        children: [
+          { label: "Affiliate", route: "/admin_web/settings/affiliate" },
+          { label: "Email", route: "/admin_web/settings/email" },
+          { label: "Tin tức", route: "/admin_web/settings/news" },
         ],
       },
     ],
@@ -109,10 +124,9 @@ const AdminSideBar  = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
             </svg>
           </button>
         </div>
-        {/* <!-- SIDEBAR HEADER --> */}
-
+        
         <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
-          {/* <!-- Sidebar Menu --> */}
+        
           <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
             {menuGroups.map((group, groupIndex) => (
               <div key={groupIndex}>

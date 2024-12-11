@@ -17,13 +17,17 @@ const Header = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const user = await GetInfo();
-      if (user.data) {
-        setUser(user.data);
-        setIsLogin(true);
+      if (!user) {
+        return
       }
+      if (!user.data) {
+        return
+      }
+      setUser(user.data);
+      setIsLogin(true);
     }
   }
-  
+
   useEffect(() => {
     setIsClient(true);
     GetUserInfo();

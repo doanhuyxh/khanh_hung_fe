@@ -35,9 +35,9 @@ axiosInstance.interceptors.response.use(
         return axiosInstance
       }
 
-      // Handle 402 - Insufficient permissions
-      if (error.response.status === 402) {
-        return Promise.reject(error.response.data);
+      // Handle 403 - Insufficient permissions
+      if (error.response.status === 403) {
+        window.location.href = "/admin_web/auth/login";
       }
 
       return Promise.reject(error.response.data);
