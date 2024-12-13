@@ -77,8 +77,11 @@ export default function Notification() {
 
     useEffect(() => {
         getNotification()
-        setIsClient(true)
     }, [page, startDate, endDate, status])
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
     if (!isClient) {
         return <Loading />

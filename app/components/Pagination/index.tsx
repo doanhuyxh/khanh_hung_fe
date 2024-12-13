@@ -5,8 +5,8 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
     return (
         <div className="flex justify-between items-center">
             {length > 0 && (
-                <div className="flex items-center gap-2 mt-4">
-                    <span className='text-sm text-gray-500'>Hiển thị {length} - {Math.min(page * pageSize, totalResult)} trên tổng số {totalResult} kết quả</span>
+                <div className="hidden lg:flex items-center gap-2 mt-4">
+                    <span className='text-gray-500'>Hiển thị {length} - {Math.min(page * pageSize, totalResult)} trên tổng số {totalResult} kết quả</span>
                 </div>
             )}
 
@@ -17,7 +17,7 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
                         disabled={page === 1}
                         onClick={() => onPageChange(page - 1)}
                     >
-                        <i className="fa-solid fa-left-long"></i>
+                        <i className="fa-solid fa-less-than"></i>
                     </button>
 
                     <div className="flex items-center gap-2">
@@ -44,7 +44,7 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
                         disabled={page === totalPage}
                         onClick={() => onPageChange(page + 1)}
                     >
-                        <i className="fa-solid fa-right-long"></i>
+                        <i className="fa-solid fa-greater-than"></i>
                     </button>
                 </div>
             )}

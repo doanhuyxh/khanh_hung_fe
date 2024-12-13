@@ -2,6 +2,10 @@ html {
   font-size: 10px;
 }
 
+body *:not(input):not(textarea) {
+  cursor: default; /* Con trỏ là mũi tên */
+  user-select: none; /* Không thể chọn văn bản */
+}
 
 .study_container {
   margin: 0 auto;

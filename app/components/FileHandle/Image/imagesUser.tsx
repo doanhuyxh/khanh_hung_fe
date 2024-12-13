@@ -7,9 +7,10 @@ import Image from 'next/image';
 interface ImageUploadProps {
   initialLink: string;
   onChange: (value: string) => void;
+  className?: string;
 }
 
-const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChange }) => {
+const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChange, className }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(initialLink);
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -31,7 +32,7 @@ const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChang
   }, [initialLink])
 
   return (
-    <div className="border-2 border-dashed border-color-primary rounded-3xl p-4 text-center w-[24rem] h-[23rem] flex flex-col justify-between">
+    <div className={`border-2 border-dashed border-color-primary rounded-3xl p-4 text-center w-[24rem] h-[23rem] flex flex-col justify-between ${className}`}>
       <label className="flex-1 flex items-center justify-center" htmlFor='file'>
         {imageUrl ? (
           <Image

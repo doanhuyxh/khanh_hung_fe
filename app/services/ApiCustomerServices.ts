@@ -25,8 +25,6 @@ axiosCustomer.interceptors.response.use(
     }
 );
 
-
-
 const login = async (email: string, password: string) => {
     const res = await axiosCustomer.post(`/Auth/Login`, {
         email,
@@ -36,31 +34,21 @@ const login = async (email: string, password: string) => {
             "Content-Type": "application/json"
         }
     });
-    console.log(res);
-    return res.data;
-}
-
-
-const postJsonData = async (url: string, data: any) => {
-    const res = await axiosCustomer.post(url, data, {
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-    });
     return res.data;
 }
 
 // api với user
 const GetInfo = async () => {
-    const res = await axiosCustomer.get(`/Customer/GetInfo`);
-    return res.data;
+    try {
+        const res = await axiosCustomer.get(`/customer/get-info`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        return null;
+    }
 }
 
-const GetLessonById = async (id: number) => {
-    
-}
 
 
-export { login, GetLessonById, GetInfo };
+export { login, GetInfo };
 
