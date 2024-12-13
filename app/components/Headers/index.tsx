@@ -1,10 +1,4 @@
-import dynamic from 'next/dynamic';
-
-const Header = dynamic(() => import('./Customer'), {
-  ssr: true, 
-  loading: () => <div>Loading...</div>,
-});
-
+import Header from './Customer';
 
 import AdminHeader from './AdminWeb';
 

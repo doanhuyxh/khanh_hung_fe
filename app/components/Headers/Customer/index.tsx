@@ -1,8 +1,7 @@
 'use client';
-import dynamic from "next/dynamic";
-const HeaderNews = dynamic(() => import("./HeaderNews"), { ssr: false });
-const HeaderContact = dynamic(() => import("./HeaderContact"), { ssr: false });
-const HeaderBottom = dynamic(() => import("./HeaderBottom"), { ssr: false });
+import HeaderNews from "./HeaderNews";
+import HeaderContact from "./HeaderContact";
+import HeaderBottom from "./HeaderBottom";
 import { useEffect, useState } from "react";
 import './index.scss';
 import { GetInfo } from "@/app/services/ApiCustomerServices";

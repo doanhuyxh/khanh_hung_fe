@@ -1,7 +1,7 @@
 'use client'
 
 import { postFormData } from '@/app/configs/axiosConfig';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface ImageUploadProps {
@@ -11,16 +11,10 @@ interface ImageUploadProps {
 
 const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChange }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(initialLink);
-
   const handleLinkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const debounceTimeout = 300; // 300ms delay
     onChange(value);
-    clearTimeout((handleLinkChange as any).timeout);
-    (handleLinkChange as any).timeout = setTimeout(() => {
-      
-      setImageUrl(value);
-    }, debounceTimeout);
+    setImageUrl(value);
   };
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +26,10 @@ const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChang
     }
   };
 
+  useEffect(() => {
+    setImageUrl(initialLink)
+  }, [initialLink])
+
   return (
     <div className="border-2 border-dashed border-color-primary rounded-3xl p-4 text-center w-[24rem] h-[23rem] flex flex-col justify-between">
       <label className="flex-1 flex items-center justify-center" htmlFor='file'>
@@ -40,9 +38,9 @@ const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChang
             src={imageUrl}
             alt="Nhập đúng đường link ảnh"
             width={400}
-            height={300}
+            height={600}
             className="max-h-48 w-auto object-contain"
-            unoptimized={imageUrl.startsWith('data:')}
+            
           />
         ) : (
           <svg className="h-20 w-20 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
@@ -58,7 +56,9 @@ const ImageUploadUser: React.FC<ImageUploadProps> = ({ initialLink = "", onChang
       <div className="space-y-4">
         <div className="text-lg text-gray-600">
           <label className="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
-            <span>Tải ảnh lên</span>
+            
+            {imageUrl ? "Thay đổi ảnh" : "Tải ảnh lên"}
+
             <input id='file' type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
           </label>
         </div>

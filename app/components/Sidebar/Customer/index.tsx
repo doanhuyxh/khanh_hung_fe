@@ -50,7 +50,7 @@ function Sidebar() {
         {
           name: "Thông báo của bạn",
           imageSrc:"/assets/images/ic-history-email.svg",
-          link: "learn/notification"
+          link: "/learn/notification"
         },
         
       ]
@@ -102,13 +102,6 @@ function Sidebar() {
     }
   ]
 
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  if (!isClient) return null;
 
   return (
     <div className="sidebar_container">
