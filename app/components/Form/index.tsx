@@ -1,5 +1,6 @@
 
 import FormLesson from "./FormLesson";
+import FormNotification from "./FormNotification";
 
-export { FormLesson };
+export { FormLesson, FormNotification };
 

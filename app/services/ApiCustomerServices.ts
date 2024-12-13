@@ -18,6 +18,9 @@ axiosCustomer.interceptors.response.use(
             await axiosCustomer.post('/Auth/RefreshToken')
             return axiosCustomerConfig
         }
+        if (error.response?.status === 403){
+            return Promise.resolve(error.response)
+        }
         return Promise.reject(error);
     }
 );

@@ -1,7 +1,7 @@
 'use client'
 
 import axios from 'axios';
-import axiosInstance from './axiosConfig';
+
 
 const axiosCustomerConfig = axios.create({
   baseURL: 'http://localhost:5035/api/v1',
@@ -36,16 +36,16 @@ axiosCustomerConfig.interceptors.response.use(
 
         await axiosCustomerConfig.post("/Auth/RefreshToken")
         await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
-        return axiosInstance
+        return axiosCustomerConfig
 
         } else {
           localStorage.clear();
           return Promise.reject(error.response.data);
         }
       }
-      // Handle 402 - Insufficient permissions
-      if (error.response.status === 402) {
-        return Promise.reject(error.response.data);
+      // Handle 403 - Insufficient permissions
+      if (error.response.status === 403) {
+        window.location.href="/"
       }
 
       return Promise.reject(error.response.data);

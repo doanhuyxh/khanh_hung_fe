@@ -18,9 +18,11 @@ const Header = () => {
     if (token) {
       const user = await GetInfo();
       if (!user) {
+        localStorage.clear()
         return
       }
       if (!user.data) {
+        localStorage.clear()
         return
       }
       setUser(user.data);

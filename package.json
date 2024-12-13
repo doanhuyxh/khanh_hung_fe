@@ -11,6 +11,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^44.0.0",
     "@ckeditor/ckeditor5-react": "^9.4.0",
+    "@mantine/rte": "^5.10.5",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "ckeditor5": "^44.0.0",
@@ -19,10 +20,10 @@
     "next": "^15.0.4",
     "next-cookies": "^2.0.3",
     "postcss-loader": "^8.1.1",
+    "quill": "^2.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
-    "react-quill": "^2.0.0",
     "swiper": "^11.1.15"
   },
   "devDependencies": {
