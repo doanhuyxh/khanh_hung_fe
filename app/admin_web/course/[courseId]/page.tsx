@@ -7,6 +7,7 @@ import Loading from '@/app/components/Loading';
 import ModalScroll from '@/app/components/Modal/ModalScroll';
 import { FormLesson } from '@/app/components/Form';
 import { LessonItemAdmin } from '@/app/components/Lesson';
+import ModalViewHtml from '@/app/components/Modal/ModalViewHtml';
 
 export default function CourseLesson() {
     const [loading, setLoading] = useState(true)
@@ -16,8 +17,12 @@ export default function CourseLesson() {
     const router = useRouter()
 
     const [isOpen, setIsOpen] = useState(false)
+    const [isOpenDescription, setIsOpenDescription] = useState(false)
+    const [lessonContent, setLessonContent] = useState('')
+
     const [course, setCourse] = useState(null)
     const [courseLesson, setCourseLesson] = useState([])
+
     const [lesson, setLesson] = useState({
         Id: "",
         Name: "",
@@ -111,8 +116,10 @@ export default function CourseLesson() {
                         <LessonItemAdmin
                             key={index}
                             item={item}
-                            toggleDescription={() => { }}
-                            toggleLessonContent={() => { }}
+                            toggleLessonContent={() => {
+                                setLessonContent(item.lessonContent)
+                                setIsOpenDescription(true)
+                            }}
                             HandleCreateOrUpdateLesson={HandleCreateOrUpdateLesson}
                             HandleDeleteLesson={HandleDeleteLesson}
                         />
@@ -124,6 +131,10 @@ export default function CourseLesson() {
             <ModalScroll isOpen={isOpen} onClose={() => setIsOpen(false)} title={`${lesson.Id == "" ? "Tạo bài học mới" : "Chỉnh sửa bài học"} cho khoá học: ${course?.name || ""}`}>
                 <FormLesson lesson={lesson} setLesson={setLesson} saveLesson={saveLesson} />
             </ModalScroll>
+
+            <ModalViewHtml isOpen={isOpenDescription} onClose={() => setIsOpenDescription(false)} title={'Nội dung bài học'}>
+                <div dangerouslySetInnerHTML={{ __html: lessonContent || "" }} />
+            </ModalViewHtml>
         </>
     )
 }

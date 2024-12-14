@@ -10,12 +10,10 @@ const axiosInstance = axios.create({
 });
 
 export const postFormData = (url: string, data: any) => {
-
   const formData = new FormData();
   for (const key in data) {
     formData.append(key, data[key]);
   }
-
   return axiosInstance.post(url, formData, {
     headers: { 'Content-Type': 'multipart/form-data' }
   });
@@ -23,12 +21,18 @@ export const postFormData = (url: string, data: any) => {
 
 axiosInstance.interceptors.response.use(
   async (response) => {
-
     const code = response.data.code
     if (code == 401){
-      const res_refresh = await axiosInstance.post("/auth/RefreshToken")
+      const refreshToken = localStorage.getItem("refreshToken")
+      const res_refresh = await axiosInstance.post("/auth/RefreshToken", {
+        headers: {
+          "RefreshToken": `${refreshToken}`
+        }
+      })
       const code_res = res_refresh.data.code
       if (code_res != 200){
+        localStorage.clear()
+        localStorage.setItem("refreshToken", res_refresh.data.data.refreshToken)
         window.location.href = "/admin_web/auth/login"
       }else{
         return axiosInstance
@@ -42,7 +46,6 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     if (error.response) {
-      // Handle 401 - Token expired, try refresh
       if (error.response.status === 401) {
         await axiosInstance.post("/auth/RefreshToken")
         await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds

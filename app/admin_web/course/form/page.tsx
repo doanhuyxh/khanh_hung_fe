@@ -1,10 +1,11 @@
 'use client'
 
-import Editor from "@/app/components/Editor";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ImageUpload, VideoUpload } from "@/app/components/FileHandle";
+import { EditorReactQuill } from "@/app/components/Editor";
 import axiosInstance, { postFormData } from "@/app/configs/axiosConfig";
+import toast from "react-hot-toast";
 
 export default function CourseForm() {
 
@@ -34,9 +35,12 @@ export default function CourseForm() {
     };
 
     const HandleSaveCourse = async () => {
-
-        await postFormData('/course/CreateCourse', course);
-
+        const res = await postFormData('/course/CreateOrUpdateCourse', course);
+        if (res.code == 200) {
+            toast.success('Lưu khoá học thành công');
+        } else {
+            toast.error('Lưu khoá học thất bại');
+        }
     }
 
 
@@ -149,7 +153,7 @@ export default function CourseForm() {
                             <label className="block text-sm font-medium text-gray-700 mb-2">
                                 Nội dung khoá mục
                             </label>
-                            <Editor value={course.CourseContent} onChange={handleEditorChangeCourseContent} />
+                            <EditorReactQuill value={course.CourseContent} onChange={handleEditorChangeCourseContent} />
                         </div>
                     </div>
                 </div>

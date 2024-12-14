@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "path";
 const nextConfig: NextConfig = {
   experimental: {
     
@@ -21,8 +22,12 @@ const nextConfig: NextConfig = {
       fullUrl: true
     }
   },
-  webpack: (config) => {
-    config.optimization.minimize = false; // Tắt tối ưu hóa
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      
+      config.resolve.alias['yjs'] = path.resolve(__dirname, 'node_modules/yjs')
+    }
+    config.optimization.minimize = false;
     return config;
   },
 };

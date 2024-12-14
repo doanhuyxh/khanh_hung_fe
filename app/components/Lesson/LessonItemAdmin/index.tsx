@@ -3,7 +3,6 @@ import Image from 'next/image';
 
 interface LessonItemProps {
     item: any; // Có thể thay đổi thành kiểu dữ liệu phù hợp với bạn
-    toggleDescription: (id: string) => void;
     toggleLessonContent: (id: string) => void;
     HandleCreateOrUpdateLesson: (id: string) => void;
     HandleDeleteLesson: (id: string) => void;

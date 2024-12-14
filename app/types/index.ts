@@ -1,3 +1,9 @@
+export interface ResponseData {
+  code: number;
+  message: string;
+  data: unknown;
+}
+
 export interface LessonData {
   id: string;
   name: string;
@@ -39,3 +45,23 @@ export interface User {
   email?: string;
   avatar?: string;
 }
+
+export interface Customer {
+  id: string;
+  email: string;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  gender: string;
+  yearOfBirth: number;
+  city: string;
+  fieldOfExpertise: string;
+  yearOfExperience: string;
+  description: string;
+  bankAccountNumber: string;
+  accountBankName: string;
+  accountBankOwner: string;
+  createdAt: number;
+}
+

@@ -26,31 +26,47 @@ axiosCustomerConfig.interceptors.request.use((config) => {
 
 axiosCustomerConfig.interceptors.response.use(
   async (response) => {
+    const code = response.data.code
+    if (code == 401) {
+      const res_refresh = await axiosCustomerConfig.post("/Auth/RefreshToken")
+      const code_res = res_refresh.data.code
+      if (code_res == 200) {
+        return axiosCustomerConfig
+      }
+    }
+    if (code == 403) {
+      window.location.href = "/"
+    }
     const data = response.data;
     return data;
   },
   async (error) => {
     if (error.response) {
-      // Handle 401 - Token expired, try refresh
       if (error.response.status === 401) {
-
         await axiosCustomerConfig.post("/Auth/RefreshToken")
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
         return axiosCustomerConfig
 
-        } else {
-          localStorage.clear();
-          return Promise.reject(error.response.data);
-        }
+      } else {
+        localStorage.clear();
+        return Promise.reject(error.response.data);
       }
-      // Handle 403 - Insufficient permissions
-      if (error.response.status === 403) {
-        window.location.href="/"
-      }
-
-      return Promise.reject(error.response.data);
     }
-   
+    if (error.response.status === 403) {
+      window.location.href = "/"
+    }
+    return Promise.reject(error.response.data);
+  }
+
 );
+
+export const postFormData = (url: string, data: any) => {
+  const formData = new FormData();
+  for (const key in data) {
+    formData.append(key, data[key]);
+  }
+  return axiosCustomerConfig.post(url, formData, {
+    headers: { 'Content-Type': 'multipart/form-data' }
+  });
+}
 
 export default axiosCustomerConfig;
