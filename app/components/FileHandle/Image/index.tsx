@@ -1,7 +1,7 @@
 'use client'
 
 import  { postFormData } from '@/app/configs/axiosConfig';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 interface ImageUploadProps {
@@ -26,6 +26,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ initialLink = "", onChange })
       onChange(res.data.file_strong_url)
     }
   };
+
+  useEffect(()=>{
+    setImageUrl(initialLink)
+  },[initialLink])
 
   return (
     <div className="mb-4">

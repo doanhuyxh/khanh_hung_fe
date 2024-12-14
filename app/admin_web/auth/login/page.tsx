@@ -18,7 +18,7 @@ export default function Login() {
         })
 
         if (response.code == 200) {
-            let data = response.data
+            const data = response.data
             localStorage.setItem("refreshToken", data.refreshToken)
             localStorage.setItem("accessToken", data.accessToken)
             localStorage.setItem("user", JSON.stringify(data.user))

@@ -16,8 +16,8 @@ export default function CourseLesson() {
     const router = useRouter()
 
     const [isOpen, setIsOpen] = useState(false)
-    const [course, setCourse] = useState<any>(null)
-    const [courseLesson, setCourseLesson] = useState<any[]>([])
+    const [course, setCourse] = useState(null)
+    const [courseLesson, setCourseLesson] = useState([])
     const [lesson, setLesson] = useState({
         Id: "",
         Name: "",
@@ -42,7 +42,7 @@ export default function CourseLesson() {
                 CourseId: courseId
             })
         } else {
-            let lesson = courseLesson.find((item: any) => item.id == id)
+            const lesson = courseLesson.find((item:any) => item.id == id)
             setLesson({
                 Id: lesson.id,
                 Name: lesson.name,

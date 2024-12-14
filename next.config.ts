@@ -1,11 +1,11 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   experimental: {
-
+    
   },
   compiler: {
     styledComponents: true,
-    removeConsole: true
+    removeConsole: false
   },
   sassOptions: {
     includePaths: ["./app/styles", "./app/components"],
@@ -20,7 +20,11 @@ const nextConfig: NextConfig = {
     fetches: {
       fullUrl: true
     }
-  }
+  },
+  webpack: (config) => {
+    config.optimization.minimize = false; // Tắt tối ưu hóa
+    return config;
+  },
 };
 
 export default nextConfig;

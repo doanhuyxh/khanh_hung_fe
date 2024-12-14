@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -12,11 +12,14 @@
     "@ckeditor/ckeditor5-build-classic": "^44.0.0",
     "@ckeditor/ckeditor5-react": "^9.4.0",
     "@mantine/rte": "^5.10.5",
+    "@types/lodash": "^4.17.13",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "ckeditor5": "^44.0.0",
     "clsx": "^2.1.1",
+    "cross-env": "^7.0.3",
     "https": "^1.0.0",
+    "lodash": "^4.17.21",
     "next": "^15.0.4",
     "next-cookies": "^2.0.3",
     "postcss-loader": "^8.1.1",

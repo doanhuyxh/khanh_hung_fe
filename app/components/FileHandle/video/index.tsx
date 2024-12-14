@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface VideoUploadProps {
   initialLink: string;
@@ -27,6 +27,10 @@ const VideoUpload: React.FC<VideoUploadProps> = ({ initialLink, onChange }) => {
       reader.readAsDataURL(file);
     }
   };
+
+  useEffect(()=>{
+    setVideoUrl(initialLink)
+  },[initialLink])
 
   return (
     <div className="mb-4">

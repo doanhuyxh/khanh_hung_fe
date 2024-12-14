@@ -45,7 +45,7 @@ export default function CourseForm() {
         if (id) {
             setTitle('Cập nhật khoá học');
             axiosInstance.get(`/course/GetCourseById?id=${id}`).then((res) => {
-                let data = res.data;
+                const data = res.data;
                 setCourse({
                     Id: data.id,
                     Name: data.name,

@@ -9,7 +9,7 @@ interface FormNotificationProps {
         Content: string;
         Type: string;
     };
-    setFormNotify: (formNotify: any) => void;
+    setFormNotify: (formNotify: void) => void;
     save: () => void;
 }
 
@@ -73,7 +73,7 @@ export default function FormNotification({formNotify, setFormNotify, save}: Form
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                     Nội dung
                 </label>
-                <textarea className='w-full h-full border-2' rows={20} cols={30}
+                <textarea className='w-full h-full border-2 p-2' rows={20}
                 value={formNotify.Content}
                 onChange={(e)=>setFormNotify({...formNotify, Content:e.target.value})}>
                 </textarea>

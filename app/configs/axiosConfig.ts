@@ -23,6 +23,20 @@ export const postFormData = (url: string, data: any) => {
 
 axiosInstance.interceptors.response.use(
   async (response) => {
+
+    const code = response.data.code
+    if (code == 401){
+      const res_refresh = await axiosInstance.post("/auth/RefreshToken")
+      const code_res = res_refresh.data.code
+      if (code_res != 200){
+        window.location.href = "/admin_web/auth/login"
+      }else{
+        return axiosInstance
+      }
+    }
+    if (code == 403){
+      window.location.href="/admin_web/auth/login"
+    }
     const data = response.data;
     return data;
   },

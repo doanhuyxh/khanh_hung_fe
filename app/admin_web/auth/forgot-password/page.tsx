@@ -28,6 +28,7 @@ export default function ForgotPassword(){
                 });
             }
         } catch (error) {
+            console.log(error)
             toast.error('Có lỗi xảy ra, vui lòng thử lại sau', {
                 duration: 5000,
                 position: "top-right" 

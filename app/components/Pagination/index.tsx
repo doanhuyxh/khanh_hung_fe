@@ -6,7 +6,7 @@ export default function Pagination({ page, totalPage, onPageChange, totalResult,
         <div className="flex justify-between items-center">
             {length > 0 && (
                 <div className="hidden lg:flex items-center gap-2 mt-4">
-                    <span className='text-gray-500'>Hiển thị {length} - {Math.min(page * pageSize, totalResult)} trên tổng số {totalResult} kết quả</span>
+                    <span className='text-gray-500 text-sm'>Hiển thị {length} - {Math.min(page * pageSize, totalResult)} trên tổng số {totalResult} kết quả</span>
                 </div>
             )}
 
