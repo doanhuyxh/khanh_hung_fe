@@ -3,14 +3,23 @@
 import Pagination from "@/app/components/Pagination";
 import Sidebar from "@/app/components/Sidebar/Customer";
 import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig";
+import ModalViewHtml from "@/app/components/Modal/ModalViewHtml";
+import { unixToDatetime } from "@/app/utils";
+import { NotificationItem } from "@/app/types";
 import { useState, useEffect } from "react";
 
 export default function Notification() {
 
 
-    const [status, setStatus] = useState("all");
-
+    const [status, setStatus] = useState("");
     const [page, setPage] = useState(1);
+    const [data, setData] = useState<NotificationItem[]>([]);
+    const [totalPage, setTotalPage] = useState(0);
+    const [totalResult, setTotalResult] = useState(0);
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [title, setTitle] = useState("");
+    const [content, setContent] = useState("");
 
     const handlePageChange = (page: number) => {
         setPage(page);
@@ -22,21 +31,28 @@ export default function Notification() {
 
     const GetNotification = async () => {
         const res_data = await axiosCustomerConfig.get(`/notification/get-notify?page=${page}&status=${status}`);
-        console.log(res_data);
+        setData(res_data.data.data);
+        setTotalPage(res_data.data.totalPage);
+        setTotalResult(res_data.data.totalResult);
+    }
 
+    const handleViewDetail = (item: NotificationItem) => {
+        setTitle(item.title);
+        setContent(item.content);
+        setIsOpen(true);
     }
 
     useEffect(() => {
         GetNotification();
     }, [page, status]);
 
-    return <div className="lg:flex w-full">
+    return <div className="lg:flex  w-full">
         <div className="hidden lg:block">
             <Sidebar />
         </div>
-        <div className="lg:container mt-20">
+        <div className="lg:container mt-20 ">
             <div className="w-full flex justify-center items-center mb-10">
-                <h1 className="text-3xl lg:text-5xl font-bold transform scale-150  text-color-secondary">Thông báo</h1>
+                <h1 className="text-3xl lg:text-6xl font-bold transform scale-150 text-color-secondary" >Thông báo của bạn</h1>
             </div>
 
             <div className="w-11/12 lg:w-full shadow-[0_0_20px_rgba(0,0,0,0.2)] shadow-gray-500/50 m-auto p-6 lg:p-12 lg:m-12 rounded-lg">
@@ -45,17 +61,17 @@ export default function Notification() {
                         <h2 className="text-3xl lg:text-4xl font-bold opacity-80">Lịch sử các thông báo của bạn</h2>
                     </div>
                     <div className="flex gap-4">
-                        <button className={`text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "all" ? "bg-color-primary text-white" : ""}`} onClick={() => handleStatusChange("all")}>Tất cả</button>
+                        <button className={`text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "all" ? "bg-color-primary text-white" : ""}`} onClick={() => handleStatusChange("")}>Tất cả</button>
                         <button className={`text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "read" ? "bg-color-primary text-white" : ""}`} onClick={() => handleStatusChange("read")}>Đã xem</button>
-                        <button className={`text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "unread" ? "bg-color-primary text-white" : ""}`} onClick={() => handleStatusChange("unread")}>Chưa xem</button>
+                        <button className={`text-gray-600 px-5 py-3 rounded-md lg:text-3xl border border-gray-600 border-opacity-40 hover:bg-color-primary hover:text-white transition-all duration-300 ${status === "unread" ? "bg-color-primary text-white" : ""}`} onClick={() => handleStatusChange("un_read")}>Chưa xem</button>
                     </div>
                 </div>
                 <div className="lg:block hidden w-full overflow-x-auto">
-                    <table className="min-w-full bg-white">
+                    <table className="min-w-full bg-white border border-gray-300 rounded-xl">
                         <thead>
-                            <tr className="bg-gray-100 text-black text-xl leading-normal">
+                            <tr className="bg-gray-100 text-black text-xl leading-normal text-nowrap">
                                 <th className="py-3 px-6 text-left">STT</th>
-                                <th className="py-3 px-6 text-left w-1/3">Tiêu đề</th>
+                                <th className="py-3 px-6 text-left min-w-[40%]">Tiêu đề</th>
                                 <th className="py-3 px-6 text-left">Nội dung</th>
                                 <th className="py-3 px-6 text-left">Thời gian gửi</th>
                                 <th className="py-3 px-6 text-left">Thời gian xem</th>
@@ -63,17 +79,37 @@ export default function Notification() {
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 text-xl">
-                            <tr className="border-b border-gray-200 hover:bg-gray-50">
-                                <td className="py-4 px-6">1</td>
-                                <td className="py-4 px-6">Thông báo mới</td>
-                                <td className="py-4 px-6">Nội dung thông báo...</td>
-                                <td className="py-4 px-6">20/03/2024 10:30</td>
-                                <td className="py-4 px-6">20/03/2024 11:45</td>
-                                <td className="py-4 px-6">
-                                    <span className="bg-green-600 text-white py-2 px-4 rounded-md">Đã xem</span>
-                                </td>
-                            </tr>
+                            {data.map((item: NotificationItem, index: number) => (
+                                <tr className="border-b border-gray-200 hover:bg-gray-50" key={index}>
+                                    <td className="py-4 px-6">{index + 1}</td>
+
+                                    {/* Cột item.title chiếm ít nhất 50% bảng */}
+                                    <td className="py-4 px-6 font-semibold text-2xl min-w-[40%]">{item.title}</td>
+
+                                    <td className="py-4 px-6">
+                                        <span
+                                            onClick={() => handleViewDetail(item)}
+                                            className={`cursor-pointer text-decoration-line: underline ${item.status === "read" ? "text-gray-600" : "text-blue-600"}`}
+                                        >
+                                            Xem chi tiết
+                                        </span>
+                                    </td>
+
+                                    <td className="py-4 px-6">{unixToDatetime(item.sendAt)}</td>
+
+                                    <td className="py-4 px-6">{item.readAt ? unixToDatetime(item.readAt) : "-"}</td>
+
+                                    <td className="py-4 px-6">
+                                        {item.status === "read" ? (
+                                            <span className="bg-green-600 text-white py-2 px-4 rounded-md">Đã xem</span>
+                                        ) : (
+                                            <span className="bg-red-600 text-white py-2 px-4 rounded-md">Chưa xem</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
+
                     </table>
                 </div>
                 <div className="lg:hidden w-full max-h-[60vh] overflow-y-auto">
@@ -104,9 +140,10 @@ export default function Notification() {
                         </div>
                     </div>
                 </div>
-                <Pagination length={100} pageSize={10} totalResult={100} page={1} totalPage={10} onPageChange={() => { }} />
+                <Pagination length={data.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={setPage} />
             </div>
 
         </div>
+        <ModalViewHtml isOpen={isOpen} onClose={() => setIsOpen(false)}  title={title} content={content}/>
     </div>
 }

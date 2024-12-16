@@ -40,7 +40,7 @@ export default function Dropdown({
       </button>
 
         {isOpen && (
-        <div className="absolute top-8 translate-y-[0%] mt-2 w-auto bg-white rounded-md shadow-lg z-1000">
+        <div className="absolute top-8 translate-y-[0%] mt-2 w-auto bg-white rounded-md shadow-2xl z-1000">
           {items.map((item, index) => (
             <button
               key={index}

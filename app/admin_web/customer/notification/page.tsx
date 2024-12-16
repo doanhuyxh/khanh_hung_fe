@@ -24,6 +24,8 @@ export default function Notification() {
     const pageSize = 30;
     const [data, setData] = useState<any[]>([])
 
+    const [checkbox, setCheckbox] = useState<string[]>([])
+
     const [formNotify, setFormNotify] = useState({
         Id: "",
         PrivateName: "",
@@ -71,12 +73,45 @@ export default function Notification() {
     }
 
     const getNotification = async () => {
-        axiosInstance.get(`/notification/GetAll?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}`)
+        axiosInstance.get(`/notification/GetAll?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}&status=${status}&search=${searchKeyword}`)
             .then(res => {
                 const data = res.data
                 setData(data)
             })
     }
+
+
+    const handleChangeCheckbox = (id: string) => {
+        if (id == 'all') {
+            setCheckbox(data.map((i: any) => i.id))
+        } else {
+            setCheckbox(prev => {
+                if (prev.includes(id)) {
+                    return prev.filter(i => i !== id)
+                }
+                return [...prev, id]
+            })
+        }
+    }
+
+    const handleUpdateStatus = async (status: string) => {
+        try {
+            for (const id of checkbox) {
+                await axiosInstance.get(`/notification/ChangeStatus?id=${id}&status=${status}`);
+            }
+            toast.success('Cập nhật trạng thái thành công', {
+                duration: 3000,
+                position: "top-right",
+            });
+            getNotification();
+        } catch (error) {
+            console.error('Có lỗi xảy ra khi cập nhật trạng thái:', error);
+            toast.error('Cập nhật thất bại', {
+                duration: 3000,
+                position: "top-right",
+            });
+        }
+    };
 
     useEffect(() => {
         getNotification()
@@ -112,8 +147,15 @@ export default function Notification() {
             </div>
             <hr />
             <div className="mt-3 flex gap-8 mb-3 mx-3 p-4 bg-gray-50 rounded-lg shadow-sm">
+                <button
+                    className='bg-blue-100 text-black hover:bg-green-100 hover:text-green-500 px-4 py-2 rounded-md'
+                    onClick={() => handleChangeCheckbox('all')}
+                >
+                    <i className="fa-solid fa-check"></i>
+                </button>
+
                 <div className="flex gap-3 items-center">
-                <input
+                    <input
                         type="text"
                         placeholder="tìm kiêm"
                         value={searchKeyword}
@@ -140,7 +182,7 @@ export default function Notification() {
 
                 <div className="flex items-center gap-8">
 
-                    <button className="px-2 py-2 text-green-500 hover:bg-green-200 hover:text-green-800 rounded-lg" onClick={() => { }}>
+                    <button className="px-2 py-2 text-green-500 hover:bg-green-200 hover:text-green-800 rounded-lg" onClick={() => handleUpdateStatus('send')}>
                         <i className="fa-solid fa-paper-plane"></i> Gửi thông báo
                     </button>
 
@@ -163,7 +205,7 @@ export default function Notification() {
             <div className="w-full overflow-y-auto mt-3">
                 <table className="w-full text-sm text-left text-gray-700 border-collapse">
                     <thead>
-                        <tr className="bg-gray-100 border-b">
+                        <tr className="bg-gray-100 border-b text-nowrap">
                             <th className="px-6 py-4 font-medium">STT</th>
                             <th className="px-6 py-4 font-medium">Tên thông báo (nội bộ)</th>
                             <th className="px-6 py-4 font-medium">Tiêu đề</th>
@@ -180,22 +222,22 @@ export default function Notification() {
                         {
                             data && data.map((item: any, index: number) => {
                                 return <tr key={index} className="hover:bg-gray-50 border-b">
-                                    <td className="px-6 py-4 text-center flex items-center">
-                                        <input type="checkbox" className="p-1 m-1"/>
+                                    <td className='p-4 flex items-center gap-1' onClick={() => handleChangeCheckbox(item.id)}>
+                                        <input type='checkbox' value={item.id} checked={checkbox.includes(item.id)} onChange={() => { }} />
                                         {index + 1}
-                                        </td>
+                                    </td>
                                     <td className="px-6 py-4 font-medium">{item.privateName}</td>
                                     <td className="px-6 py-4">{item.title}</td>
                                     <td className="px-6 py-4 max-w-xs truncate">{item.content}</td>
                                     <td className="px-6 py-4">
-                                        <span className={`px-2 py-1 rounded-full text-xs ${item.status === 'sent' ? 'bg-green-100 text-green-800' :
+                                        <span className={`px-2 py-1 rounded-full text-xs ${item.status === 'send' ? 'bg-green-100 text-green-800' :
                                             item.status === 'pending' ? 'bg-yellow-100 text-gray-800' :
                                                 item.status === 'draft' ? 'bg-gray-100 text-gray-800' :
                                                     'bg-yellow-100 text-yellow-800'
                                             }`}>
                                             {item.status == 'pending' && "Đang chờ"}
                                             {item.status == 'draft' && "Nháp"}
-                                            {item.status == 'sent' && "Đã gửi"}
+                                            {item.status == 'send' && "Đã gửi"}
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-sm">

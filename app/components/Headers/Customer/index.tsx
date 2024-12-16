@@ -1,50 +1,33 @@
-'use client';
+import { cookies } from "next/headers";
+import dynamic from "next/dynamic";
 import HeaderNews from "./HeaderNews";
 import HeaderContact from "./HeaderContact";
-import HeaderBottom from "./HeaderBottom";
-import { useEffect, useState } from "react";
 import './index.scss';
-import { GetInfo } from "@/app/services/ApiCustomerServices";
+import { Customer } from "@/app/types";
 
-const Header = () => {
-  const [isClient, setIsClient] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
-  const [user, setUser] = useState(null);
+const HeaderBottom = dynamic(() => import("./HeaderBottom"), {
+  ssr: true,
+  loading: () => <></>,
+});
 
-  const GetUserInfo = async () => {
+const Header = async ({user}: {user: Customer}) => {
+  try {
+    
 
-    const token = localStorage.getItem("token");
-    if (token) {
-      const user = await GetInfo();
-      if (!user) {
-        localStorage.clear()
-        return
-      }
-      if (!user.data) {
-        localStorage.clear()
-        return
-      }
-      setUser(user.data);
-      setIsLogin(true);
-    }
+
+    return (
+      <header className="header">
+        <div className="header_top">
+          <HeaderNews />
+          <HeaderContact />
+        </div>
+        <HeaderBottom isLogin={user.id !== undefined && user.id !== null && user.id !== ''} user={user} />
+      </header>
+    );
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return <></>;
   }
-
-  useEffect(() => {
-    setIsClient(true);
-    GetUserInfo();
-  }, []);
-
-  if (!isClient) return null;
-
-  return (
-    <header className="header">
-      <div className="header_top">
-        <HeaderNews />
-        <HeaderContact />
-      </div>
-      <HeaderBottom isLogin={isLogin} user={user} />
-    </header>
-  );
-}
+};
 
 export default Header;

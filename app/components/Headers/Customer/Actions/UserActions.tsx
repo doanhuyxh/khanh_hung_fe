@@ -1,10 +1,12 @@
 'use client';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import UserDropdown from './UserDropdown';
+import { Customer } from '@/app/types';
 
-export default function UserActions({user}: {user: any}) {
+export default function UserActions({user}: {user: Customer}) {
     const [isDropdown, setIsDropdown] = useState(false);
 
     return (

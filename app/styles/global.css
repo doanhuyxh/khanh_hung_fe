@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,6 +48,7 @@
     --bg-color-modal-notify: linear-gradient(180deg, #710EBE 32.63%, #F41E92 163.15%);
   }
   
+
   @media (prefers-color-scheme: dark) {
     :root {
       --background: #0a0a0a;

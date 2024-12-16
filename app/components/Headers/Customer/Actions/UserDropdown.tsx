@@ -1,9 +1,20 @@
 'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Customer } from '@/app/types';
+import axiosCustomerConfig from '@/app/configs/axiosCustomerConfig';
 
-export default function UserDropdown({ isDropdown, user }: { isDropdown: boolean, user: any }) {
+export default function UserDropdown({ isDropdown, user }: { isDropdown: boolean, user: Customer }) {
+
+    const handleLogout = () => {
+        localStorage.clear()
+        axiosCustomerConfig.get(`Auth/LogOut?id=${user.id}`).then(res => {
+            window.location.href = "/learn/login"
+        })
+    }
+
     return (
         <div
             className={`dropdown_menu transition-all duration-300 absolute top-20 right-[-20px] ${isDropdown ? 'opacity-150' : 'opacity-0'}`}
@@ -52,11 +63,7 @@ export default function UserDropdown({ isDropdown, user }: { isDropdown: boolean
                     <div className="m-auto w-10/12 h-[1px] bg-gray-500"></div>
                 </li>
                 <li>
-                    <div onClick={() => {
-                        localStorage.removeItem("token");
-                        localStorage.removeItem("refreshToken");
-                        window.location.href = "/learn/login";
-                    }} className="flex items-center gap-2 px-5 py-3 cursor-pointer">
+                    <div onClick={handleLogout} className="flex items-center gap-2 px-5 py-3 cursor-pointer">
                         <div className="flex justify-center text-gray-500">
                             <Image src="/assets/images/header/window.svg" alt="profile" width={15} height={15} />
                         </div>

@@ -4,17 +4,21 @@ import dynamic from "next/dynamic"
 import { useEffect, useState } from "react";
 const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoPlayer"), { ssr: false });
 import { LessonList } from "@/app/components/Lesson";
-import { LessonData, CourseData } from "@/app/types";
+import { LessonData, CourseData, LessonDataItem } from "@/app/types";
 
 import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig";
 import Loading from "@/app/components/Loading";
+import { useSearchParams } from "next/navigation";
 
 
 export default function StudyPage() {
 
   const [loading, setLoading] = useState(true);
 
+  const query = useSearchParams()
+  const lessonId = query.get('lesson')
 
+  const [lesson, setLesson] = useState<LessonDataItem | null>(null);
   const [data, setData] = useState<CourseData[]>([]);
 
   const [isShowAllLesson, setIsShowAllLesson] = useState(false);
@@ -46,7 +50,7 @@ export default function StudyPage() {
       temp_arr.push(course);
     });
     setData(temp_arr);
-    setLoading(false);
+
   }
 
   useEffect(() => {
@@ -56,7 +60,46 @@ export default function StudyPage() {
       }
       getAllCourse();
     }
+
   }, [])
+
+  useEffect(() => {
+
+    if (lessonId) {
+      axiosCustomerConfig.get(`/course/get-lesson?id=${lessonId}`)
+        .then((res) => {
+          setLesson(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+    else {
+      axiosCustomerConfig.get("/course/get-last-lesson")
+        .then((res) => {
+          setLesson(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+
+    setLoading(false)
+
+  }, [lessonId])
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (lesson?.id) {
+        axiosCustomerConfig.post(`/course/update-lesson?id=${lesson.id}&progress=100&lessonOrder=${lesson.order}`)
+          .catch((err) => {
+            console.log(err)
+          })
+      }
+    }, 30000)
+    return () => clearInterval(interval)
+  }, [lesson])
 
   if (loading) {
     return <Loading />
@@ -66,9 +109,10 @@ export default function StudyPage() {
     <div className="study_container flex flex-col lg:flex-row lg:gap-4 lg:px-10">
       <div className="lg:w-2/3 w-ful">
         <VideoPlayer
-          title="ActiveSpin Cách để nói trúng tim đen autience - Avatar"
-          timeDuration="10:35"
-          views={565}
+          title={lesson?.name || ""}
+          videoUrl={lesson?.video || ""}
+          timeDuration={lesson?.duration || ""}
+          views={lesson?.totalView || 0}
         />
       </div>
 

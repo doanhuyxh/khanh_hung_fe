@@ -1,5 +1,6 @@
 'use client';
-import React, { useState } from "react";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Sidebar } from "../../Sidebar";
 import { BurgerIcon } from "../../Icon";
@@ -7,6 +8,14 @@ import { BurgerIcon } from "../../Icon";
 const HeaderLogo = ({ isLogin }: { isLogin: boolean }) => {
 
   const [isOpenSidebar, setIsOpenSidebar] = useState(false)
+
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) return <></>
 
   return(
     <>

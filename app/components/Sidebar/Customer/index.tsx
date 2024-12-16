@@ -3,7 +3,7 @@
 import Image from "next/image";
 import BlockItem from "./BlockItem";
 import "./index.scss";
-import { useEffect, useState } from "react";
+
 
 function Sidebar() {
 
@@ -107,7 +107,7 @@ function Sidebar() {
     <div className="sidebar_container">
       <div className="sidebar_content">
         <div className="sidebar_top">
-          <a href="/learn/profile" className="sidebar_top_wrap">
+          <a href="/learn/study" className="sidebar_top_wrap">
             <span className="icon_thunder">
               <Image
                 width={20}

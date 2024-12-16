@@ -15,7 +15,7 @@ interface BlockItemProps {
 
 export default function BlockItem({ title, menuItems }: BlockItemProps) {
     return (
-        <div className="block_item">
+        <div className="block_item cursor-pointer">
             <p className="block_item_title">{title}</p>
 
             <div className="block_menu">

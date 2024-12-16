@@ -6,17 +6,19 @@ interface VideoPlayerProps {
   title: string;
   timeDuration: string;
   views: number;
+  videoUrl: string;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
   title,
   timeDuration,
   views,
+  videoUrl,
 }) => {
   return (
     <div className="flex-1">
       <div className="h-auto w-full flex justify-center text-white video_section">
-        <video src="/assets/video/video_demo.mp4" className="w-full h-auto  object-contain" controls />
+        <video src={videoUrl||"/assets/video/video_demo.mp4"} className="w-full h-auto  object-contain" controls />
       </div>
       <div className="mt-10">
         <h1 className="lesson_name my-2">{title}</h1>

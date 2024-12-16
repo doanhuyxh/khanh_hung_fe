@@ -2,7 +2,7 @@
     flex-shrink: 0;
     //max-height: calc(100vh - var(--sz-hd-foot));
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: scroll;
     position: sticky;
     top: 0;
     width: var(--w-sidebar);

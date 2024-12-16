@@ -39,7 +39,7 @@ export default function CustomerDetailPage() {
 
                 <div className="grid grid-cols-2 gap-4 mt-6">
 
-                    <div className="bg-white p-4 rounded-lg shadow-xl col-span-2 flex flex-row justify-start gap-30">
+                    <div className="bg-white p-4 rounded-lg shadow-2xl col-span-2 flex flex-row justify-start gap-30">
                         <div className="w-32 h-32 rounded-full overflow-hidden">
                             {customerData?.avatar &&
                                 <Image
@@ -69,7 +69,7 @@ export default function CustomerDetailPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-4 rounded-lg shadow-xl">
+                    <div className="bg-white p-4 rounded-lg shadow-2xl">
                         <h3 className="font-semibold mb-4">Thông tin chuyên môn</h3>
                         <div className="space-y-2">
                             <p><span className="font-medium">Lĩnh vực:</span> {customerData?.fieldOfExpertise}</p>
@@ -78,7 +78,7 @@ export default function CustomerDetailPage() {
                         </div>
                     </div>
 
-                    <div className="bg-white p-4 rounded-lg shadow-xl">
+                    <div className="bg-white p-4 rounded-lg shadow-2xl">
                         <h3 className="font-semibold mb-4">Thông tin ngân hàng</h3>
                         <div className="space-y-2">
                             <p><span className="font-medium">Số tài khoản:</span> {customerData?.bankAccountNumber}</p>
@@ -86,6 +86,12 @@ export default function CustomerDetailPage() {
                             <p><span className="font-medium">Chủ tài khoản:</span> {customerData?.accountBankOwner}</p>
                         </div>
                     </div>
+
+
+                    <div className="bg-white p-4 rounded-lg shadow-2xl col-span-2">
+                        <h3 className="font-semibold mb-4 text-center">Tiến độ khoá học</h3>
+                    </div>
+
                 </div>
             </div>
         </div>

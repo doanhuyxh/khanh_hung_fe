@@ -82,7 +82,7 @@ function ProfilePage() {
     if (!isClient) return null;
 
     return (
-        <div className="flex pb-10">
+        <div className="flex justify-center lg:justify-start pb-10">
             <div className="hidden lg:block">
                 <Sidebar />
             </div>

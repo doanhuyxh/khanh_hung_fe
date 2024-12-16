@@ -1,11 +1,11 @@
+'use client';
+
 import React from "react";
 import HeaderLogo from "./HeaderLogo";
 import HeaderMenuItem from "./HeaderMenuItem";
 import Auth from "./Auth";
 
-import { User } from "@/app/types";
-
-
+import { Customer } from "@/app/types";
 
 const menuItems = [
   { href: "", icon: "/assets/images/add-friend.svg", text: "Kết bạn" },
@@ -17,7 +17,7 @@ const menuItems = [
   { href: "", icon: "/assets/images/MTczMjAwNjc1MQ.png", text: "Tiktok" },
 ];
 
-const HeaderBottom = ({isLogin, user}: {isLogin: boolean, user: User | null}) => (
+const HeaderBottom = ({isLogin, user}: {isLogin: boolean, user: Customer}) => (
 
   <div className="header_bottom">
     <div className="container">

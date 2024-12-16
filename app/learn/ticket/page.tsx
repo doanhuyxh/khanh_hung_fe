@@ -8,7 +8,7 @@ export default function Ticket() {
     const [ticket, setTicket] = useState([])
     const [status, setStatus] = useState('all')
 
-    return (<div className="flex">
+    return (<div className="flex justify-center">
         <div className="hidden lg:block">
             <Sidebar />
         </div>

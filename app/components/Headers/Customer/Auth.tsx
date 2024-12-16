@@ -1,8 +1,10 @@
 'use client';
+
 import GuestActions from './Actions/GuestActions';
 import UserActions from './Actions/UserActions';
+import { Customer } from '@/app/types';
 
-const Auth = ({isLogin, user}: {isLogin: boolean, user: any}) => {
+const Auth = ({isLogin, user}: {isLogin: boolean, user: Customer}) => {
 
 
   if (!isLogin) {

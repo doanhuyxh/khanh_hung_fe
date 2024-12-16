@@ -1,9 +1,11 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';    
 
 import axiosInstance from '@/app/configs/axiosConfig';
+import { ResponseData } from '@/app/types';
 
 export default function Login() {
     const [email, setEmail] = useState<string>('admin');
@@ -12,13 +14,20 @@ export default function Login() {
 
     const HandleLogin = async () => {
         
-        const response = await axiosInstance.post("/auth/login", {
+        const response:ResponseData = await axiosInstance.post("/auth/login", {
             email: email,
             password: password
         })
 
         if (response.code == 200) {
-            const data = response.data
+            const data = response.data as {
+                refreshToken: string;
+                accessToken: string;
+                user: {
+                    id: string;
+                    role: string;
+                };
+            };
             localStorage.setItem("refreshToken", data.refreshToken)
             localStorage.setItem("accessToken", data.accessToken)
             localStorage.setItem("user", JSON.stringify(data.user))
@@ -35,7 +44,7 @@ export default function Login() {
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
                 <div className="text-center mb-8">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">Đăng nhập Admin</h1>
+                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">Đăng nhập Quản trị viên</h1>
                 </div>
                 <form className="space-y-6">
                     <div>

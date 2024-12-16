@@ -1,8 +1,6 @@
 import axios from "axios";
 import axiosCustomerConfig from "../configs/axiosCustomerConfig";
 
-
-
 const baseUrl = "http://localhost:5035/api/v1"
 
 const axiosCustomer = axios.create({

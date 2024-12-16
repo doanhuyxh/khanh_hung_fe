@@ -13,6 +13,17 @@ export interface LessonData {
   duration: string;
 }
 
+export interface LessonDataItem {
+  id: string;
+  name: string;
+  lessonContent: string;
+  imageThumbnail: string;
+  video: string;
+  duration: string;
+  order: number;
+  totalView: number;
+}
+
 export interface CourseData {
   id: string;
   name: string;
@@ -63,5 +74,18 @@ export interface Customer {
   accountBankName: string;
   accountBankOwner: string;
   createdAt: number;
+  totalMoney: number;
+  code: string;
+  level_affiliate: number;
+}
+
+export interface NotificationItem {
+  messId: string;
+  messUserId: string;
+  status: string;
+  sendAt: number;
+  readAt: number;
+  title: string;
+  content: string;
 }
 

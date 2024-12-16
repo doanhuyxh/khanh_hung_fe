@@ -1,9 +1,7 @@
-'use client';
 import React from "react";
 
 const HeaderNews = () => {
-
-
+    
     return (
         <div className="header_top_news scrolling-text">
             <p>
