@@ -1,11 +1,12 @@
 'use client'
 
-import { useEffect, useState } from "react";
-import { Customer } from "@/app/types";
-import axiosInstance from "@/app/configs/axiosConfig";
-import { unixToDatetime } from "@/app/utils";
+import { useCallback, useEffect, useState } from "react";
+import { Customer } from "@/app/libs/types";
+import axiosInstance from "@/app/libs/configs/axiosConfig";
+import { unixToDatetime } from "@/app/libs/utils";
 import Pagination from "@/app/components/Pagination";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function CustomerPage() {
 
@@ -23,17 +24,17 @@ export default function CustomerPage() {
         router.push(`/admin_web/account/customer/${id}`)
     }
 
-    const fetchCustomerData = async () => {
+    const fetchCustomerData = useCallback(async () => {
         const response = await axiosInstance(`/customer/get-all-customer?page=${page}&pageSize=${pageSize}&search_keyword=${searchKeyword}`)
         console.log(response)
         setCustomerData(response.data.data)
         setTotalResult(response.data.totalResult)
         setTotalPage(response.data.totalPage)
-    }
+    }, [page, searchKeyword, pageSize])
 
     useEffect(() => {
         fetchCustomerData()
-    }, [page, searchKeyword])
+    }, [page, searchKeyword, pageSize, fetchCustomerData])
 
     return (
         <div className="container mx-auto">
@@ -43,7 +44,7 @@ export default function CustomerPage() {
 
             <div className="w-full px-4 py-2 shadow-md rounded-lg">
                 <div className="flex justify-end gap-2 mb-4">
-                    <input type="text" className="p-2 rounded-md border-2 border-gray-300 focus:outline-none" placeholder="Tìm kiếm khách hàng" />
+                    <input type="text" className="p-2 rounded-md border-2 border-gray-300 focus:outline-none" placeholder="Tìm kiếm khách hàng" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)} />
                 </div>
 
                 <div className="container">
@@ -65,10 +66,12 @@ export default function CustomerPage() {
                                     <td className="px-4 py-2 border-b">{index + 1}</td>
                                     <td className="px-4 py-2 border-b">
                                         {customer.avatar && (
-                                            <img
+                                            <Image
+                                                width={100}
+                                                height={100}
                                                 src={customer.avatar}
                                                 alt={customer.firstName + ' ' + customer.lastName}
-                                                className="w-10 h-10 rounded-full border border-gray-300"
+                                                
                                             />
                                         )}
                                     </td>

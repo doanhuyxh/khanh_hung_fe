@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
-import axiosInstance from "@/app/configs/axiosConfig";
+import axiosInstance from "@/app/libs/configs/axiosConfig";
+import { ResponseData } from "@/app/libs/types";
 
 export default function ForgotPassword(){
    
@@ -11,7 +12,7 @@ export default function ForgotPassword(){
 
     const handleForgotPassword = async () => {
         try {
-            const response = await axiosInstance.post("/auth/forgot-password", {
+            const response:ResponseData = await axiosInstance.post("/auth/forgot-password", {
                 email: email
             });
 

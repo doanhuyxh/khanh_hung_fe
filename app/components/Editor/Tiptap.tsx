@@ -12,7 +12,7 @@ import TableHeader from '@tiptap/extension-table-header'
 import { ImageUpload, VideoUpload } from '@/app/components/FileHandle'
 import { useState } from 'react'
 
-const Tiptap = ({ value = '', onChange = (content: string) => {} }) => {
+const Tiptap = ({ value = '' }) => {
   const [showImageUpload, setShowImageUpload] = useState(false)
   const [showVideoUpload, setShowVideoUpload] = useState(false)
 
@@ -40,9 +40,9 @@ const Tiptap = ({ value = '', onChange = (content: string) => {} }) => {
       TableHeader,
     ],
     content: value,
-    onUpdate: ({ editor }) => {
-      onChange(editor.getHTML())
-    }
+    // onUpdate: ({ editor }) => {
+    //   //onChange(editor.getHTML())
+    // }
   })
 
   const handleImageUpload = (imageUrl: string) => {
@@ -58,6 +58,7 @@ const Tiptap = ({ value = '', onChange = (content: string) => {} }) => {
         <video controls>
           <source src="${videoUrl}" type="video/mp4">
           Your browser does not support the video tag.
+          ${value}
         </video>
       `).run()
     }
@@ -81,7 +82,7 @@ const Tiptap = ({ value = '', onChange = (content: string) => {} }) => {
         </button>
       </div>
 
-      <EditorContent editor={editor} />
+      <EditorContent editor={editor} value={value} />
 
       {showImageUpload && (
         <div className="mt-4">

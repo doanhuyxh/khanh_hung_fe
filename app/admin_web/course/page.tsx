@@ -4,10 +4,10 @@ import Loading from '@/app/components/Loading';
 import Pagination from '@/app/components/Pagination';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { ResponseData } from '@/app/types';
+import { DataPage, ResponseData } from '@/app/libs/types';
 import Dropdown from '@/app/components/DropDown';
 
-import axiosInstance from '@/app/configs/axiosConfig';
+import axiosInstance from '@/app/libs/configs/axiosConfig';
 import toast from 'react-hot-toast';
 
 export default function Course() {
@@ -28,10 +28,12 @@ export default function Course() {
     const GetData = useCallback(async () => {
         const res: ResponseData = await axiosInstance.get(`/course/GetAllCourse?page=${page}&pageSize=${pageSize}&status=${status}&search_keyword=${searchKeyword}`)
         if (res.code == 200) {
-            const data = res.data;
-            setCourses(data.data);
-            setTotalResult(data.totalResult);
-            setTotalPage(data.totalPage);
+            const data: DataPage = res.data;
+            if (data) {
+                setCourses(data.data);
+                setTotalResult(data.totalResult);
+                setTotalPage(data.totalPage);
+            }
         }
         setIsLoading(false);
     }, [page, pageSize, status, searchKeyword]);
@@ -109,7 +111,7 @@ export default function Course() {
             });
         }
     };
-    
+
 
     useEffect(() => {
         GetData();
@@ -154,7 +156,7 @@ export default function Course() {
                             label: "Chuyển sang công khai",
                             className: "text-green-500 hover:text-green-600",
                             onClick: () => handleUpdateStatus('published')
-                        },  
+                        },
                         {
                             icon: '',
                             label: "Chuyển sang ẩn",

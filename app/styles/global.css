@@ -66,27 +66,3 @@
     display: none;
   }
   
-  body {
-    background-color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100vw;
-  }
-  p, span{
-    font-size: 1.4rem;
-  }
-  .main {
-    padding-top: 20px;
-    min-height: 68vh;
-  }
-  @media (max-width: 1580px) {
-    html {
-      font-size: 8px;
-    }
-  }
-  
-  @media (max-width: 1200px) {
-    body {
-      font-size: 1.6rem;
-    }
-  }
-  

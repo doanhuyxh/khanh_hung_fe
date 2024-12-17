@@ -8,22 +8,22 @@ import "./index.scss";
 function Sidebar() {
 
   const menu = [
-    {
-      title: "Quyền lợi riêng cho bạn",
-      menuItems: [
-        {
-          name: "Đặt lich hẹn Free mentor",
-          imageSrc:"/assets/images/ic-chanel-calendar.svg",
-          link: ""
-        },
-        {
-          name: "Đăng ký Free Setup",
-          imageSrc:"/assets/images/ic-chanel-setup.svg",
-          link: ""
-        },
+    // {
+    //   title: "Quyền lợi riêng cho bạn",
+    //   menuItems: [
+    //     {
+    //       name: "Đặt lich hẹn Free mentor",
+    //       imageSrc:"/assets/images/ic-chanel-calendar.svg",
+    //       link: ""
+    //     },
+    //     {
+    //       name: "Đăng ký Free Setup",
+    //       imageSrc:"/assets/images/ic-chanel-setup.svg",
+    //       link: ""
+    //     },
         
-      ]
-    },
+    //   ]
+    // },
     {
       title: "Profile",
       menuItems: [
@@ -66,13 +66,8 @@ function Sidebar() {
         {
           name: "Chính sách Affiliate",
           imageSrc:"/assets/images/mb-ic-11.svg",
-          link: ""
-        },
-        {
-          name: "Ambassador-offer",
-          imageSrc:"/assets/images/coupon-code.svg",
-          link: ""
-        }        
+          link: "/learn/affiliate/policy"
+        },   
       ]
     },
     {
@@ -81,22 +76,22 @@ function Sidebar() {
         {
           name: "Chương trình học",
           imageSrc:"/assets/images/ic-chanel-4-side-menu.svg",
-          link: ""
+          link: "#chuong-trinh-hoc"
         },
         {
           name: "Quyền lợi",
           imageSrc:"/assets/images/ic-chanel-5.svg",
-          link: ""
+          link: "/#quyen-loi"
         },
         {
           name: "Thông tin về chúng tôi",
           imageSrc:"/assets/images/ic-chanel-3-side-menu.svg",
-          link: ""
+          link: "#thong-tin-ve-chung-toi"
         },
         {
           name: "Q&A",
           imageSrc:"/assets/images/ic-chanel-6-side-menu.svg",
-          link: ""
+          link: "/#qa"
         }        
       ]
     }
@@ -104,7 +99,7 @@ function Sidebar() {
 
 
   return (
-    <div className="sidebar_container">
+    <div className="sidebar_container animate-fade-right ">
       <div className="sidebar_content">
         <div className="sidebar_top">
           <a href="/learn/study" className="sidebar_top_wrap">

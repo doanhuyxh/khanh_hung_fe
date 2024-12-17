@@ -389,6 +389,12 @@ html {
     }
 }
 
+@media screen and (max-width: 1300px) {
+    .header_bottom_wrapper_right .btn_profile{
+        display: none;
+    }
+}
+
 .scrolling-text {
     white-space: nowrap;
     overflow: hidden;

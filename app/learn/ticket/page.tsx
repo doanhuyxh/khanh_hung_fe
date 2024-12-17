@@ -4,8 +4,7 @@ import Sidebar from "@/app/components/Sidebar/Customer";
 import { useState } from "react";
 
 export default function Ticket() {
-
-    const [ticket, setTicket] = useState([])
+    
     const [status, setStatus] = useState('all')
 
     return (<div className="flex justify-center">

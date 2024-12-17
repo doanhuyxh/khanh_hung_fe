@@ -1,0 +1,25 @@
+html {
+    font-size: 10px;
+}
+
+body {
+    background-color: #fff;
+    font-family: "Inter", sans-serif;
+    width: 100vw;
+  }
+  
+  @media (max-width: 1580px) {
+    html {
+      font-size: 8px;
+    }
+  }
+  
+@media (max-width: 1200px) {
+  body {
+    font-size: 1.6rem;
+  }
+}
+
+span, p {
+  font-size: 1.4rem !important;
+}

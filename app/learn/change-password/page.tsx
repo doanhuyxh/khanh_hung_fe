@@ -1,10 +1,9 @@
 'use client'
 
 import { Sidebar } from "@/app/components/Sidebar"
-import axiosInstance from "@/app/configs/axiosConfig"
 import toast from "react-hot-toast"
 import { useState } from "react"
-import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig"
+import axiosCustomerConfig from "@/app/libs/configs/axiosCustomerConfig"
 
 export default function ChangePassword() {
 
@@ -42,7 +41,7 @@ export default function ChangePassword() {
                     })
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 toast.error("Cập nhật mật khẩu thất bại", {
                     duration: 3000,
                     position: "top-right",

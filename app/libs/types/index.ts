@@ -1,7 +1,17 @@
-export interface ResponseData {
+export interface ResponseData<T = any> {
   code: number;
   message: string;
-  data: unknown;
+  data: T;
+}
+
+
+export interface DataPage<T = any> {
+  data: T;
+  totalResult: number;
+  totalPage: number;
+  page: number;
+  pageSize: number;
+
 }
 
 export interface LessonData {
@@ -11,6 +21,17 @@ export interface LessonData {
   imageThumbnail: string;
   video: boolean;
   duration: string;
+}
+
+export interface LessonItem {
+  id: string;
+  name: string;
+  description: string;
+  lessonContent: string;
+  imageThumbnail: string;
+  video: string;
+  duration: string;
+  courseId: string;
 }
 
 export interface LessonDataItem {
@@ -77,6 +98,10 @@ export interface Customer {
   totalMoney: number;
   code: string;
   level_affiliate: number;
+  codeRef: string;
+  totalRef: number;
+  totalCommission: number;
+  totalDiscount: number;
 }
 
 export interface NotificationItem {

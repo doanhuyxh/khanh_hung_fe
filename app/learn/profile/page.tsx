@@ -4,9 +4,9 @@ import ImageUploadUser from "@/app/components/FileHandle/Image/imagesUser"
 
 import Sidebar from "@/app/components/Sidebar/Customer"
 import { useState } from "react";
-import { GetInfo } from '@/app/services/ApiCustomerServices';
+import { GetInfo } from '@/app/libs/services/ApiCustomerServices';
 import toast from 'react-hot-toast';
-import axiosCustomerConfig from '@/app/configs/axiosCustomerConfig';
+import axiosCustomerConfig from '@/app/libs/configs/axiosCustomerConfig';
 
 
 function ProfilePage() {
@@ -88,7 +88,7 @@ function ProfilePage() {
             </div>
             <div className="container mt-20">
                 <div className="w-full flex flex-col justify-center items-center mb-5 lg:mb-10">
-                    <h1 className="lg:text-5xl text-3xl font-bold transform scale-150 text-color-secondary text-center">Thông tin cá nhân</h1>
+                    <h1 className="lg:text-5xl text-3xl font-bold transform scale-150 text-color-secondary text-center animate-jump-in animate-once animate-ease-out">Thông tin cá nhân</h1>
                 </div>
 
                 <div className="w-full flex flex-col items-center">

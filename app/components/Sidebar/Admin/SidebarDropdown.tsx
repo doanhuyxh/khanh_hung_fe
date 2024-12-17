@@ -3,7 +3,14 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const SidebarDropdown = ({ item }: any) => {
+interface SidebarDropdownProps {
+  item: {
+    label: string;
+    route: string;
+  }[];
+}
+
+const SidebarDropdown = ({ item }: SidebarDropdownProps) => {
   const pathname = usePathname();
 
   return (

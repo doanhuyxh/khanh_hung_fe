@@ -4,9 +4,9 @@ import dynamic from "next/dynamic"
 import { useEffect, useState } from "react";
 const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoPlayer"), { ssr: false });
 import { LessonList } from "@/app/components/Lesson";
-import { LessonData, CourseData, LessonDataItem } from "@/app/types";
+import { LessonData, CourseData, LessonDataItem } from "@/app/libs/types";
 
-import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig";
+import axiosCustomerConfig from "@/app/libs/configs/axiosCustomerConfig";
 import Loading from "@/app/components/Loading";
 import { useSearchParams } from "next/navigation";
 

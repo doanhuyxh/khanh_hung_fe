@@ -5,7 +5,7 @@ import HeaderLogo from "./HeaderLogo";
 import HeaderMenuItem from "./HeaderMenuItem";
 import Auth from "./Auth";
 
-import { Customer } from "@/app/types";
+import { Customer } from "@/app/libs/types";
 
 const menuItems = [
   { href: "", icon: "/assets/images/add-friend.svg", text: "Kết bạn" },

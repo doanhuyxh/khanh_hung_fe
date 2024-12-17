@@ -3,15 +3,15 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Customer } from '@/app/types';
-import axiosCustomerConfig from '@/app/configs/axiosCustomerConfig';
+import { Customer } from '@/app/libs/types';
+import axiosCustomerConfig from '@/app/libs/configs/axiosCustomerConfig';
 
 export default function UserDropdown({ isDropdown, user }: { isDropdown: boolean, user: Customer }) {
 
     const handleLogout = () => {
         localStorage.clear()
-        axiosCustomerConfig.get(`Auth/LogOut?id=${user.id}`).then(res => {
-            window.location.href = "/learn/login"
+        axiosCustomerConfig.get(`Auth/LogOut?id=${user.id}`).then(() => {
+            window.location.href = "/"
         })
     }
 

@@ -1,7 +1,6 @@
 
 'use client'
 
-import { useEffect } from "react";
 
 export default function Pagination({ page, totalPage, onPageChange, totalResult, pageSize, length }: { page: number, totalPage: number, onPageChange: (page: number) => void, totalResult: number, pageSize: number, length: number }) {
     return (

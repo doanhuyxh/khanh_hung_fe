@@ -1,7 +1,7 @@
 'use client';
 
 import Image from "next/image";
-import { LessonData } from "@/app/types";
+import { LessonData } from "@/app/libs/types";
 
 import { useRouter } from "next/navigation";
 

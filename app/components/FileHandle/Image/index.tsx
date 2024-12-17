@@ -1,6 +1,6 @@
 'use client'
 
-import  { postFormData } from '@/app/configs/axiosConfig';
+import  { postFormData } from '@/app/libs/configs/axiosConfig';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 

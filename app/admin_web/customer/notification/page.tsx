@@ -1,14 +1,13 @@
 'use client'
 
 import Loading from "@/app/components/Loading"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { FormNotification } from "@/app/components/Form"
 import ModalScroll from "@/app/components/Modal/ModalScroll"
-import { unixToDatetime, dateToUnixTimestamp } from "@/app/utils"
+import { unixToDatetime, dateToUnixTimestamp } from "@/app/libs/utils"
 
-import axiosInstance, { postFormData } from "@/app/configs/axiosConfig"
-import Dropdown from "@/app/components/DropDown"
+import axiosInstance, { postFormData } from "@/app/libs/configs/axiosConfig"
 import Pagination from "@/app/components/Pagination"
 
 export default function Notification() {
@@ -72,13 +71,13 @@ export default function Notification() {
             })
     }
 
-    const getNotification = async () => {
+    const getNotification = useCallback(async () => {
         axiosInstance.get(`/notification/GetAll?page=${page}&pageSize=${pageSize}&startTime=${startDate}&endTime=${endDate}&status=${status}&search=${searchKeyword}`)
             .then(res => {
                 const data = res.data
                 setData(data)
             })
-    }
+    }, [page, startDate, endDate, status, searchKeyword])
 
 
     const handleChangeCheckbox = (id: string) => {
@@ -115,7 +114,7 @@ export default function Notification() {
 
     useEffect(() => {
         getNotification()
-    }, [page, startDate, endDate, status])
+    }, [page, startDate, endDate, status, searchKeyword, getNotification])
 
     useEffect(() => {
         setIsClient(true)

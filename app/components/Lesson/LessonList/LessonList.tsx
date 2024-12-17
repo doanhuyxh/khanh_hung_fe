@@ -4,7 +4,7 @@ import ActiveSpin from "@/app/components/ActiveSpin";
 import { CollapseCourse } from "@/app/components/Collapse";
 import TabButtons from "./TabButtons";
 import Description from "./Description";
-import { CourseData } from "@/app/types";
+import { CourseData } from "@/app/libs/types";
 
 
 interface LessonListProps {

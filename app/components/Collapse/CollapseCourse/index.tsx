@@ -4,7 +4,7 @@ import { useState } from "react";
 import CollapseHeader from "./CollapseHeader";
 import CourseLessonItemComponent from "./CourseLessonItemComponent";
 import "./index.scss";
-import { CollapseCourseProps } from "@/app/types";
+import { CollapseCourseProps } from "@/app/libs/types";
 
 
 export default function CollapseCourse({

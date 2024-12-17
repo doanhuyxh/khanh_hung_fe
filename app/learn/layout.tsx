@@ -1,14 +1,13 @@
 import { cookies } from "next/headers";
 import Header from "../components/Headers/Customer";
 import "../styles/study.scss";
-import { Customer } from "../types";
+import { Customer } from "../libs/types";
 
-export default async function CustomerLayout({ children }: { children: React.ReactNode }) {
+export default async function LearnLayout({ children }: { children: React.ReactNode }) {
 
   const cookieStore = await cookies()
   const accessToken = cookieStore.get("AccessToken")
   const refreshToken = cookieStore.get("RefreshToken")
- 
 
   let user: Customer = {} as Customer
   if (accessToken && refreshToken) {
@@ -22,7 +21,6 @@ export default async function CustomerLayout({ children }: { children: React.Rea
     if (res.ok) {
       const res_data = await res.json()
       user = res_data.data
-      console.log("user:: ", user)
     }
 
   }

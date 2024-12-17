@@ -1,39 +1,38 @@
 'use client'
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
-import { postFormData } from '@/app/configs/axiosCustomerConfig';
 import { debounce } from 'lodash';
 
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false });
 
 export default function EditorReactQuill({ value, onChange }: { value: string; onChange: (data: string) => void }) {
 
-    const imageHandler = () => {
-        const input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.click();
+    // const imageHandler = () => {
+    //     const input = document.createElement('input');
+    //     input.setAttribute('type', 'file');
+    //     input.setAttribute('accept', 'image/*');
+    //     input.click();
 
-        input.addEventListener('change', async (e) => {
-            const target = e.target as HTMLInputElement;
-            const file = target.files ? target.files[0] : null;
-            if (file) {               
-                try {
-                    const response = await postFormData('/upload/image', {file: file});
-                    const result = response.data;
+    //     input.addEventListener('change', async (e) => {
+    //         const target = e.target as HTMLInputElement;
+    //         const file = target.files ? target.files[0] : null;
+    //         if (file) {               
+    //             try {
+    //                 const response = await postFormData('/upload/image', {file: file});
+    //                 const result = response.data;
                     
-                    if (result) {
-                        const imageUrl = result;
-                        const newValue = `${value}<img src="${imageUrl}" alt="Image" />`;
-                        console.log(newValue);
-                        onChange(newValue);
-                    }
-                } catch (error) {
-                    console.error('Image upload failed:', error);
-                }
-            }
-        });
-    };
+    //                 if (result) {
+    //                     const imageUrl = result;
+    //                     const newValue = `${value}<img src="${imageUrl}" alt="Image" />`;
+    //                     console.log(newValue);
+    //                     onChange(newValue);
+    //                 }
+    //             } catch (error) {
+    //                 console.error('Image upload failed:', error);
+    //             }
+    //         }
+    //     });
+    // };
 
     const modules = {
         toolbar: {

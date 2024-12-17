@@ -348,6 +348,7 @@ export default {
     },
   },
   plugins: [
-    
+    require('tailwindcss-motion'),
+    require('tailwindcss-animated')
   ],
 } satisfies Config;

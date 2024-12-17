@@ -1,6 +1,6 @@
 "use client";
 
-import useColorMode from "../../../hooks/useColorMode";
+import useColorMode from "../../../libs/hooks/useColorMode";
 
 const DarkModeSwitcher = () => {
   const [colorMode, setColorMode] = useColorMode();

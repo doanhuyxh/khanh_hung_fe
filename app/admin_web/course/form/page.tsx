@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ImageUpload, VideoUpload } from "@/app/components/FileHandle";
 import { EditorReactQuill } from "@/app/components/Editor";
-import axiosInstance, { postFormData } from "@/app/configs/axiosConfig";
+import axiosInstance, { postFormData } from "@/app/libs/configs/axiosConfig";
 import toast from "react-hot-toast";
 
 export default function CourseForm() {
@@ -35,7 +35,7 @@ export default function CourseForm() {
     };
 
     const HandleSaveCourse = async () => {
-        const res = await postFormData('/course/CreateOrUpdateCourse', course);
+        const res:any = await postFormData('/course/CreateOrUpdateCourse', course);
         if (res.code == 200) {
             toast.success('Lưu khoá học thành công');
         } else {

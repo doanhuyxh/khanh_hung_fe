@@ -1,13 +1,14 @@
 'use client';
 
-import axiosInstance, { postFormData } from '@/app/configs/axiosConfig';
-import { useEffect, useState } from 'react';
+import axiosInstance, { postFormData } from '@/app/libs/configs/axiosConfig';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Loading from '@/app/components/Loading';
 import ModalScroll from '@/app/components/Modal/ModalScroll';
 import { FormLesson } from '@/app/components/Form';
 import { LessonItemAdmin } from '@/app/components/Lesson';
 import ModalViewHtml from '@/app/components/Modal/ModalViewHtml';
+import { LessonItem } from '@/app/libs/types';
 
 export default function CourseLesson() {
     const [loading, setLoading] = useState(true)
@@ -20,8 +21,8 @@ export default function CourseLesson() {
     const [isOpenDescription, setIsOpenDescription] = useState(false)
     const [lessonContent, setLessonContent] = useState('')
 
-    const [course, setCourse] = useState(null)
-    const [courseLesson, setCourseLesson] = useState([])
+    const [course, setCourse] = useState<any>(null)
+    const [courseLesson, setCourseLesson] = useState<LessonItem[]>([])
 
     const [lesson, setLesson] = useState({
         Id: "",
@@ -47,17 +48,19 @@ export default function CourseLesson() {
                 CourseId: courseId
             })
         } else {
-            const lesson = courseLesson.find((item:any) => item.id == id)
-            setLesson({
-                Id: lesson.id,
-                Name: lesson.name,
-                Description: lesson.description,
-                LessonContent: lesson.lessonContent,
-                ImageThumbnail: lesson.imageThumbnail,
-                Video: lesson.video,
-                Duration: lesson.duration,
-                CourseId: courseId
-            })
+            const lesson = courseLesson.find((item: LessonItem) => item.id == id)
+            if (lesson) {
+                setLesson({
+                    Id: lesson.id,
+                    Name: lesson.name,
+                    Description: lesson.description,
+                    LessonContent: lesson.lessonContent,
+                    ImageThumbnail: lesson.imageThumbnail,
+                    Video: lesson.video,
+                    Duration: lesson.duration,
+                    CourseId: courseId
+                })
+            }
         }
         setIsOpen(true)
     }
@@ -74,22 +77,22 @@ export default function CourseLesson() {
 
     }
 
-    const GetDataCourse = async () => {
+    const GetDataCourse = useCallback(async () => {
         const res = await axiosInstance.get(`/course/GetCourseById?id=${courseId}`)
         setCourse(res.data)
-    }
+    }, [courseId])
 
-    const GetDataLesson = async () => {
+    const GetDataLesson = useCallback(async () => {
         const res = await axiosInstance.get(`/lesson/GetByCourseId?courseId=${courseId}&page=1&pageSize=30`)
         setCourseLesson(res.data)
-    }
+    }, [courseId])
 
 
     useEffect(() => {
         GetDataCourse()
         GetDataLesson()
         setLoading(false)
-    }, [])
+    }, [courseId, GetDataCourse, GetDataLesson])
 
     if (loading) {
         return <Loading />
@@ -133,7 +136,7 @@ export default function CourseLesson() {
             </ModalScroll>
 
             <ModalViewHtml isOpen={isOpenDescription} onClose={() => setIsOpenDescription(false)} title={'Nội dung bài học'}>
-                <div dangerouslySetInnerHTML={{ __html: lessonContent || "" }} />
+                <div dangerouslySetInnerHTML={{ __html: lessonContent }} />
             </ModalViewHtml>
         </>
     )

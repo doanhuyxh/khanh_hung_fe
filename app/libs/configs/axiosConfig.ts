@@ -29,7 +29,7 @@ axiosInstance.interceptors.response.use(
           "RefreshToken": `${refreshToken}`
         }
       })
-      const code_res = res_refresh.data.code
+      const code_res = res_refresh.code
       if (code_res != 200){
         localStorage.clear()
         window.location.href = "/admin_web/auth/login"

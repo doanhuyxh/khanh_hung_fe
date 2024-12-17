@@ -2,7 +2,7 @@
 
 import GuestActions from './Actions/GuestActions';
 import UserActions from './Actions/UserActions';
-import { Customer } from '@/app/types';
+import { Customer } from '@/app/libs/types';
 
 const Auth = ({isLogin, user}: {isLogin: boolean, user: Customer}) => {
 
