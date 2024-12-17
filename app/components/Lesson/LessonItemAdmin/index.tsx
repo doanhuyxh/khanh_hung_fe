@@ -32,7 +32,7 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                 </div>
                 <div className='max-w-[200px] h-[100px]'>
                     {item.video && (
-                        <video src={item.video || ""} controls />
+                        <span className='text-sm'>Đã upload video</span>
                     )}
                 </div>
                 <div>

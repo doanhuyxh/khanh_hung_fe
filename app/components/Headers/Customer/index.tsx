@@ -17,7 +17,7 @@ const Header = async ({ user }: { user: Customer }) => {
           <HeaderNews />
           <HeaderContact />
         </div>
-        <HeaderBottom isLogin={user.id !== undefined && user.id !== null && user.id !== ''} user={user} />
+        <HeaderBottom isLogin={user?.id != null} user={user} />
       </header>
     );
   } catch (error) {

@@ -1,9 +1,12 @@
 'use client';
 
+import { useEffect, useState, useRef } from 'react';
+import confetti from 'canvas-confetti';
 import axiosCustomerConfig from '@/app/libs/configs/axiosCustomerConfig';
 import { Customer } from '@/app/libs/types';
-import confetti from 'canvas-confetti';
-import { useEffect, useState, useRef } from 'react';
+import '../../styles/home.css'
+import { toast } from 'react-hot-toast';
+
 
 export default function PaymentPage() {
 
@@ -23,6 +26,33 @@ export default function PaymentPage() {
         }, 1000);
         return () => clearInterval(interval);
     }, []);
+
+    useEffect(() => {
+        if (countDown === 0) {
+            window.location.href = '/upgrade';
+        }
+        else{
+            if (countDown % 10 === 0) {
+                axiosCustomerConfig.get('/customer/get-member-type')
+                .then((res) => {
+                    if (res.data == "vip"){
+                        toast.success("Bạn đã được nâng cấp thành viên VIP", {
+                            duration: 10000,
+                            position: "top-right",
+                            style: {
+                                background: "#4CAF50",
+                                color: "#fff",
+                            },
+                        });
+                        window.location.href = '/learn/dashboard';
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+            }
+        }
+    }, [countDown]);
 
     useEffect(() => {
         GetUserInfo();

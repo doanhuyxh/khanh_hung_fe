@@ -21,6 +21,7 @@ export default async function LearnLayout({ children }: { children: React.ReactN
     if (res.ok) {
       const res_data = await res.json()
       user = res_data.data
+      console.log(user) 
     }
 
   }

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { LessonData } from "@/app/libs/types";
 
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 interface CourseItemComponentProps {
   item: LessonData;
@@ -11,13 +12,15 @@ interface CourseItemComponentProps {
 
 const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
   const router = useRouter();
-
+  const query = useSearchParams();
+  
   const handleClick = () => {
     router.push(`/learn/study?lesson=${item.id}`);
   };
-
+  const isActive = query.get("lesson") == item.id;
+  
   return (
-    <div className="group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 mb-4" onClick={handleClick}>
+    <div className={`group flex items-center cursor-pointer rounded-md lg:hover:bg-hover-primary p-3 mb-4 ${isActive ? "bg-hover-primary" : ""}`} onClick={handleClick}>
       <div className="w-auto border border-none rounded-md overflow-hidden">
         {item.imageThumbnail && <Image
           src={item.imageThumbnail}
@@ -28,10 +31,10 @@ const CourseLessonItemComponent = ({ item }: CourseItemComponentProps) => {
         {!item.imageThumbnail && <div className="w-[152px] h-[92px]"></div>}
       </div>
       <div className="w-3/4 flex flex-col gap-3 px-2 text-[1.2rem]  lg:text-xl">
-        <h3 className="font-bold mb-2 text-black lg:group-hover:text-white group-hover:opacity-100 ">
+        <h3 className={`font-bold mb-2 text-black lg:group-hover:text-white group-hover:opacity-100 ${isActive ? "text-white" : ""}`}>
           {item.name}
         </h3>
-        <div className="flex justify-between text-[0.8rem] lg:text-xs text-gray-500 lg:group-hover:text-white">
+          <div className={`flex justify-between text-[0.8rem] lg:text-xs text-gray-500 lg:group-hover:text-white ${isActive ? "text-white" : ""}`}>
           <p className="flex gap-2">
             <span className="font-bold text-white bg-color-secondary p-2 lg:p-3 rounded-lg flex lg:gap-2 text-nowrap">
               <span className="m-auto hidden lg:block">
