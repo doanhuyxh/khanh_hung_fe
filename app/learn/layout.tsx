@@ -8,7 +8,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
   const cookieStore = await cookies()
   const accessToken = cookieStore.get("AccessToken")
   const refreshToken = cookieStore.get("RefreshToken")
-  const user_cookie = cookieStore.get("user")
+ 
 
   let user: Customer = {} as Customer
   if (accessToken && refreshToken) {
@@ -22,6 +22,7 @@ export default async function CustomerLayout({ children }: { children: React.Rea
     if (res.ok) {
       const res_data = await res.json()
       user = res_data.data
+      console.log("user:: ", user)
     }
 
   }

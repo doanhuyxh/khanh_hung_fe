@@ -17,13 +17,7 @@ export default function ModalViewHtml({ isOpen, onClose, title, content }: Modal
                     onClose()
                 }}></div>
                 <div
-                    className="relative bg-white rounded-lg shadow-xl w-full overflow-y-scroll"
-                    style={{
-                        width: "60%",
-                        height: "50vh",
-                        marginTop: "20vh",
-
-                    }}
+                    className="relative bg-white rounded-lg shadow-xl w-10/12 lg:w-[60%] h-[80vh] lg:h-[50vh] mt-[10vh] lg:mt-[20vh] overflow-y-scroll"
                 >
                     <div
                         className="sticky top-0 bg-white shadow p-4 z-10"
@@ -37,7 +31,7 @@ export default function ModalViewHtml({ isOpen, onClose, title, content }: Modal
                             x
                         </button>
                     </div>
-                    <div className="px-6 py-10 overflow-y-auto lg:text-3xl" style={{ maxHeight: "calc(50vh - 100px)" }}>
+                    <div className="px-6 py-10 overflow-y-auto lg:text-3xl max-h-[calc(80vh-100px)] lg:max-h-[calc(50vh-100px)]">
                         <div dangerouslySetInnerHTML={{ __html: content }} />
                     </div>
                 </div>

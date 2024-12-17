@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios';
+import { ResponseData } from '../types';
 
 
 const axiosCustomerConfig = axios.create({
@@ -28,8 +29,8 @@ axiosCustomerConfig.interceptors.response.use(
   async (response) => {
     const code = response.data.code
     if (code == 401) {
-      const res_refresh = await axiosCustomerConfig.post("/Auth/RefreshToken")
-      const code_res = res_refresh.data.code
+      const res_refresh:ResponseData  = await axiosCustomerConfig.post("/Auth/RefreshToken")
+      const code_res = res_refresh.code
       if (code_res == 200) {
         return axiosCustomerConfig
       }

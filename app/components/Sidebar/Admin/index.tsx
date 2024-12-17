@@ -58,7 +58,7 @@ const menuGroups = [
         label: "Chăm sóc khách hàng",
         route: "#",
         children: [
-          { label: "Thông báo mail", route: "/admin_web/customer/notification" },
+          { label: "Thông báo", route: "/admin_web/customer/notification" },
           { label: "Ticket", route: "/admin_web/customer/ticket" },
         ],
       },

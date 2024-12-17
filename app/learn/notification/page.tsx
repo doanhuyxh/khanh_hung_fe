@@ -6,7 +6,7 @@ import axiosCustomerConfig from "@/app/configs/axiosCustomerConfig";
 import ModalViewHtml from "@/app/components/Modal/ModalViewHtml";
 import { unixToDatetime } from "@/app/utils";
 import { NotificationItem } from "@/app/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 export default function Notification() {
 
@@ -29,12 +29,12 @@ export default function Notification() {
         setStatus(status);
     }
 
-    const GetNotification = async () => {
+    const GetNotification = useCallback(async () => {
         const res_data = await axiosCustomerConfig.get(`/notification/get-notify?page=${page}&status=${status}`);
         setData(res_data.data.data);
         setTotalPage(res_data.data.totalPage);
         setTotalResult(res_data.data.totalResult);
-    }
+    }, [page, status]);
 
     const handleViewDetail = (item: NotificationItem) => {
         setTitle(item.title);
@@ -44,7 +44,7 @@ export default function Notification() {
 
     useEffect(() => {
         GetNotification();
-    }, [page, status]);
+    }, [page, status, GetNotification]);
 
     return <div className="lg:flex  w-full">
         <div className="hidden lg:block">
@@ -83,7 +83,6 @@ export default function Notification() {
                                 <tr className="border-b border-gray-200 hover:bg-gray-50" key={index}>
                                     <td className="py-4 px-6">{index + 1}</td>
 
-                                    {/* Cột item.title chiếm ít nhất 50% bảng */}
                                     <td className="py-4 px-6 font-semibold text-2xl min-w-[40%]">{item.title}</td>
 
                                     <td className="py-4 px-6">
@@ -113,37 +112,51 @@ export default function Notification() {
                     </table>
                 </div>
                 <div className="lg:hidden w-full max-h-[60vh] overflow-y-auto">
-                    <div className="bg-white p-4 border border-gray-300 rounded-md">
-                        <div className="flex justify-between">
-                            <span className="font-semibold text-gray-400">STT :</span>
-                            <span className="text-gray-400">1</span>
-                        </div>
-                        <div className="flex justify-between mt-2">
-                            <span className="font-semibold text-gray-400">Tiêu đề:</span>
-                            <span className="text-gray-700">Thông báo mới</span>
-                        </div>
-                        <div className="flex justify-between mt-2">
-                            <span className="font-semibold text-gray-400">Nội dung:</span>
-                            <span className="text-gray-600">Nội dung thông báo...</span>
-                        </div>
-                        <div className="flex justify-between mt-2">
-                            <span className="font-semibold text-gray-400">Thời gian gửi:</span>
-                            <span className="text-gray-600">20/03/2024 10:30</span>
-                        </div>
-                        <div className="flex justify-between mt-2">
-                            <span className="font-semibold text-gray-400">Thời gian xem:</span>
-                            <span className="text-gray-600">20/03/2024 11:45</span>
-                        </div>
-                        <div className="flex justify-between mt-2">
-                            <span className="font-semibold text-gray-400">Trạng thái:</span>
-                            <span className="text-white bg-green-600 py-1 px-3 rounded-md">Đã xem</span>
-                        </div>
-                    </div>
+                    {
+                        data.map((item: NotificationItem, index: number) => (
+                            <div className="bg-white p-4 border border-gray-300 rounded-md" key={index}>
+                                <div className="flex justify-between">
+                                    <span className="font-semibold text-gray-400">STT :</span>
+                                    <span className="text-gray-400">{index+1}</span>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                    <span className="font-semibold text-gray-400">Tiêu đề: </span>
+                                    <span className="text-gray-700">{item.title}</span>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                    <span className="font-semibold text-gray-400">Nội dung:</span>
+                                    <span
+                                    onClick={()=>handleViewDetail(item)}
+                                    className="text-gray-600 text-decoration-line: underline">
+                                        Nhấn để xem
+                                    </span>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                    <span className="font-semibold text-gray-400">Thời gian gửi:</span>
+                                    <span className="text-gray-600">
+                                        {unixToDatetime(item.sendAt)}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                    <span className="font-semibold text-gray-400">Thời gian xem:</span>
+                                    <span className="text-gray-600">
+                                        {item.readAt == 0 ? unixToDatetime(item.readAt):"-"}
+                                    </span>
+                                </div>
+                                <div className="flex justify-between mt-2">
+                                    <span className="font-semibold text-gray-400">Trạng thái:</span>
+                                    <span className={`text-white ${item.status == "read" ? "bg-green-500": "bg-orange-400"} py-1 px-3 rounded-md`}>
+                                        {item.status == "read" ? "Đã xem": "Chưa xem"}
+                                    </span>
+                                </div>
+                            </div>
+                        ))
+                    }
                 </div>
-                <Pagination length={data.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={setPage} />
+                <Pagination length={data.length} pageSize={30} totalResult={totalResult} page={page} totalPage={totalPage} onPageChange={handlePageChange} />
             </div>
 
         </div>
-        <ModalViewHtml isOpen={isOpen} onClose={() => setIsOpen(false)}  title={title} content={content}/>
+        <ModalViewHtml isOpen={isOpen} onClose={() => setIsOpen(false)} title={title} content={content} />
     </div>
 }
