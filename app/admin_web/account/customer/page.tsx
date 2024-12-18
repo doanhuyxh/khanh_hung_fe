@@ -21,7 +21,7 @@ export default function CustomerPage() {
     const router = useRouter()
 
     const handleViewCustomer = (id: string) => {
-        router.push(`/admin_web/account/customer/${id}`)
+        router.push(`/admin_web/account/customer/detail?id=${id}`)
     }
 
     const fetchCustomerData = useCallback(async () => {

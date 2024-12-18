@@ -2,13 +2,12 @@
 
 import axiosInstance from "@/app/libs/configs/axiosConfig";
 import { Customer } from "@/app/libs/types";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 export default function CustomerDetailPage() {
-    const param = useParams()
-    const { id } = param
-
+    const query = useSearchParams();
+    const id = query.get('id')
     const [customerData, setCustomerData] = useState<Customer>()
     const [CourseProgress, setCourseProgress] = useState<any[]>([])
     const [isLoading, setIsLoading] = useState(true)

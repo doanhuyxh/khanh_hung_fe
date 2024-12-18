@@ -9,6 +9,7 @@ import { LessonData, CourseData, LessonDataItem } from "@/app/libs/types";
 import axiosCustomerConfig from "@/app/libs/configs/axiosCustomerConfig";
 import Loading from "@/app/components/Loading";
 import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
 
 
 export default function StudyPage() {
@@ -44,7 +45,10 @@ export default function StudyPage() {
           lessonContent: lesson.lessonContent,
           imageThumbnail: lesson.imageThumbnail,
           video: lesson.video,
-          duration: lesson.duration
+          duration: lesson.duration,
+          isFree: lesson?.isFree,
+          isImportant: lesson?.isImportant,
+          isHot: lesson?.isHot
         });
       });
       temp_arr.push(course);
@@ -67,7 +71,22 @@ export default function StudyPage() {
 
     if (lessonId) {
       axiosCustomerConfig.get(`/course/get-lesson?id=${lessonId}`)
-        .then((res) => {
+        .then((res:any) => {
+
+          if(res.code == 209){
+
+            toast.error("Bạn chưa mua khóa học này, bản sẽ được chuyển về bài học trước đó hoặc trạng chủ",{
+              duration: 5000,
+              position: "top-right",
+              style: {
+                background: "#333",
+                color: "#fff",
+                fontSize: "1.5rem"
+              }
+            })
+            return
+          }
+
           setLesson(res.data)
         })
         .catch((err) => {

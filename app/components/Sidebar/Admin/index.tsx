@@ -74,8 +74,8 @@ const menuGroups = [
         route: "#",
         children: [
           { label: "Affiliate", route: "/admin_web/settings/affiliate" },
-          { label: "Email", route: "/admin_web/settings/email" },
           { label: "Tin tức", route: "/admin_web/settings/news" },
+          { label: "Mạng xã hội", route: "/admin_web/settings/social_network" },
         ],
       },
     ],

@@ -2,24 +2,28 @@
 
 import axiosInstance, { postFormData } from '@/app/libs/configs/axiosConfig';
 import { useCallback, useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import Loading from '@/app/components/Loading';
 import ModalScroll from '@/app/components/Modal/ModalScroll';
 import { FormLesson } from '@/app/components/Form';
 import { LessonItemAdmin } from '@/app/components/Lesson';
 import ModalViewHtml from '@/app/components/Modal/ModalViewHtml';
 import { LessonItem } from '@/app/libs/types';
+import VideoPlayerType from '@/app/components/Video/VideoPlayerType';
 
 export default function CourseLesson() {
     const [loading, setLoading] = useState(true)
-    const param = useParams()
-    const { courseId } = param
+    const param = useSearchParams()
+    const courseId = param.get('id')
 
     const router = useRouter()
 
     const [isOpen, setIsOpen] = useState(false)
     const [isOpenDescription, setIsOpenDescription] = useState(false)
+    const [isOpenVideo, setIsOpenVideo] = useState(false)
+
     const [lessonContent, setLessonContent] = useState('')
+    const [lessonVideo, setLessonVideo] = useState('')
 
     const [course, setCourse] = useState<any>(null)
     const [courseLesson, setCourseLesson] = useState<LessonItem[]>([])
@@ -123,6 +127,10 @@ export default function CourseLesson() {
                                 setLessonContent(item.lessonContent)
                                 setIsOpenDescription(true)
                             }}
+                            toggleLessonVideo={() => {
+                                setLessonVideo(item.video)
+                                setIsOpenVideo(true)
+                            }}
                             HandleCreateOrUpdateLesson={HandleCreateOrUpdateLesson}
                             HandleDeleteLesson={HandleDeleteLesson}
                         />
@@ -137,6 +145,10 @@ export default function CourseLesson() {
 
             <ModalViewHtml isOpen={isOpenDescription} onClose={() => setIsOpenDescription(false)} title={'Nội dung bài học'}>
                 <div dangerouslySetInnerHTML={{ __html: lessonContent }} />
+            </ModalViewHtml>
+
+            <ModalViewHtml isOpen={isOpenVideo} onClose={() => setIsOpenVideo(false)} title={""}>
+                <VideoPlayerType videoSrc={lessonVideo} />
             </ModalViewHtml>
         </>
     )

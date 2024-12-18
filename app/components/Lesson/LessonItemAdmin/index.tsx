@@ -4,6 +4,7 @@ import Image from 'next/image';
 interface LessonItemProps {
     item: any; // Có thể thay đổi thành kiểu dữ liệu phù hợp với bạn
     toggleLessonContent: (id: string) => void;
+    toggleLessonVideo: (id: string) => void;
     HandleCreateOrUpdateLesson: (id: string) => void;
     HandleDeleteLesson: (id: string) => void;
 }
@@ -11,12 +12,13 @@ interface LessonItemProps {
 const LessonItemAdmin: React.FC<LessonItemProps> = ({
     item,
     toggleLessonContent,
+    toggleLessonVideo,
     HandleCreateOrUpdateLesson,
     HandleDeleteLesson,
 }) => {
     return (
         <div className='w-full flex justify-between items-center gap-4 shadow-lg px-4 py-5 mb-6 rounded-lg'>
-            <div className='flex gap-5'>
+            <div className='flex gap-5 justify-center items-center'>
                 <div className='max-w-[200px] h-[100px]'>
                     {item.imageThumbnail && (
                         <Image
@@ -30,9 +32,13 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                         />
                     )}
                 </div>
-                <div className='max-w-[200px] h-[100px]'>
+                <div className='max-w-[200px] h-[100px] flex items-center justify-center cursor-pointer'>
                     {item.video && (
-                        <span className='text-sm'>Đã upload video</span>
+                        <span
+                        onClick={() => toggleLessonVideo(item.id)}
+                        className='text-sm text-blue-500 hover:text-red-500'>
+                            <i className="fa-solid fa-video"></i>
+                        </span>
                     )}
                 </div>
                 <div>

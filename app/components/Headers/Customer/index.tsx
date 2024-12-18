@@ -2,14 +2,13 @@ import dynamic from "next/dynamic";
 import HeaderNews from "./HeaderNews";
 import HeaderContact from "./HeaderContact";
 import './index.scss';
-import { Customer } from "@/app/libs/types";
 
 const HeaderBottom = dynamic(() => import("./HeaderBottom"), {
   ssr: true,
   loading: () => <></>,
 });
 
-const Header = async ({ user }: { user: Customer }) => {
+const Header = async () => {
   try {
     return (
       <header className="header">
@@ -17,7 +16,7 @@ const Header = async ({ user }: { user: Customer }) => {
           <HeaderNews />
           <HeaderContact />
         </div>
-        <HeaderBottom isLogin={user?.id != null} user={user} />
+        <HeaderBottom />
       </header>
     );
   } catch (error) {

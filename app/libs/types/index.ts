@@ -21,6 +21,9 @@ export interface LessonData {
   imageThumbnail: string;
   video: boolean;
   duration: string;
+  isFree: boolean;
+  isImportant: boolean;
+  isHot: boolean;
 }
 
 export interface LessonItem {
@@ -114,3 +117,17 @@ export interface NotificationItem {
   content: string;
 }
 
+export interface SocialLinks {
+  key: string;
+  value: string;
+  label: string;
+}
+
+export interface Page {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  type: string;
+  createdAt: number;
+}

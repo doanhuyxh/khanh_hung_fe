@@ -42,11 +42,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     <div className="flex-1">
       <div className="h-auto w-full flex justify-center text-white video_section">
         {isM3U8(videoUrl) ? (
-          // Video M3U8: Xử lý với HLS.js
           <video ref={videoRef} className="w-full h-auto object-contain" controls />
         ) : (
-          // Video MP4: Hiển thị trực tiếp
-          <video src={videoSrc} className="w-full h-auto object-contain" controls />
+          <video src={videoSrc||""} className="w-full h-auto object-contain" controls />
         )}
       </div>
       <div className="mt-10">

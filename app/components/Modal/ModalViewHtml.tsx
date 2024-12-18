@@ -23,9 +23,9 @@ export default function ModalViewHtml({ isOpen, onClose, title, children }: Moda
                         className="sticky top-0 bg-white shadow p-4 z-10"
                         style={{ borderBottom: "1px solid #ddd" }}
                     >
-                        <h2 className="text-left lg:text-5xl font-bold w-10/12" style={{ color: "#1f1f1f" }}>
+                        <h2 className="text-left lg:text-3xl font-bold w-10/12" style={{ color: "#1f1f1f" }}>
                             {title} <br/>
-                            <span className="text-lg text-gray-500">12/12/2024 10:30</span>
+                            <span className="text-lg text-gray-500"></span>
                         </h2>
                         <button className="animate-spin animate-infinite animate-ease-linear absolute top-0 right-0 mx-2 my-0 px-3 py-2 rounded-xl hover:text-red-500 text-3xl font-thin scale-150 opacity-55" onClick={onClose}>
                             x

@@ -35,9 +35,6 @@ axiosCustomerConfig.interceptors.response.use(
         return axiosCustomerConfig
       }
     }
-    if (code == 403) {
-      window.location.href = "/"
-    }
     const data = response.data;
     return data;
   },

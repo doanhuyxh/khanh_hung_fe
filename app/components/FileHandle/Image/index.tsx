@@ -1,8 +1,8 @@
 'use client'
 
-import  { postFormData } from '@/app/libs/configs/axiosConfig';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import axiosCustomerConfig from '@/app/libs/configs/axiosCustomerConfig';
 
 interface ImageUploadProps {
   initialLink: string;
@@ -20,10 +20,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ initialLink = "", onChange })
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
-    if (file) {      
-      const res = await postFormData('/upload/img', { file: file });
-      setImageUrl(res.data.file_strong_url)
-      onChange(res.data.file_strong_url)
+    if (file) {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await axiosCustomerConfig.post('/upload/image', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      setImageUrl(res.data)
+      onChange(res.data)
     }
   };
 

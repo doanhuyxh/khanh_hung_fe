@@ -35,6 +35,9 @@ export default function CourseForm() {
     };
 
     const HandleSaveCourse = async () => {
+        if(id){
+            course.Id = id;
+        }
         const res:any = await postFormData('/course/CreateOrUpdateCourse', course);
         if (res.code == 200) {
             toast.success('Lưu khoá học thành công');

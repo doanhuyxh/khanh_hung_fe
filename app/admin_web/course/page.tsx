@@ -43,7 +43,7 @@ export default function Course() {
     }
 
     const handleDetailCourse = (id: string) => {
-        router.push(`/admin_web/course/${id}`)
+        router.push(`/admin_web/course/lesson?id=${id}`)
     }
 
     const handleDeleteCourse = (id: string) => {

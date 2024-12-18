@@ -24,7 +24,7 @@ export default function Affiliate() {
             }
         })
             .then(() => {
-                toast.success('Lưu thành công',{
+                toast.success('Lưu thành công', {
                     position: "top-right",
                 })
             })
@@ -63,11 +63,12 @@ export default function Affiliate() {
     )
 
     const renderPolicy = () => (
-        <div className="flex flex-col gap-4">
-            <h3 className="text-center text-2xl font-bold">Chính sách Affiliate</h3>
-            <EditorReactQuill value={value} onChange={handleEditorChange} />
-
-            <button className="bg-blue-500 w-25 text-white px-4 py-2 rounded-md" onClick={handleSavePolicy}>Lưu</button>
+        <div className="w-full h-auto pb-10">
+            <div className="flex flex-col gap-4 mb-3">
+                <h3 className="text-center text-2xl font-bold">Chính sách Affiliate</h3>
+                <EditorReactQuill value={value} onChange={handleEditorChange} />
+            </div>
+            <button className="bg-blue-500 w-25 text-white px-4 py-2 rounded-md float-end" onClick={handleSavePolicy}>Lưu</button>
         </div>
     )
 
