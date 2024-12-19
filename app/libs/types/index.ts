@@ -131,3 +131,10 @@ export interface Page {
   type: string;
   createdAt: number;
 }
+
+
+export interface BannerTop {
+  id: string,
+  content: string,
+  status: string
+}

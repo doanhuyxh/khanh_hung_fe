@@ -8,8 +8,8 @@ export default function Ceo() {
                 <div className="w-full lg:w-1/3 flex justify-center items-center p-4">
                     <Image
                         src={"/assets/images/home/member.png"}
-                        width={500}
-                        height={600}
+                        width={200}
+                        height={300}
                         alt="cel"
                         layout="responsive"
                         className="w-full h-auto object-cover"
@@ -46,7 +46,6 @@ export default function Ceo() {
                     <Image
                         src={"/assets/images/home/web-statistics-bg.png"}
                         layout="fill"
-                        objectFit="cover"
                         alt="Background"
                     />
                 </div>

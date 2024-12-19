@@ -23,6 +23,55 @@ p {
   background: linear-gradient(180deg, #580b94 58.7%, #a75ee0 100%);
 }
 
+#hall_of_wall {
+  background-color: #a75ee0;
+}
+
+.desc {
+  font-size: 2rem;
+  font-weight: 600;
+  text-align: center;
+  background: radial-gradient(
+    6869.79% 50.13% at 49.87% 42.57%,
+    #ffffe0 0,
+    #fad842 19%,
+    #f7d33e 24%,
+    #eec433 29%,
+    #c88000 43%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  mix-blend-mode: screen;
+}
+
+.desc::after,
+.desc::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 0.27rem;
+  background: radial-gradient(circle, #fff 10%, gold 30%, #000 70%);
+  background-blend-mode: screen;
+  mix-blend-mode: screen;
+}
+
+.desc::after{
+  top: 50px;
+}
+.desc::before{
+  top: 0px;
+}
+
+
+
+#coming_soon{
+  background-color: #580B94;
+}
+
 #faqs {
   background-color: #580b94;
   margin-top: 17rem;

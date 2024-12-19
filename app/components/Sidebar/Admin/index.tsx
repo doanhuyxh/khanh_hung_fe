@@ -76,6 +76,7 @@ const menuGroups = [
           { label: "Affiliate", route: "/admin_web/settings/affiliate" },
           { label: "Tin tức", route: "/admin_web/settings/news" },
           { label: "Mạng xã hội", route: "/admin_web/settings/social_network" },
+          { label: "Banner Top", route: "/admin_web/settings/banner_top" },
         ],
       },
     ],

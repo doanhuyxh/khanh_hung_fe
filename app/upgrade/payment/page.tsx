@@ -10,7 +10,7 @@ import { toast } from 'react-hot-toast';
 
 export default function PaymentPage() {
 
-    const [qrCode, setQrCode] = useState<string>('');
+
     const [user, setUser] = useState<Customer>({} as Customer);
     const confettiCanvasRef = useRef<HTMLCanvasElement | null>(null);
     const GetUserInfo = async () => {

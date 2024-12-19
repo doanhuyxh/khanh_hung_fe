@@ -1,14 +1,23 @@
 'use client';
 
-import React from "react";
+import axiosCustomerConfig from "@/app/libs/configs/axiosCustomerConfig";
+import React, { useEffect, useState } from "react";
 
 const HeaderNews = () => {
+
+    const [news, setNew] = useState("")
+
+    useEffect(()=>{
+        axiosCustomerConfig.get("/public/get-banner-header")
+        .then(res=>{
+            setNew(res.data)
+        })
+    },[])
     
     return (
         <div className="header_top_news scrolling-text">
             <p>
-                Livestream Q&A hỏi đáp, tám chuyện vui vẻ Cùng anh chị Đồng nghiệp
-                20:00-23:00 05/07/2024
+                {news}
             </p>
 
         </div>

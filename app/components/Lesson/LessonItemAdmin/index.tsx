@@ -27,8 +27,7 @@ const LessonItemAdmin: React.FC<LessonItemProps> = ({
                         width={200}
                         height={200}
                         loading='lazy'
-                        objectFit="contain"
-                        layout="responsive"
+                        style={{ width: '100%', height: 'auto' }}
                         />
                     )}
                 </div>
