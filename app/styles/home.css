@@ -1,25 +1,59 @@
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-Bold.woff2") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
 html {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 body {
-    background-color: #fff;
-    font-family: "Inter", sans-serif;
-    width: 100vw;
+  background-color: #a75ee0;
+  width: 100vw;
+}
+
+span,
+p {
+  font-size: 1.4rem;
+}
+
+#section_1 {
+  background: linear-gradient(180deg, #580b94 58.7%, #a75ee0 100%);
+}
+
+#faqs {
+  background-color: #580b94;
+  margin-top: 17rem;
+  padding: 0 0 14rem;
+  background: #580b94;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 1580px) {
+  html {
+    font-size: 9px;
   }
-  
-  @media (max-width: 1580px) {
-    html {
-      font-size: 8px;
-    }
-  }
-  
-@media (max-width: 1200px) {
-  body {
+
+  p,
+  span {
     font-size: 1.6rem;
   }
 }
 
-span, p {
-  font-size: 1.4rem !important;
+@media (max-width: 1200px) {
+  html {
+    font-size: 10px;
+  }
+
+  body {
+    font-size: 1.6rem;
+  }
+
+  p,
+  span {
+    font-size: unset;
+  }
 }

@@ -6,7 +6,7 @@ import axiosInstance from "@/app/libs/configs/axiosConfig";
 import { SocialLinks } from "@/app/libs/types";
 
 export default function SocialNetworkPage() {
-    const [isEditing, setIsEditing] = useState(false);
+    const [isEditing, setIsEditing] = useState(true);
     const [socialLinks, setSocialLinks] = useState<SocialLinks[]>([]);
 
     const handleEdit = () => {
@@ -39,6 +39,7 @@ export default function SocialNetworkPage() {
             });
             setIsEditing(false);
         } catch (error) {
+            console.log(error)
             toast.error('Có lỗi xảy ra', {
                 position: "top-right"
             });
@@ -87,7 +88,7 @@ export default function SocialNetworkPage() {
         <div className="p-6 bg-white rounded-lg shadow-md w-8/12 mx-auto">
             <button
                 onClick={handleEdit}
-                className="p-2 rounded-[50%] hover:bg-gray-100 float-end"
+                className="p-2 w-10 h-10 rounded-[50%] text-red-900 hover:bg-gray-100 float-end"
             >
                 {isEditing ? <i className="fa-solid fa-x"></i> : <i className="fa-solid fa-pen"></i>}
             </button>

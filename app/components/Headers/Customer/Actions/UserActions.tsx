@@ -32,7 +32,15 @@ export default function UserActions({ user }: { user: Customer }) {
                         <span className="text-nowrap uppercase text-white font-bold text-xl">Học ngay</span>
                     </Link>
                 }
+                
             </div>
+            <a className='lg:hidden bg-pink-500 flex flex-col justify-center items-center p-2 rounded-lg' href="https://play.google.com/store/apps/details?id=com.englishgo.app">
+                    <span className="star"></span>
+                    <span>
+                        <Image src="/assets/images/header/icon-down-app.svg" alt="star" width={15} height={15} />
+                    </span>
+                    <span className="text-nowrap uppercase text-white font-bold text-xl">Tải App</span>
+                </a>
             <div className="btn_profile">
                 <div className="btn_profile_content cursor-pointer" onClick={() => setIsDropdown(!isDropdown)}>
                     <Link href="/learn/profile" className="btn_profile_avatar">
