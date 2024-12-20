@@ -1,30 +1,73 @@
 'use client'
 
 import { useState, useEffect } from "react";
-import { BannerTop } from "../../../libs/types"
+import { BannerHeaderTop } from "../../../libs/types"
 import axiosInstance from "@/app/libs/configs/axiosConfig";
+import ModalScroll from "@/app/components/Modal/ModalScroll";
+import toast from "react-hot-toast";
+
 
 export default function BannerTop() {
 
-    const [banners, setBanners] = useState<BannerTop[]>([
-        { id: "", content: "Banner 1", status: "Active" },
-        { id: "", content: "Banner 2", status: "Inactive" },
-        { id: "", content: "Banner 3", status: "Active" },
-    ]);
+    const [banners, setBanners] = useState<BannerHeaderTop[]>([]);
 
-    const handleUpdate = (id: string) => {
-        alert(`Cập nhật banner với ID: ${id}`);
+    const [new_banner, setNew_banner] = useState<BannerHeaderTop>()
+
+    const [isOpen, setIsOpen] = useState(false)
+
+    const handleAddOrUpdate = (id: string) => {
+        if (id != "") {
+            setNew_banner(banners.find(i => i.id == id))
+        } else {
+            setNew_banner({
+                id: "",
+                content: "",
+                status: "active"
+            })
+        }
+        setIsOpen(true)
     };
 
     const handleDelete = (id: string) => {
-
+        axiosInstance.get(`/settings/delete-banner-top?id=${id}`)
+            .then(res => {
+                console.log(res)
+                toast.success("Thành công", {
+                    position: "top-right",
+                    duration: 3000,
+                    "style": {
+                        "animation": "ease-in-out"
+                    }
+                })
+            })
+        getData()
     };
 
-    useEffect(() => {
+    const HandleSave = () => {
+        axiosInstance.post("/settings/create-or-update-banner-top", new_banner)
+            .then(res => {
+                console.log(res)
+                toast.success("Thành công", {
+                    position: "top-right",
+                    duration: 3000,
+                    "style": {
+                        "animation": "ease-in-out"
+                    }
+                })
+                setIsOpen(false)
+                getData()
+            })
+    }
+
+    const getData = () => {
         axiosInstance.get("/settings/get-banner-top")
             .then((res: any) => {
                 setBanners(res.data)
             })
+    }
+
+    useEffect(() => {
+        getData()
     }, [])
 
     return (
@@ -40,7 +83,13 @@ export default function BannerTop() {
                     />
                 </div>
 
-                <div className=""></div>
+                <div className="">
+                    <span
+                        onClick={() => handleAddOrUpdate("")}
+                        className="cursor-pointer bg-green-300 px-3 py-2 rounded-xl">
+                        <i className="fa-solid fa-plus"></i>
+                    </span>
+                </div>
             </div>
 
             <div className="overflow-x-auto">
@@ -58,19 +107,19 @@ export default function BannerTop() {
                             <tr key={index}>
                                 <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
                                 <td className="border border-gray-300 px-4 py-2">{banner.content}</td>
-                                <td className="border border-gray-300 px-4 py-2">{banner.status}</td>
+                                <td className="border border-gray-300 px-4 py-2">{banner.status == "active" ? "Đang hoạt động" : "Tắt"}</td>
                                 <td className="border border-gray-300 px-4 py-2 text-center">
                                     <button
-                                        onClick={() => handleUpdate(banner.id)}
+                                        onClick={() => handleAddOrUpdate(banner.id)}
                                         className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mr-2"
                                     >
-                                        Cập nhật
+                                        <i className="fa-solid fa-pen-to-square"></i>
                                     </button>
                                     <button
                                         onClick={() => handleDelete(banner.id)}
                                         className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
                                     >
-                                        Xóa
+                                        <i className="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -78,6 +127,36 @@ export default function BannerTop() {
                     </tbody>
                 </table>
             </div>
+
+            <ModalScroll isOpen={isOpen} title={new_banner?.id == "" ? "Tạo thông báo mới" : "Cập nhật thông báos"} onClose={() => setIsOpen(false)}>
+                <div className="space-y-4">
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700">Nội dung</label>
+                        <input
+                            value={new_banner?.content}
+                            onChange={(e) => setNew_banner({ ...new_banner, content: e.target.value, id: new_banner?.id || "", status: new_banner?.status || "" })}
+                            className="mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:outline-none"
+                            placeholder="Nhập nội dung..."
+                        />
+                    </div>
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700">Trạng thái</label>
+                        <select
+                            value={new_banner?.status}
+                            className="mt-1 p-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:ring-opacity-50 focus:outline-none"
+                            onChange={(e) => setNew_banner({ ...new_banner, content: new_banner?.content || "", id: new_banner?.id || "", status: e.target.value })}>
+                            <option value="active">Hoạt động</option>
+                            <option value="stop">Tắt</option>
+                        </select>
+                    </div>
+
+                    <div className="flex justify-end gap-4">
+                        <button className="px-4 py-2 bg-gray-400 rounded-xl" onClick={() => setIsOpen(false)}>Huỷ</button>
+                        <button className="px-4 py-2 bg-green-400  rounded-xl" onClick={() => HandleSave()}>Lưu</button>
+                    </div>
+                </div>
+
+            </ModalScroll>
         </div>
     )
 }

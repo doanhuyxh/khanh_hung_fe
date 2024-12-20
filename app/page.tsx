@@ -45,7 +45,7 @@ export default async function Home() {
 
           </div>
 
-          <div className='grid md:gird-cols-2 grid-cols-3 gap-10 w-7/12 m-auto'>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 w-2/3 xl:w-7/12 m-auto">
 
             <HallOfFrame />
             <HallOfFrame />

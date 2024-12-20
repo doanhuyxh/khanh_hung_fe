@@ -25,6 +25,7 @@
     "@tiptap/react": "^2.10.3",
     "@tiptap/starter-kit": "^2.10.3",
     "@types/lodash": "^4.17.13",
+    "aos": "^2.3.4",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.9",
     "canvas-confetti": "^1.9.3",

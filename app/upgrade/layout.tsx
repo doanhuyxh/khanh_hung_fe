@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 async function UpgradeLayout({ children }: { children: React.ReactNode }) {
-    return <div style={{ backgroundColor: '#8b1dd0' }}>{children}</div>
+    return <div style={{ backgroundColor: '' }}>{children}</div>
 }
 
 export default UpgradeLayout;

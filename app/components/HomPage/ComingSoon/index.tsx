@@ -1,7 +1,7 @@
 'use client'
 
 import ComingSoonItem from "./ComingSoonItem"
-//import SwiperContainer from "../../SwiperContainer"
+import SwiperContainer from "../../SwiperContainer"
 
 export default function ComingSoon() {
     
@@ -9,7 +9,8 @@ export default function ComingSoon() {
 
     return (
         <div className="flex flex-row gap-10 overflow-x-scroll w-full">
-            {arr.map((item, index) => <ComingSoonItem key={index} />)}
+            {/* {arr.map((item, index) => <ComingSoonItem key={index} />)} */}
+            <SwiperContainer slides={arr.map((item, index) => <ComingSoonItem key={index} />)} />
         </div>
     )
 }

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { useEffect, useState } from "react";
-const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoPlayer"), { ssr: false });
+const VideoPlayer = dynamic(() => import("@/app/components/Video/VideoLessonPlayer"), { ssr: false });
 import { LessonList } from "@/app/components/Lesson";
 import { LessonData, CourseData, LessonDataItem } from "@/app/libs/types";
 

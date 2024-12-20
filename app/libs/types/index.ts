@@ -133,7 +133,7 @@ export interface Page {
 }
 
 
-export interface BannerTop {
+export interface BannerHeaderTop {
   id: string,
   content: string,
   status: string

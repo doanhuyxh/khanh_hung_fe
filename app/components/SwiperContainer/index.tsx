@@ -16,10 +16,26 @@ export default function SwiperContainer({ slides }: SwiperContainerProps) {
     <Swiper
       modules={[Navigation, Autoplay]}
       spaceBetween={50}
-      slidesPerView={3}
-      navigation
+      slidesPerView="auto"
+      navigation={true}
+      scrollbar={{ draggable: true }}
       pagination={{ clickable: true }}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
+      className="custom-swiper"
+      breakpoints={{
+        640: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 40,
+        },
+        1400: {
+          slidesPerView: 3,
+          spaceBetween: 50,
+        },
+      }}
     >
       {slides.map((slide, index) => (
         <SwiperSlide key={index}>{slide}</SwiperSlide>

@@ -1,6 +1,6 @@
 @font-face {
+  src: url("/fonts/Inter-Bold.woff2");
   font-family: "Inter";
-  src: url("/fonts/Inter-Bold.woff2") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: #a75ee0;
+  /* background-color: #a75ee0; */
   width: 100vw;
 }
 
@@ -31,14 +31,12 @@ p {
   font-size: 2rem;
   font-weight: 600;
   text-align: center;
-  background: radial-gradient(
-    6869.79% 50.13% at 49.87% 42.57%,
-    #ffffe0 0,
-    #fad842 19%,
-    #f7d33e 24%,
-    #eec433 29%,
-    #c88000 43%
-  );
+  background: radial-gradient(6869.79% 50.13% at 49.87% 42.57%,
+      #ffffe0 0,
+      #fad842 19%,
+      #f7d33e 24%,
+      #eec433 29%,
+      #c88000 43%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -59,17 +57,40 @@ p {
   mix-blend-mode: screen;
 }
 
-.desc::after{
+.desc::after {
   top: 50px;
 }
-.desc::before{
+
+.desc::before {
   top: 0px;
 }
 
 
-
-#coming_soon{
+#coming_soon {
   background-color: #580B94;
+}
+
+
+.custom-swiper2 .swiper-button-next,
+.custom-swiper2 .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  z-index: 10;
+}
+
+.custom-swiper .swiper-button-next {
+  right: -25px;
+  /* background-image: url("/assets/images/home/icon_angle-left.png"); */
+  z-index: 1000;
+}
+
+.custom-swiper .swiper-button-prev {
+  left: -25px;
+  /* Adjust the value as needed */
 }
 
 #faqs {
@@ -80,6 +101,24 @@ p {
   position: relative;
   z-index: 1;
 }
+
+
+.prmk-progress-line {
+  background: linear-gradient(180deg, #aa3028, #f04438 47.96%, #aa3028);
+  height: 100%;
+  width: 90%;
+}
+
+.pros {
+  background-image: url(/assets/images/prmk-progress-bubble.png);
+  background-repeat: repeat-x;
+  background-size: cover;
+  height: 100%;
+  left: 0;
+  width: 90%;
+  
+}
+
 
 @media (max-width: 1580px) {
   html {
