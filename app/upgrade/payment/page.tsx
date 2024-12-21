@@ -13,7 +13,7 @@ export default function PaymentPage() {
 
 
     const [user, setUser] = useState<Customer>({} as Customer);
-    const confettiCanvasRef = useRef<HTMLCanvasElement | null>(null);
+    // const confettiCanvasRef = useRef<HTMLCanvasElement | null>(null);
     const GetUserInfo = async () => {
         const res = await axiosCustomerConfig.get('/customer/get-info');
         setUser(res.data);
@@ -25,21 +25,22 @@ export default function PaymentPage() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCountDown(prev => prev - 1);
-
-            if (second > 0) {
-                setSecond(pre => pre - 1)
-            } else {
-                setSecond(60)
-                setMinute(pre => pre - 1)
-            }
-
+            setCountDown(prev => {
+                if (prev <= 0) {
+                    clearInterval(interval); 
+                    return 0;
+                }
+                return prev - 1;
+            });
         }, 1000);
         return () => clearInterval(interval);
 
     }, []);
 
     useEffect(() => {
+        setMinute(Math.floor(countDown / 60))
+        setSecond(countDown % 60)
+        
         if (countDown === 0) {
             window.location.href = '/upgrade';
         }
@@ -167,13 +168,13 @@ export default function PaymentPage() {
                             sở hữu một nguồn thu nhập thụ động đúng nghĩa như những <strong>CHUYÊN GIA</strong></p>
                     </div>
 
-                    <div className='flex justify-center items-center w-10/12 xl:w-[71rem] h-[3.6rem] relative'>
+                    <div className='w-10/12 xl:w-[71rem] h-[3.6rem] relative'>
                         <div className='w-full h-[3.6rem] bg-white rounded-full overflow-hidden'>
                             <div className='prmk-progress-line'>
                                 <div className='pros h-[3.6rem] animate-fade-right animate-infinite animate-duration-1000 animate-ease-linear'></div>
                             </div>
                         </div>
-                        <div className='flex flex-shrink-0 z-20 w-20 h-20 lg:w-[64px] lg:h-[64px] rounded-full items-center justify-center absolute right-[-10%] top-[-50%] transform translate-x-[-50%] translate-y-[50%] animate-wiggle-more animate-infinite animate-duration-1000 animate-ease-out'>
+                        <div className='absolute bottom-[-10%] right-[-5%] translate-x-1/2 translate-y-1/2 flex items-center justify-center w-20 h-20 lg:w-[64px] lg:h-[64px] rounded-full z-20 animate-wiggle-more animate-infinite animate-duration-1000 animate-ease-out'>
                             <Image src="/assets/images/box-gif.png" alt="Arrow" width={100} height={100} style={{ width: "100%", height: "auto" }} />
                         </div>
                     </div>
